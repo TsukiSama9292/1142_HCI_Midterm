@@ -17,6 +17,15 @@ from src.analysis import (
     ConnectedComponentAnalyzer,
     ContentFeatureAnalyzer,
     AccountAgeAnalyzer,
+    VotingBehaviorAnalyzer,
+    CommentNetworkAnalyzer,
+    BadgeNetworkAnalyzer,
+    EditCollaborationAnalyzer,
+    PostLinkAnalyzer,
+    ReviewTaskAnalyzer,
+    BountyNetworkAnalyzer,
+    UserLocationAnalyzer,
+    TimeSeriesAnalyzer,
 )
 
 
@@ -27,6 +36,15 @@ ANALYSIS_MODULES = {
     '4': ('ConnectedComponentAnalyzer', '知識孤島與連通分量分析'),
     '5': ('ContentFeatureAnalyzer', '內容特徵與互動反響'),
     '6': ('AccountAgeAnalyzer', '帳號年資與社群貢獻'),
+    '7': ('VotingBehaviorAnalyzer', '投票行為網路'),
+    '8': ('CommentNetworkAnalyzer', '評論互動網路'),
+    '9': ('BadgeNetworkAnalyzer', '徽章成就網路'),
+    '10': ('EditCollaborationAnalyzer', '編輯協作網路'),
+    '11': ('PostLinkAnalyzer', '引用與重複問題網路'),
+    '12': ('ReviewTaskAnalyzer', '審核任務網路'),
+    '13': ('BountyNetworkAnalyzer', '賞金懸賞網路'),
+    '14': ('UserLocationAnalyzer', '使用者地理分布網路'),
+    '15': ('TimeSeriesAnalyzer', '時間序列活躍度網路'),
 }
 
 
@@ -57,6 +75,15 @@ def run_analysis(analysis_id: str, limit: int, output_dir: str):
         'ConnectedComponentAnalyzer': ConnectedComponentAnalyzer,
         'ContentFeatureAnalyzer': ContentFeatureAnalyzer,
         'AccountAgeAnalyzer': AccountAgeAnalyzer,
+        'VotingBehaviorAnalyzer': VotingBehaviorAnalyzer,
+        'CommentNetworkAnalyzer': CommentNetworkAnalyzer,
+        'BadgeNetworkAnalyzer': BadgeNetworkAnalyzer,
+        'EditCollaborationAnalyzer': EditCollaborationAnalyzer,
+        'PostLinkAnalyzer': PostLinkAnalyzer,
+        'ReviewTaskAnalyzer': ReviewTaskAnalyzer,
+        'BountyNetworkAnalyzer': BountyNetworkAnalyzer,
+        'UserLocationAnalyzer': UserLocationAnalyzer,
+        'TimeSeriesAnalyzer': TimeSeriesAnalyzer,
     }
     
     analyzer_class = analyzer_map[analyzer_class_name]
@@ -78,7 +105,7 @@ def run_analysis(analysis_id: str, limit: int, output_dir: str):
 def run_all_analyses(limit: int, output_dir: str):
     """執行所有分析"""
     print("\n" + "=" * 70)
-    print("執行所有 6 個分析主題")
+    print("執行所有 15 個分析主題")
     print("=" * 70)
     
     runner = SNARunner(output_dir=output_dir, data_limit=limit)
@@ -112,6 +139,15 @@ def main():
   4. 知識孤島與連通分量分析
   5. 內容特徵與互動反響
   6. 帳號年資與社群貢獻
+  7. 投票行為網路
+  8. 評論互動網路
+  9. 徽章成就網路
+  10. 編輯協作網路
+  11. 引用與重複問題網路
+  12. 審核任務網路
+  13. 賞金懸賞網路
+  14. 使用者地理分布網路
+  15. 時間序列活躍度網路
 """
     )
     
@@ -125,7 +161,7 @@ def main():
         '--run', '-r',
         type=str,
         default='all',
-        help='執行指定分析 (1-6 或 all，預設: all)'
+        help='執行指定分析 (1-15 或 all，預設: all)'
     )
     
     parser.add_argument(

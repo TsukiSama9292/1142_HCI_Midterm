@@ -112,7 +112,9 @@ class SNAPlotter:
                           shape_by: Optional[str] = None,
                           vertex_labels: Optional[List[str]] = None,
                           filename: str = "network.png",
-                          legend_info: Optional[Dict] = None) -> str:
+                          legend_info: Optional[Dict] = None,
+                          edge_weight_attribute: str = "weight",
+                          show_edge_weights: bool = True) -> str:
         """
         繪製網路圖
         
@@ -124,6 +126,8 @@ class SNAPlotter:
             vertex_labels: 節點標籤列表
             filename: 輸出檔案名
             legend_info: 圖例資訊
+            edge_weight_attribute: 邊權重屬性名稱 (default: "weight")
+            show_edge_weights: 是否根據權重調整連線粗細 (default: True)
         """
         print(f"\n中間過程: 繪製網路圖 ({title})...")
         
@@ -168,11 +172,31 @@ class SNAPlotter:
                       c=colors, s=sizes,
                       edgecolors='white', linewidths=0.5, alpha=0.8, zorder=2)
         
-        for edge in graph.es:
-            source, target = edge.tuple
-            x_coords = [layout[source][0], layout[target][0]]
-            y_coords = [layout[source][1], layout[target][1]]
-            ax.plot(x_coords, y_coords, 'gray', alpha=0.3, linewidth=0.5, zorder=1)
+        if show_edge_weights and edge_weight_attribute in graph.es.attribute_names():
+            weights = graph.es[edge_weight_attribute]
+            if weights and len(weights) > 0:
+                weights = np.array(weights, dtype=float)
+                max_w = weights.max() if weights.max() > 0 else 1
+                min_w = weights.min()
+                if max_w > min_w:
+                    norm_weights = (weights - min_w) / (max_w - min_w)
+                    line_widths = 0.5 + norm_weights * 4
+                else:
+                    line_widths = [1.0] * len(weights)
+                
+                for i, edge in enumerate(graph.es):
+                    source, target = edge.tuple
+                    x_coords = [layout[source][0], layout[target][0]]
+                    y_coords = [layout[source][1], layout[target][1]]
+                    alpha = 0.3 + norm_weights[i] * 0.4 if max_w > min_w else 0.3
+                    ax.plot(x_coords, y_coords, color='#666666', alpha=alpha, 
+                           linewidth=line_widths[i], zorder=1)
+        else:
+            for edge in graph.es:
+                source, target = edge.tuple
+                x_coords = [layout[source][0], layout[target][0]]
+                y_coords = [layout[source][1], layout[target][1]]
+                ax.plot(x_coords, y_coords, color='#666666', alpha=0.3, linewidth=0.5, zorder=1)
         
         if vertex_labels and len(vertex_labels) == n_vertices:
             for i, (x, y) in enumerate(layout):
@@ -182,7 +206,7 @@ class SNAPlotter:
                                alpha=0.7)
         
         if legend_info:
-            self._add_legend(ax, legend_info)
+            self._add_legend(ax, legend_info, graph)
         
         ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
         ax.axis('off')
@@ -248,6 +272,84 @@ class SNAPlotter:
             color_map = {'True': '#F44336', 'False': '#2196F3'}
             return [color_map.get(str(v), default_color) for v in values]
         
+        elif color_by == 'vote_type':
+            color_map = {
+                'accepted': '#FFD700',
+                'upvote': '#4CAF50',
+                'downvote': '#F44336',
+                'spam': '#212121',
+                'favorite': '#2196F3',
+                'none': '#BDBDBD',
+                'other': '#9E9E9E',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'badge_level':
+            color_map = {
+                '1_Gold': '#FFD700',
+                '2_Silver': '#C0C0C0',
+                '3_Bronze': '#CD7F32',
+                '0_None': '#BDBDBD',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'editor_level':
+            color_map = {
+                '3_Power': '#F44336',
+                '2_Active': '#FF9800',
+                '1_Casual': '#4CAF50',
+                '0_None': '#BDBDBD',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'link_type':
+            color_map = {
+                'Linked': '#2196F3',
+                'Duplicate': '#F44336',
+                'Other': '#9E9E9E',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'reviewer_level':
+            color_map = {
+                '3_Power': '#F44336',
+                '2_Active': '#FF9800',
+                '1_Casual': '#4CAF50',
+                '0_None': '#BDBDBD',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'bounty_level':
+            color_map = {
+                '4_Extravagant': '#F44336',
+                '3_Generous': '#FF9800',
+                '2_Normal': '#4CAF50',
+                '1_Meager': '#9E9E9E',
+                '0_None': '#BDBDBD',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'region':
+            color_map = {
+                'North America': '#2196F3',
+                'Europe': '#4CAF50',
+                'Asia': '#FFC107',
+                'Oceania': '#9E9E9E',
+                'South America': '#FF5722',
+                'Africa': '#795548',
+                'Middle East': '#607D8B',
+                'Other': '#BDBDBD',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
+        elif color_by == 'activity_level':
+            color_map = {
+                'high': '#F44336',
+                'medium': '#FF9800',
+                'low': '#4CAF50',
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+        
         elif isinstance(values[0], (int, float)):
             norm_values = np.array(values, dtype=float)
             max_v, min_v = norm_values.max(), norm_values.min()
@@ -311,8 +413,8 @@ class SNAPlotter:
         
         return result
     
-    def _add_legend(self, ax, legend_info: Dict):
-        """添加圖例"""
+    def _add_legend(self, ax, legend_info: Dict, graph: Optional[ig.Graph] = None):
+        """添加图例"""
         patches = []
         
         if 'colors' in legend_info:
@@ -323,6 +425,20 @@ class SNAPlotter:
             for label, marker in legend_info['shapes'].items():
                 patches.append(plt.Line2D([0], [0], marker=marker, color='w', 
                                          markerfacecolor='gray', markersize=10, label=label))
+        
+        if 'edge_weights' in legend_info and graph is not None:
+            weights = graph.es['weight'] if 'weight' in graph.es.attribute_names() else []
+            if weights and len(weights) > 0:
+                try:
+                    max_w = max(weights)
+                    min_w = min(weights)
+                except (TypeError, ValueError):
+                    max_w = None
+                    min_w = None
+                if max_w is not None and min_w is not None:
+                    for label, width in legend_info['edge_weights'].items():
+                        patches.append(plt.Line2D([0], [0], color='#666666', linewidth=width, 
+                                                 alpha=0.7, label=label))
         
         if patches:
             ax.legend(handles=patches, loc='upper left', fontsize=8, 

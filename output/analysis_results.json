@@ -4,7 +4,118 @@
       "nodes": 191,
       "edges": 98
     },
-    "users_df": "           id      display_name  ...          location  reputation_level\n0     3918419      MrVocabulary  ...  Warszawa, Polska             1_Low\n1     8185618      BarzanHayati  ...              None             1_Low\n2     2691879     Adam Baranyai  ...              None          2_Medium\n3     1818028              M410  ...              Iran             1_Low\n4     3146213         CZoellner  ...         Stralsund          3_Senior\n..        ...               ...  ...               ...               ...\n186  15221658          AdroMine  ...              None          2_Medium\n187  11339386             Arnau  ...        Munich, DE             1_Low\n188  18572447  Artem Goldenberg  ...              None             1_Low\n189   6514966         Hafssa El  ...              None             1_Low\n190  18538657         virtually  ...              None             1_Low\n\n[191 rows x 9 columns]",
+    "users_df": [
+      {
+        "id": 3918419,
+        "display_name": "MrVocabulary",
+        "reputation": 567,
+        "up_votes": 1255,
+        "down_votes": 0,
+        "views": 126,
+        "creation_date": "2014-08-07 12:43:28.077000+00:00",
+        "location": "Warszawa, Polska",
+        "reputation_level": "1_Low"
+      },
+      {
+        "id": 8185618,
+        "display_name": "BarzanHayati",
+        "reputation": 590,
+        "up_votes": 854,
+        "down_votes": 7,
+        "views": 125,
+        "creation_date": "2017-06-20 00:00:00.913000+00:00",
+        "location": null,
+        "reputation_level": "1_Low"
+      },
+      {
+        "id": 2691879,
+        "display_name": "Adam Baranyai",
+        "reputation": 3389,
+        "up_votes": 244,
+        "down_votes": 11,
+        "views": 542,
+        "creation_date": "2013-08-17 11:22:33.123000+00:00",
+        "location": null,
+        "reputation_level": "2_Medium"
+      },
+      {
+        "id": 1818028,
+        "display_name": "M410",
+        "reputation": 213,
+        "up_votes": 72,
+        "down_votes": 21,
+        "views": 96,
+        "creation_date": "2012-11-12 12:20:00.317000+00:00",
+        "location": "Iran",
+        "reputation_level": "1_Low"
+      },
+      {
+        "id": 3146213,
+        "display_name": "CZoellner",
+        "reputation": 12848,
+        "up_votes": 2043,
+        "down_votes": 85,
+        "views": 1547,
+        "creation_date": "2013-12-30 11:27:15.770000+00:00",
+        "location": "Stralsund",
+        "reputation_level": "3_Senior"
+      },
+      {
+        "id": 11063450,
+        "display_name": "Md. Sajjad Hussain",
+        "reputation": 3,
+        "up_votes": 0,
+        "down_votes": 0,
+        "views": 6,
+        "creation_date": "2019-02-14 17:20:38.833000+00:00",
+        "location": null,
+        "reputation_level": "1_Low"
+      },
+      {
+        "id": 18734991,
+        "display_name": "DeepH",
+        "reputation": 11,
+        "up_votes": 0,
+        "down_votes": 0,
+        "views": 0,
+        "creation_date": "2022-04-07 09:38:52.367000+00:00",
+        "location": null,
+        "reputation_level": "1_Low"
+      },
+      {
+        "id": 18464566,
+        "display_name": "Roman Nekliukov",
+        "reputation": 13,
+        "up_votes": 0,
+        "down_votes": 0,
+        "views": 2,
+        "creation_date": "2022-03-14 15:57:00.663000+00:00",
+        "location": null,
+        "reputation_level": "1_Low"
+      },
+      {
+        "id": 125734,
+        "display_name": "Titian Cernicova-Dragomir",
+        "reputation": 205473,
+        "up_votes": 3709,
+        "down_votes": 55,
+        "views": 16990,
+        "creation_date": "2009-06-19 13:08:28.650000+00:00",
+        "location": "Timișoara, Timiș County, Romania",
+        "reputation_level": "4_Expert"
+      },
+      {
+        "id": 676192,
+        "display_name": "simone",
+        "reputation": 4425,
+        "up_votes": 30,
+        "down_votes": 4,
+        "views": 419,
+        "creation_date": "2011-03-25 05:57:52.470000+00:00",
+        "location": null,
+        "reputation_level": "2_Medium"
+      }
+    ],
     "centrality_metrics": {
       "betweenness": {
         "0": 0.0,
@@ -1792,184 +1903,184 @@
         "co_occurrence_count": 193440
       }
     ],
-    "clusters": "[TagCluster(name='DataScience', tags=['asp.net-core', 'winforms', 'multithreading', 'regex', 'numpy', 'entity-framework', 'dictionary', 'pandas', 'hibernate', 'tkinter', 'codeigniter', 'wordpress', 'arrays', 'dataframe', 'dart', 'r', 'typescript', 'express', 'matplotlib'], avg_popularity=np.float64(131300.36842105264), total_connections=24), TagCluster(name='Backend', tags=['ruby', 'mongodb', 'django', 'ruby-on-rails', 'c#', 'laravel', 'python-3.x', 'flask', 'php', 'spring', 'python-2.7', 'spring-boot', 'django-models', 'python', 'java'], avg_popularity=np.float64(591089.8666666667), total_connections=59), TagCluster(name='Other', tags=['.net', 'c', 'iphone', 'xaml', 'asp.net', 'maven', 'shell', 'c++11', 'vba', 'swing', 'xcode', 'c++', 'qt', 'list', 'asp.net-mvc', 'xml', 'eclipse', 'visual-studio', 'linq', 'wpf', 'excel', 'uitableview', 'unity3d', 'json', 'ggplot2'], avg_popularity=np.float64(176794.16), total_connections=34), TagCluster(name='Mobile', tags=['android-layout', 'objective-c', 'ios', 'swift', 'android', 'kotlin', 'flutter', 'android-fragments', 'android-studio'], avg_popularity=np.float64(331116.3333333333), total_connections=19), TagCluster(name='Web', tags=['css', 'node.js', 'twitter-bootstrap', 'angular', 'reactjs', 'html', 'jquery', 'ajax', 'javascript', 'angularjs', 'react-native', 'vue.js'], avg_popularity=np.float64(610273.3333333334), total_connections=44), TagCluster(name='Database', tags=['oracle', 'sql-server', 'postgresql', 'mysql', 'database', 'sql', 'tsql'], avg_popularity=np.float64(301661.28571428574), total_connections=18), TagCluster(name='DevOps', tags=['bash'], avg_popularity=np.float64(148367.0), total_connections=1), TagCluster(name='AI_ML', tags=['tensorflow'], avg_popularity=0.0, total_connections=1)]",
+    "clusters": "[TagCluster(name='Backend', tags=['spring', 'python', 'python-3.x', 'flask', 'django-models', 'c#', 'ruby', 'ruby-on-rails', 'java', 'django', 'python-2.7', 'laravel', 'php', 'mongodb', 'spring-boot'], avg_popularity=np.float64(591089.8666666667), total_connections=59), TagCluster(name='Mobile', tags=['ios', 'flutter', 'swift', 'android', 'android-studio', 'kotlin', 'android-fragments', 'android-layout', 'objective-c'], avg_popularity=np.float64(331116.3333333333), total_connections=19), TagCluster(name='Other', tags=['swing', 'iphone', 'asp.net-mvc', 'ggplot2', 'linq', 'wpf', 'eclipse', 'uitableview', 'xml', 'c', 'list', 'excel', 'c++11', 'asp.net', 'shell', 'qt', 'visual-studio', 'json', 'xcode', '.net', 'maven', 'xaml', 'unity3d', 'vba', 'c++'], avg_popularity=np.float64(176794.16), total_connections=34), TagCluster(name='AI_ML', tags=['tensorflow'], avg_popularity=0.0, total_connections=1), TagCluster(name='Web', tags=['ajax', 'jquery', 'node.js', 'reactjs', 'react-native', 'javascript', 'angular', 'vue.js', 'css', 'twitter-bootstrap', 'html', 'angularjs'], avg_popularity=np.float64(610273.3333333334), total_connections=44), TagCluster(name='DataScience', tags=['asp.net-core', 'arrays', 'express', 'winforms', 'codeigniter', 'dart', 'dictionary', 'entity-framework', 'numpy', 'r', 'dataframe', 'matplotlib', 'multithreading', 'typescript', 'tkinter', 'wordpress', 'hibernate', 'regex', 'pandas'], avg_popularity=np.float64(131300.36842105264), total_connections=24), TagCluster(name='Database', tags=['mysql', 'sql-server', 'postgresql', 'sql', 'database', 'tsql', 'oracle'], avg_popularity=np.float64(301661.28571428574), total_connections=18), TagCluster(name='DevOps', tags=['bash'], avg_popularity=np.float64(148367.0), total_connections=1)]",
     "community_structure": {
       "num_communities": 14,
       "modularity": 0.7594500000000002,
       "community_sizes": [
+        10,
+        14,
+        6,
+        2,
+        14,
         12,
         2,
-        4,
-        3,
-        6,
-        10,
-        2,
         5,
-        14,
-        14,
+        3,
         11,
         2,
+        4,
         2,
         2
       ],
       "community_info": {
         "Community_1": {
-          "size": 12,
+          "size": 10,
           "tags": [
-            "asp.net-core",
-            ".net",
-            "xaml",
-            "asp.net",
-            "winforms",
-            "entity-framework",
-            "c#",
-            "asp.net-mvc",
-            "visual-studio",
-            "linq",
-            "wpf",
-            "unity3d"
+            "spring",
+            "swing",
+            "eclipse",
+            "arrays",
+            "xml",
+            "multithreading",
+            "java",
+            "hibernate",
+            "spring-boot",
+            "maven"
           ]
         },
         "Community_2": {
-          "size": 2,
+          "size": 14,
           "tags": [
-            "ruby",
-            "ruby-on-rails"
+            "python",
+            "python-3.x",
+            "flask",
+            "tensorflow",
+            "django-models",
+            "dictionary",
+            "list",
+            "numpy",
+            "dataframe",
+            "matplotlib",
+            "django",
+            "tkinter",
+            "python-2.7",
+            "pandas"
           ]
         },
         "Community_3": {
-          "size": 4,
+          "size": 6,
           "tags": [
-            "c",
-            "c++11",
-            "c++",
-            "qt"
+            "ios",
+            "iphone",
+            "uitableview",
+            "swift",
+            "xcode",
+            "objective-c"
           ]
         },
         "Community_4": {
-          "size": 3,
-          "tags": [
-            "mongodb",
-            "node.js",
-            "express"
-          ]
-        },
-        "Community_5": {
-          "size": 6,
-          "tags": [
-            "iphone",
-            "objective-c",
-            "ios",
-            "swift",
-            "xcode",
-            "uitableview"
-          ]
-        },
-        "Community_6": {
-          "size": 10,
-          "tags": [
-            "maven",
-            "multithreading",
-            "hibernate",
-            "swing",
-            "arrays",
-            "xml",
-            "eclipse",
-            "spring",
-            "spring-boot",
-            "java"
-          ]
-        },
-        "Community_7": {
-          "size": 2,
-          "tags": [
-            "shell",
-            "bash"
-          ]
-        },
-        "Community_8": {
-          "size": 5,
-          "tags": [
-            "android-layout",
-            "android",
-            "kotlin",
-            "android-fragments",
-            "android-studio"
-          ]
-        },
-        "Community_9": {
-          "size": 14,
-          "tags": [
-            "css",
-            "twitter-bootstrap",
-            "regex",
-            "angular",
-            "reactjs",
-            "html",
-            "jquery",
-            "ajax",
-            "javascript",
-            "typescript",
-            "angularjs",
-            "react-native",
-            "json",
-            "vue.js"
-          ]
-        },
-        "Community_10": {
-          "size": 14,
-          "tags": [
-            "numpy",
-            "dictionary",
-            "django",
-            "pandas",
-            "tkinter",
-            "list",
-            "python-3.x",
-            "tensorflow",
-            "flask",
-            "dataframe",
-            "python-2.7",
-            "django-models",
-            "python",
-            "matplotlib"
-          ]
-        },
-        "Community_11": {
-          "size": 11,
-          "tags": [
-            "oracle",
-            "sql-server",
-            "codeigniter",
-            "wordpress",
-            "postgresql",
-            "laravel",
-            "php",
-            "mysql",
-            "database",
-            "sql",
-            "tsql"
-          ]
-        },
-        "Community_12": {
-          "size": 2,
-          "tags": [
-            "vba",
-            "excel"
-          ]
-        },
-        "Community_13": {
           "size": 2,
           "tags": [
             "flutter",
             "dart"
           ]
         },
+        "Community_5": {
+          "size": 14,
+          "tags": [
+            "ajax",
+            "jquery",
+            "reactjs",
+            "react-native",
+            "javascript",
+            "angular",
+            "vue.js",
+            "typescript",
+            "css",
+            "twitter-bootstrap",
+            "html",
+            "json",
+            "regex",
+            "angularjs"
+          ]
+        },
+        "Community_6": {
+          "size": 12,
+          "tags": [
+            "asp.net-core",
+            "asp.net-mvc",
+            "linq",
+            "wpf",
+            "winforms",
+            "c#",
+            "entity-framework",
+            "asp.net",
+            "visual-studio",
+            ".net",
+            "xaml",
+            "unity3d"
+          ]
+        },
+        "Community_7": {
+          "size": 2,
+          "tags": [
+            "ggplot2",
+            "r"
+          ]
+        },
+        "Community_8": {
+          "size": 5,
+          "tags": [
+            "android",
+            "android-studio",
+            "kotlin",
+            "android-fragments",
+            "android-layout"
+          ]
+        },
+        "Community_9": {
+          "size": 3,
+          "tags": [
+            "express",
+            "node.js",
+            "mongodb"
+          ]
+        },
+        "Community_10": {
+          "size": 11,
+          "tags": [
+            "codeigniter",
+            "mysql",
+            "sql-server",
+            "postgresql",
+            "sql",
+            "database",
+            "tsql",
+            "oracle",
+            "wordpress",
+            "laravel",
+            "php"
+          ]
+        },
+        "Community_11": {
+          "size": 2,
+          "tags": [
+            "ruby",
+            "ruby-on-rails"
+          ]
+        },
+        "Community_12": {
+          "size": 4,
+          "tags": [
+            "c",
+            "c++11",
+            "qt",
+            "c++"
+          ]
+        },
+        "Community_13": {
+          "size": 2,
+          "tags": [
+            "excel",
+            "vba"
+          ]
+        },
         "Community_14": {
           "size": 2,
           "tags": [
-            "r",
-            "ggplot2"
+            "shell",
+            "bash"
           ]
         }
       }
@@ -1981,55 +2092,21 @@
       "num_communities": 14,
       "modularity": 0.7594500000000002,
       "domain_details": {
-        "DataScience": {
-          "tag_count": 19,
-          "avg_popularity": 131300.36842105264,
-          "total_connections": 24,
-          "tags": [
-            "asp.net-core",
-            "winforms",
-            "multithreading",
-            "regex",
-            "numpy",
-            "entity-framework",
-            "dictionary",
-            "pandas",
-            "hibernate",
-            "tkinter"
-          ]
-        },
         "Backend": {
           "tag_count": 15,
           "avg_popularity": 591089.8666666667,
           "total_connections": 59,
           "tags": [
-            "ruby",
-            "mongodb",
-            "django",
-            "ruby-on-rails",
-            "c#",
-            "laravel",
+            "spring",
+            "python",
             "python-3.x",
             "flask",
-            "php",
-            "spring"
-          ]
-        },
-        "Other": {
-          "tag_count": 25,
-          "avg_popularity": 176794.16,
-          "total_connections": 34,
-          "tags": [
-            ".net",
-            "c",
-            "iphone",
-            "xaml",
-            "asp.net",
-            "maven",
-            "shell",
-            "c++11",
-            "vba",
-            "swing"
+            "django-models",
+            "c#",
+            "ruby",
+            "ruby-on-rails",
+            "java",
+            "django"
           ]
         },
         "Mobile": {
@@ -2037,54 +2114,32 @@
           "avg_popularity": 331116.3333333333,
           "total_connections": 19,
           "tags": [
-            "android-layout",
-            "objective-c",
             "ios",
+            "flutter",
             "swift",
             "android",
+            "android-studio",
             "kotlin",
-            "flutter",
             "android-fragments",
-            "android-studio"
+            "android-layout",
+            "objective-c"
           ]
         },
-        "Web": {
-          "tag_count": 12,
-          "avg_popularity": 610273.3333333334,
-          "total_connections": 44,
+        "Other": {
+          "tag_count": 25,
+          "avg_popularity": 176794.16,
+          "total_connections": 34,
           "tags": [
-            "css",
-            "node.js",
-            "twitter-bootstrap",
-            "angular",
-            "reactjs",
-            "html",
-            "jquery",
-            "ajax",
-            "javascript",
-            "angularjs"
-          ]
-        },
-        "Database": {
-          "tag_count": 7,
-          "avg_popularity": 301661.28571428574,
-          "total_connections": 18,
-          "tags": [
-            "oracle",
-            "sql-server",
-            "postgresql",
-            "mysql",
-            "database",
-            "sql",
-            "tsql"
-          ]
-        },
-        "DevOps": {
-          "tag_count": 1,
-          "avg_popularity": 148367.0,
-          "total_connections": 1,
-          "tags": [
-            "bash"
+            "swing",
+            "iphone",
+            "asp.net-mvc",
+            "ggplot2",
+            "linq",
+            "wpf",
+            "eclipse",
+            "uitableview",
+            "xml",
+            "c"
           ]
         },
         "AI_ML": {
@@ -2093,6 +2148,62 @@
           "total_connections": 1,
           "tags": [
             "tensorflow"
+          ]
+        },
+        "Web": {
+          "tag_count": 12,
+          "avg_popularity": 610273.3333333334,
+          "total_connections": 44,
+          "tags": [
+            "ajax",
+            "jquery",
+            "node.js",
+            "reactjs",
+            "react-native",
+            "javascript",
+            "angular",
+            "vue.js",
+            "css",
+            "twitter-bootstrap"
+          ]
+        },
+        "DataScience": {
+          "tag_count": 19,
+          "avg_popularity": 131300.36842105264,
+          "total_connections": 24,
+          "tags": [
+            "asp.net-core",
+            "arrays",
+            "express",
+            "winforms",
+            "codeigniter",
+            "dart",
+            "dictionary",
+            "entity-framework",
+            "numpy",
+            "r"
+          ]
+        },
+        "Database": {
+          "tag_count": 7,
+          "avg_popularity": 301661.28571428574,
+          "total_connections": 18,
+          "tags": [
+            "mysql",
+            "sql-server",
+            "postgresql",
+            "sql",
+            "database",
+            "tsql",
+            "oracle"
+          ]
+        },
+        "DevOps": {
+          "tag_count": 1,
+          "avg_popularity": 148367.0,
+          "total_connections": 1,
+          "tags": [
+            "bash"
           ]
         }
       }
@@ -2469,132 +2580,132 @@
     },
     "age_df": [
       {
-        "user_id": 10315163,
-        "display_name": "Ynjxsjmh",
-        "reputation": 23749,
-        "account_creation_date": "2018-09-04 13:07:42.573000+00:00",
-        "account_age_days": 2766,
-        "question_count": 21,
-        "answer_count": 1500,
+        "user_id": 9582542,
+        "display_name": "Leo Torres",
+        "reputation": 604,
+        "account_creation_date": "2018-04-01 15:34:13.407000+00:00",
+        "account_age_days": 2923,
+        "question_count": 80,
+        "answer_count": 9,
         "post_type": "1_Both",
         "account_age_level": "4_Established"
       },
       {
-        "user_id": 7429447,
-        "display_name": "undetected Selenium",
-        "reputation": 162142,
-        "account_creation_date": "2017-01-17 08:59:30.927000+00:00",
-        "account_age_days": 3361,
-        "question_count": 61,
-        "answer_count": 8243,
+        "user_id": 10737626,
+        "display_name": "Nick the Community Scientist",
+        "reputation": 621,
+        "account_creation_date": "2018-12-03 07:25:55.720000+00:00",
+        "account_age_days": 2677,
+        "question_count": 14,
+        "answer_count": 31,
         "post_type": "1_Both",
         "account_age_level": "4_Established"
       },
       {
-        "user_id": 4718350,
-        "display_name": "Chris",
-        "reputation": 14301,
-        "account_creation_date": "2015-03-26 21:03:59.930000+00:00",
-        "account_age_days": 4024,
-        "question_count": 8,
-        "answer_count": 883,
+        "user_id": 10885684,
+        "display_name": "KunduK",
+        "reputation": 29896,
+        "account_creation_date": "2019-01-08 17:37:18.173000+00:00",
+        "account_age_days": 2641,
+        "question_count": 2,
+        "answer_count": 1840,
+        "post_type": "1_Both",
+        "account_age_level": "4_Established"
+      },
+      {
+        "user_id": 7716289,
+        "display_name": "Firmansyah",
+        "reputation": 84,
+        "account_creation_date": "2017-03-15 16:14:52.590000+00:00",
+        "account_age_days": 3305,
+        "question_count": 48,
+        "answer_count": 6,
+        "post_type": "1_Both",
+        "account_age_level": "4_Established"
+      },
+      {
+        "user_id": 169394,
+        "display_name": "Itai Ferber",
+        "reputation": 26445,
+        "account_creation_date": "2009-02-01 06:03:25.403000+00:00",
+        "account_age_days": 6269,
+        "question_count": 6,
+        "answer_count": 267,
         "post_type": "1_Both",
         "account_age_level": "5_Senior"
       },
       {
-        "user_id": 9068895,
-        "display_name": "Alex",
-        "reputation": 2475,
-        "account_creation_date": "2017-12-07 18:02:39.800000+00:00",
-        "account_age_days": 3037,
+        "user_id": 10290918,
+        "display_name": "Abraham Labkovsky",
+        "reputation": 1677,
+        "account_creation_date": "2018-08-29 15:42:48.920000+00:00",
+        "account_age_days": 2773,
         "question_count": 1,
-        "answer_count": 133,
+        "answer_count": 106,
         "post_type": "1_Both",
         "account_age_level": "4_Established"
       },
       {
-        "user_id": 2429187,
-        "display_name": "le_camerone",
-        "reputation": 600,
-        "account_creation_date": "2013-05-28 15:24:20.860000+00:00",
-        "account_age_days": 4691,
-        "question_count": 8,
-        "answer_count": 47,
+        "user_id": 2344011,
+        "display_name": "Gejun",
+        "reputation": 3372,
+        "account_creation_date": "2013-05-02 16:40:23.677000+00:00",
+        "account_age_days": 4718,
+        "question_count": 7,
+        "answer_count": 9,
         "post_type": "1_Both",
         "account_age_level": "5_Senior"
       },
       {
-        "user_id": 6303541,
-        "display_name": "Balastrong",
-        "reputation": 4153,
-        "account_creation_date": "2016-05-07 10:07:40.360000+00:00",
-        "account_age_days": 3616,
+        "user_id": 6574038,
+        "display_name": "jay.sf",
+        "reputation": 50099,
+        "account_creation_date": "2016-07-11 10:13:21.780000+00:00",
+        "account_age_days": 3552,
+        "question_count": 152,
+        "answer_count": 2729,
+        "post_type": "1_Both",
+        "account_age_level": "4_Established"
+      },
+      {
+        "user_id": 4157719,
+        "display_name": "Vassilis Chasiotis",
+        "reputation": 427,
+        "account_creation_date": "2014-10-18 22:26:22.470000+00:00",
+        "account_age_days": 4184,
+        "question_count": 27,
+        "answer_count": 2,
+        "post_type": "1_Both",
+        "account_age_level": "5_Senior"
+      },
+      {
+        "user_id": 965900,
+        "display_name": "mkopriva",
+        "reputation": 29967,
+        "account_creation_date": "2011-09-26 21:52:15.473000+00:00",
+        "account_age_days": 5302,
         "question_count": 1,
-        "answer_count": 257,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 413337,
-        "display_name": "Codo",
-        "reputation": 71736,
-        "account_creation_date": "2010-08-06 17:52:07.830000+00:00",
-        "account_age_days": 5717,
-        "question_count": 45,
-        "answer_count": 1412,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
-      },
-      {
-        "user_id": 97471,
-        "display_name": "Gerardo Grignoli",
-        "reputation": 12971,
-        "account_creation_date": "2009-04-29 02:38:23.120000+00:00",
-        "account_age_days": 6181,
-        "question_count": 15,
-        "answer_count": 120,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
-      },
-      {
-        "user_id": 4621513,
-        "display_name": "mkrieger1",
-        "reputation": 15669,
-        "account_creation_date": "2015-03-01 23:32:35.203000+00:00",
-        "account_age_days": 4049,
-        "question_count": 19,
-        "answer_count": 715,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
-      },
-      {
-        "user_id": 62076,
-        "display_name": "Alex Wayne",
-        "reputation": 167819,
-        "account_creation_date": "2009-02-03 18:41:34.357000+00:00",
-        "account_age_days": 6266,
-        "question_count": 133,
-        "answer_count": 2392,
+        "answer_count": 770,
         "post_type": "1_Both",
         "account_age_level": "5_Senior"
       }
     ],
-    "patterns": "[AgeContributionPattern(age_level='3_Mature', avg_reputation=np.float64(3574.6911764705883), avg_questions=np.float64(8.676470588235293), avg_answers=np.float64(197.63235294117646), both_ratio=0.4117647058823529, questions_only_ratio=0.47058823529411764, answers_only_ratio=0.11764705882352941), AgeContributionPattern(age_level='4_Established', avg_reputation=np.float64(13442.692307692309), avg_questions=np.float64(28.576923076923077), avg_answers=np.float64(593.1923076923077), both_ratio=0.7307692307692307, questions_only_ratio=0.17307692307692307, answers_only_ratio=0.09615384615384616), AgeContributionPattern(age_level='5_Senior', avg_reputation=np.float64(84686.26760563381), avg_questions=np.float64(29.732394366197184), avg_answers=np.float64(2735.3521126760565), both_ratio=0.7605633802816901, questions_only_ratio=0.056338028169014086, answers_only_ratio=0.18309859154929578)]",
+    "patterns": "[AgeContributionPattern(age_level='3_Mature', avg_reputation=np.float64(3574.6911764705883), avg_questions=np.float64(8.676470588235293), avg_answers=np.float64(197.63235294117646), both_ratio=0.4117647058823529, questions_only_ratio=0.47058823529411764, answers_only_ratio=0.11764705882352941), AgeContributionPattern(age_level='4_Established', avg_reputation=np.float64(13703.392156862745), avg_questions=np.float64(28.941176470588236), avg_answers=np.float64(604.7843137254902), both_ratio=0.7254901960784313, questions_only_ratio=0.17647058823529413, answers_only_ratio=0.09803921568627451), AgeContributionPattern(age_level='5_Senior', avg_reputation=np.float64(83512.11111111111), avg_questions=np.float64(29.458333333333332), avg_answers=np.float64(2697.3888888888887), both_ratio=0.7638888888888888, questions_only_ratio=0.05555555555555555, answers_only_ratio=0.18055555555555555)]",
     "behavior_evolution": {
       "reputation_growth": {
         "Mature": 3574.6911764705883,
-        "Established": 13442.692307692309,
-        "Senior": 84686.26760563381
+        "Established": 13703.392156862745,
+        "Senior": 83512.11111111111
       },
       "question_trend": {
         "Mature": 8.676470588235293,
-        "Established": 28.576923076923077,
-        "Senior": 29.732394366197184
+        "Established": 28.941176470588236,
+        "Senior": 29.458333333333332
       },
       "answer_trend": {
         "Mature": 197.63235294117646,
-        "Established": 593.1923076923077,
-        "Senior": 2735.3521126760565
+        "Established": 604.7843137254902,
+        "Senior": 2697.3888888888887
       }
     },
     "summary": {
@@ -2605,37 +2716,1216 @@
           "avg_reputation": 3574.6911764705883
         },
         "4_Established": {
-          "count": 52,
-          "avg_reputation": 13442.692307692309
+          "count": 51,
+          "avg_reputation": 13703.392156862745
         },
         "5_Senior": {
-          "count": 71,
-          "avg_reputation": 84686.26760563381
+          "count": 72,
+          "avg_reputation": 83512.11111111111
         }
       },
       "newcomer_questions_only_ratio": 0,
-      "senior_answers_only_ratio": 0.18309859154929578,
+      "senior_answers_only_ratio": 0.18055555555555555,
       "veteran_both_ratio": 0,
-      "avg_account_age_days": 3230.7015706806283,
+      "avg_account_age_days": 3231.7015706806283,
       "behavior_evolution": {
         "reputation_growth": {
           "Mature": 3574.6911764705883,
-          "Established": 13442.692307692309,
-          "Senior": 84686.26760563381
+          "Established": 13703.392156862745,
+          "Senior": 83512.11111111111
         },
         "question_trend": {
           "Mature": 8.676470588235293,
-          "Established": 28.576923076923077,
-          "Senior": 29.732394366197184
+          "Established": 28.941176470588236,
+          "Senior": 29.458333333333332
         },
         "answer_trend": {
           "Mature": 197.63235294117646,
-          "Established": 593.1923076923077,
-          "Senior": 2735.3521126760565
+          "Established": 604.7843137254902,
+          "Senior": 2697.3888888888887
         }
       },
       "hypothesis_newbie_asks_more": false,
       "hypothesis_veteran_answers_more": false
+    }
+  },
+  "analysis_7_voting_behavior": {
+    "graph": {
+      "nodes": 200,
+      "edges": 19900
+    },
+    "votes_df": [
+      {
+        "vote_id": 57471200,
+        "post_id": 9073856,
+        "vote_type_id": 2,
+        "creation_date": "2013-11-17 00:00:00+00:00",
+        "post_owner_id": 1156628,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 36406994,
+        "post_id": 6771258,
+        "vote_type_id": 2,
+        "creation_date": "2012-11-13 00:00:00+00:00",
+        "post_owner_id": 26349,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 90404019,
+        "post_id": 2518421,
+        "vote_type_id": 2,
+        "creation_date": "2015-06-02 00:00:00+00:00",
+        "post_owner_id": 190706,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 71122933,
+        "post_id": 8090010,
+        "vote_type_id": 2,
+        "creation_date": "2014-07-06 00:00:00+00:00",
+        "post_owner_id": 714495,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 251928821,
+        "post_id": 58058776,
+        "vote_type_id": 2,
+        "creation_date": "2022-05-25 00:00:00+00:00",
+        "post_owner_id": 12077722,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 199982239,
+        "post_id": 47534153,
+        "vote_type_id": 2,
+        "creation_date": "2019-12-18 00:00:00+00:00",
+        "post_owner_id": 3399416,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 200489171,
+        "post_id": 59492242,
+        "vote_type_id": 2,
+        "creation_date": "2019-12-29 00:00:00+00:00",
+        "post_owner_id": 878532,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 187662923,
+        "post_id": 56342415,
+        "vote_type_id": 2,
+        "creation_date": "2019-05-28 00:00:00+00:00",
+        "post_owner_id": 3534730,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 122604626,
+        "post_id": 8673375,
+        "vote_type_id": 2,
+        "creation_date": "2016-09-21 00:00:00+00:00",
+        "post_owner_id": 838102,
+        "vote_type": "upvote"
+      },
+      {
+        "vote_id": 213551276,
+        "post_id": 336859,
+        "vote_type_id": 2,
+        "creation_date": "2020-07-16 00:00:00+00:00",
+        "post_owner_id": 31569,
+        "vote_type": "upvote"
+      }
+    ],
+    "summary": {
+      "total_votes": 10000,
+      "unique_voters": 6134,
+      "avg_votes_per_user": 1.6302575806977502,
+      "vote_type_distribution": {
+        "upvote": 10000
+      }
+    }
+  },
+  "analysis_8_comment_network": {
+    "graph": {
+      "nodes": 2577,
+      "edges": 1125
+    },
+    "comments_df": [
+      {
+        "comment_id": 19609568,
+        "post_id": 14151041,
+        "commenter_id": 965146,
+        "comment_score": 0,
+        "creation_date": "2013-01-04 12:08:16.703000+00:00",
+        "post_owner_id": 1275039,
+        "post_type_id": 1,
+        "commenter_reputation": 20791,
+        "commenter_name": "4b0"
+      },
+      {
+        "comment_id": 19618112,
+        "post_id": 14161513,
+        "commenter_id": 722762,
+        "comment_score": 0,
+        "creation_date": "2013-01-04 17:08:28.530000+00:00",
+        "post_owner_id": 1727587,
+        "post_type_id": 1,
+        "commenter_reputation": 56540,
+        "commenter_name": "Halcyon"
+      },
+      {
+        "comment_id": 19739618,
+        "post_id": 14212433,
+        "commenter_id": 1160282,
+        "comment_score": 0,
+        "creation_date": "2013-01-09 06:26:06.960000+00:00",
+        "post_owner_id": 1957199,
+        "post_type_id": 1,
+        "commenter_reputation": 7111,
+        "commenter_name": "SilentKiller"
+      },
+      {
+        "comment_id": 19745847,
+        "post_id": 14233125,
+        "commenter_id": 156755,
+        "comment_score": 0,
+        "creation_date": "2013-01-09 10:33:37.927000+00:00",
+        "post_owner_id": 1302273,
+        "post_type_id": 1,
+        "commenter_reputation": 25926,
+        "commenter_name": "Basic"
+      },
+      {
+        "comment_id": 19786132,
+        "post_id": 14256807,
+        "commenter_id": 1111081,
+        "comment_score": 0,
+        "creation_date": "2013-01-10 11:40:11.697000+00:00",
+        "post_owner_id": 1890851,
+        "post_type_id": 1,
+        "commenter_reputation": 3330,
+        "commenter_name": "Abhijith Nagaraja"
+      },
+      {
+        "comment_id": 19788191,
+        "post_id": 14257348,
+        "commenter_id": 826606,
+        "comment_score": 0,
+        "creation_date": "2013-01-10 12:48:28.263000+00:00",
+        "post_owner_id": 1258600,
+        "post_type_id": 1,
+        "commenter_reputation": 17016,
+        "commenter_name": "M-Wajeeh"
+      },
+      {
+        "comment_id": 19818557,
+        "post_id": 14274132,
+        "commenter_id": 1100413,
+        "comment_score": 0,
+        "creation_date": "2013-01-11 09:46:07.503000+00:00",
+        "post_owner_id": 1100413,
+        "post_type_id": 1,
+        "commenter_reputation": 520,
+        "commenter_name": "Roberto"
+      },
+      {
+        "comment_id": 19944703,
+        "post_id": 14345973,
+        "commenter_id": 107415,
+        "comment_score": 0,
+        "creation_date": "2013-01-15 21:23:18.347000+00:00",
+        "post_owner_id": 48523,
+        "post_type_id": 1,
+        "commenter_reputation": 81840,
+        "commenter_name": "Matchu"
+      },
+      {
+        "comment_id": 19944741,
+        "post_id": 14345973,
+        "commenter_id": 107415,
+        "comment_score": 0,
+        "creation_date": "2013-01-15 21:24:41.623000+00:00",
+        "post_owner_id": 48523,
+        "post_type_id": 1,
+        "commenter_reputation": 81840,
+        "commenter_name": "Matchu"
+      },
+      {
+        "comment_id": 19944796,
+        "post_id": 14345973,
+        "commenter_id": 107415,
+        "comment_score": 0,
+        "creation_date": "2013-01-15 21:26:14.773000+00:00",
+        "post_owner_id": 48523,
+        "post_type_id": 1,
+        "commenter_reputation": 81840,
+        "commenter_name": "Matchu"
+      }
+    ],
+    "summary": {
+      "total_comments": 10000,
+      "unique_commenters": 2577,
+      "network_density": 0.0003389395440314102,
+      "avg_comments_per_user": 3.880481179666279
+    }
+  },
+  "analysis_9_badge_network": {
+    "graph": {
+      "nodes": 480,
+      "edges": 11441
+    },
+    "badges_df": [
+      {
+        "badge_id": 47949739,
+        "user_id": 20082258,
+        "badge_name": "Informed",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:37:16.333000+00:00",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "badge_id": 47949738,
+        "user_id": 20082256,
+        "badge_name": "Informed",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:36:42.613000+00:00",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "badge_id": 47949737,
+        "user_id": 20082201,
+        "badge_name": "Informed",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:35:41.997000+00:00",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "badge_id": 47949717,
+        "user_id": 20082226,
+        "badge_name": "Autobiographer",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "badge_id": 47949714,
+        "user_id": 20081526,
+        "badge_name": "Autobiographer",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "badge_id": 47949734,
+        "user_id": 1462202,
+        "badge_name": "Yearling",
+        "badge_class": 2,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": 392,
+        "display_name": "Eric Wolf"
+      },
+      {
+        "badge_id": 47949733,
+        "user_id": 224591,
+        "badge_name": "Yearling",
+        "badge_class": 2,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": 1199,
+        "display_name": "Sjemmie"
+      },
+      {
+        "badge_id": 47949711,
+        "user_id": 12777044,
+        "badge_name": "Announcer",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": 685,
+        "display_name": "dkhara"
+      },
+      {
+        "badge_id": 47949730,
+        "user_id": 14572991,
+        "badge_name": "Student",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": 1,
+        "display_name": "AK1828 Tech Enthusiast"
+      },
+      {
+        "badge_id": 47949720,
+        "user_id": 10086284,
+        "badge_name": "Notable Question",
+        "badge_class": 2,
+        "tag_based": false,
+        "date": "2022-09-25 10:33:52.760000+00:00",
+        "reputation": 11,
+        "display_name": "Mahdi Dor Emami"
+      }
+    ],
+    "summary": {
+      "total_badges": 500,
+      "unique_users": 480,
+      "avg_badges_per_user": 1.0416666666666667,
+      "badge_distribution": {
+        "3": 393,
+        "2": 105,
+        "1": 2
+      }
+    }
+  },
+  "analysis_10_edit_collaboration": {
+    "graph": {
+      "nodes": 990,
+      "edges": 366
+    },
+    "edits_df": [
+      {
+        "history_id": 10840619,
+        "post_id": 5093358,
+        "editor_id": null,
+        "post_history_type_id": 4,
+        "creation_date": "2011-02-23 17:25:29.650000+00:00",
+        "edit_comment": "Proper title. SQL Server doesn't implement a full standard complain XQuery engine. Retagging.",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 10949077,
+        "post_id": 5140900,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-02-28 10:52:40.733000+00:00",
+        "edit_comment": "added wal_sync_method advice",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11023447,
+        "post_id": 5172559,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-02 20:54:36.883000+00:00",
+        "edit_comment": "edited tags; edited title; deleted 79 characters in body; edited title",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11025996,
+        "post_id": 5174215,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-02 22:41:42.523000+00:00",
+        "edit_comment": "hilighting",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11037955,
+        "post_id": 5179424,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-03 10:40:43.123000+00:00",
+        "edit_comment": "added 225 characters in body",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11085837,
+        "post_id": 5200366,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-04 23:34:12.507000+00:00",
+        "edit_comment": "added 101 characters in body",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11089714,
+        "post_id": 5202073,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-05 06:20:39.440000+00:00",
+        "edit_comment": "added 209 characters in body",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11162038,
+        "post_id": 5228768,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-08 13:39:10.683000+00:00",
+        "edit_comment": "added 996 characters in body",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11204032,
+        "post_id": 3717081,
+        "editor_id": null,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-09 20:25:17.220000+00:00",
+        "edit_comment": "Added more information around what the posted code snippet is for.",
+        "reputation": null,
+        "display_name": null
+      },
+      {
+        "history_id": 11119648,
+        "post_id": 4139500,
+        "editor_id": 22528,
+        "post_history_type_id": 5,
+        "creation_date": "2011-03-07 01:50:28.767000+00:00",
+        "edit_comment": "Update #3 including a new tip from Josh Smith",
+        "reputation": 3232,
+        "display_name": "lightw8"
+      }
+    ],
+    "summary": {
+      "total_edits": 5000,
+      "unique_editors": 990,
+      "active_editors": 521,
+      "avg_edits_per_editor": 4.97070707070707
+    }
+  },
+  "analysis_11_post_link": {
+    "graph": {
+      "nodes": 924,
+      "edges": 500
+    },
+    "links_df": [
+      {
+        "link_id": 1244340863,
+        "source_post_id": 39623788,
+        "target_post_id": 29960715,
+        "link_type_id": 1,
+        "creation_date": "2016-09-21 18:22:07.957000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 3394623,
+        "target_user_id": 1330984,
+        "source_score": 7,
+        "target_score": 2
+      },
+      {
+        "link_id": 1625017692,
+        "source_post_id": 51763420,
+        "target_post_id": 20370827,
+        "link_type_id": 1,
+        "creation_date": "2018-09-09 09:34:08.550000+00:00",
+        "link_type": "Linked",
+        "source_user_id": null,
+        "target_user_id": 696436,
+        "source_score": null,
+        "target_score": 9
+      },
+      {
+        "link_id": 1740837423,
+        "source_post_id": 60795129,
+        "target_post_id": 3877657,
+        "link_type_id": 1,
+        "creation_date": "2020-03-22 05:08:03.500000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 4561887,
+        "target_user_id": 175259,
+        "source_score": 1,
+        "target_score": 12
+      },
+      {
+        "link_id": 1967833680,
+        "source_post_id": 71641550,
+        "target_post_id": 31038742,
+        "link_type_id": 1,
+        "creation_date": "2022-03-28 01:28:30.013000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 17726874,
+        "target_user_id": 3491275,
+        "source_score": 0,
+        "target_score": 102
+      },
+      {
+        "link_id": 927276120,
+        "source_post_id": 24644464,
+        "target_post_id": 5780888,
+        "link_type_id": 1,
+        "creation_date": "2014-07-09 03:26:06.167000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 245091,
+        "target_user_id": 702627,
+        "source_score": 38,
+        "target_score": 171
+      },
+      {
+        "link_id": 1604591981,
+        "source_post_id": 1801160,
+        "target_post_id": 45068932,
+        "link_type_id": 1,
+        "creation_date": "2018-06-27 15:58:27.273000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 219069,
+        "target_user_id": 6669370,
+        "source_score": 613,
+        "target_score": 9
+      },
+      {
+        "link_id": 1623520256,
+        "source_post_id": 52023077,
+        "target_post_id": 208105,
+        "link_type_id": 1,
+        "creation_date": "2018-08-26 04:11:05.210000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 10043329,
+        "target_user_id": 27929,
+        "source_score": 2,
+        "target_score": 7138
+      },
+      {
+        "link_id": 1810175621,
+        "source_post_id": 66257827,
+        "target_post_id": 58657003,
+        "link_type_id": 1,
+        "creation_date": "2021-02-18 16:09:27.083000+00:00",
+        "link_type": "Linked",
+        "source_user_id": null,
+        "target_user_id": 12128695,
+        "source_score": null,
+        "target_score": 10
+      },
+      {
+        "link_id": 1994516905,
+        "source_post_id": 73018449,
+        "target_post_id": 37027720,
+        "link_type_id": 1,
+        "creation_date": "2022-07-18 07:53:33.993000+00:00",
+        "link_type": "Linked",
+        "source_user_id": 18359714,
+        "target_user_id": 2858052,
+        "source_score": 0,
+        "target_score": 1
+      },
+      {
+        "link_id": 555363395,
+        "source_post_id": 8962231,
+        "target_post_id": 5584787,
+        "link_type_id": 1,
+        "creation_date": "2012-01-27 00:52:18.877000+00:00",
+        "link_type": "Linked",
+        "source_user_id": null,
+        "target_user_id": 412252,
+        "source_score": null,
+        "target_score": 0
+      }
+    ],
+    "summary": {
+      "total_links": 500,
+      "unique_posts": 924,
+      "link_type_distribution": {
+        "Linked": 500
+      },
+      "duplicate_ratio": 0.0
+    }
+  },
+  "analysis_12_review_task": {
+    "graph": {
+      "nodes": 88,
+      "edges": 36
+    },
+    "reviews_df": [
+      {
+        "history_id": 278889482,
+        "post_id": 73841838,
+        "reviewer_id": 6530970,
+        "post_history_type_id": 10,
+        "creation_date": "2022-09-25 07:34:35.090000+00:00",
+        "comment": "101",
+        "review_type": "Close",
+        "post_owner_id": 20080504,
+        "reputation": 47322,
+        "display_name": "Maurits Evers"
+      },
+      {
+        "history_id": 278889362,
+        "post_id": 73842719,
+        "reviewer_id": 19392359,
+        "post_history_type_id": 13,
+        "creation_date": "2022-09-25 07:30:28.290000+00:00",
+        "comment": null,
+        "review_type": "Undelete",
+        "post_owner_id": null,
+        "reputation": 24,
+        "display_name": "Jaejoon Han"
+      },
+      {
+        "history_id": 278889345,
+        "post_id": 73842731,
+        "reviewer_id": -1,
+        "post_history_type_id": 10,
+        "creation_date": "2022-09-25 07:29:51.423000+00:00",
+        "comment": "102",
+        "review_type": "Close",
+        "post_owner_id": null,
+        "reputation": 1,
+        "display_name": "Community"
+      },
+      {
+        "history_id": 278889252,
+        "post_id": 73842629,
+        "reviewer_id": -1,
+        "post_history_type_id": 10,
+        "creation_date": "2022-09-25 07:26:38.887000+00:00",
+        "comment": "103",
+        "review_type": "Close",
+        "post_owner_id": null,
+        "reputation": 1,
+        "display_name": "Community"
+      },
+      {
+        "history_id": 278889251,
+        "post_id": 73842719,
+        "reviewer_id": 19392359,
+        "post_history_type_id": 12,
+        "creation_date": "2022-09-25 07:26:33.703000+00:00",
+        "comment": "via Vote",
+        "review_type": "Delete",
+        "post_owner_id": null,
+        "reputation": 24,
+        "display_name": "Jaejoon Han"
+      },
+      {
+        "history_id": 278889214,
+        "post_id": 73832338,
+        "reviewer_id": 19200469,
+        "post_history_type_id": 13,
+        "creation_date": "2022-09-25 07:24:54.323000+00:00",
+        "comment": null,
+        "review_type": "Undelete",
+        "post_owner_id": null,
+        "reputation": 1,
+        "display_name": "RhoAies"
+      },
+      {
+        "history_id": 278889204,
+        "post_id": 73842464,
+        "reviewer_id": 2034787,
+        "post_history_type_id": 13,
+        "creation_date": "2022-09-25 07:24:26.170000+00:00",
+        "comment": null,
+        "review_type": "Undelete",
+        "post_owner_id": null,
+        "reputation": 22989,
+        "display_name": "גלעד ברקן"
+      },
+      {
+        "history_id": 278889178,
+        "post_id": 73842464,
+        "reviewer_id": 2034787,
+        "post_history_type_id": 12,
+        "creation_date": "2022-09-25 07:23:59.630000+00:00",
+        "comment": "via Vote",
+        "review_type": "Delete",
+        "post_owner_id": null,
+        "reputation": 22989,
+        "display_name": "גלעד ברקן"
+      },
+      {
+        "history_id": 278889145,
+        "post_id": 73841843,
+        "reviewer_id": -1,
+        "post_history_type_id": 10,
+        "creation_date": "2022-09-25 07:21:21.517000+00:00",
+        "comment": "104",
+        "review_type": "Close",
+        "post_owner_id": 4868984,
+        "reputation": 1,
+        "display_name": "Community"
+      },
+      {
+        "history_id": 278889144,
+        "post_id": 73842690,
+        "reviewer_id": -1,
+        "post_history_type_id": 10,
+        "creation_date": "2022-09-25 07:21:17.880000+00:00",
+        "comment": "104",
+        "review_type": "Close",
+        "post_owner_id": null,
+        "reputation": 1,
+        "display_name": "Community"
+      }
+    ],
+    "summary": {
+      "total_reviews": 500,
+      "unique_reviewers": 88,
+      "active_reviewers": 17,
+      "avg_reviews_per_reviewer": 4.840909090909091,
+      "review_type_distribution": {
+        "Close": 349,
+        "SuggestedEdit": 74,
+        "Undelete": 38,
+        "Delete": 33,
+        "Reopen": 6
+      }
+    }
+  },
+  "analysis_13_bounty_network": {
+    "graph": {
+      "nodes": 500,
+      "edges": 74401
+    },
+    "bounties_df": [
+      {
+        "vote_id": 119691493,
+        "post_id": 34454481,
+        "vote_type_id": 8,
+        "creation_date": "2016-08-08 00:00:00+00:00",
+        "post_owner_id": 3211143,
+        "title": "Angular2 DI in Typescript. Can we use it in node.js / non-angular projects?",
+        "post_score": 28,
+        "tags": "javascript|angular|typescript|dependency-injection",
+        "reputation": 2775,
+        "display_name": "Ludovic C",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 151112889,
+        "post_id": 47200527,
+        "vote_type_id": 8,
+        "creation_date": "2017-11-12 00:00:00+00:00",
+        "post_owner_id": 8091553,
+        "title": "How does Reflection in Laravel work?",
+        "post_score": 41,
+        "tags": "php|laravel|reflection|inversion-of-control",
+        "reputation": 1256,
+        "display_name": "Krystian Polska",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 152246195,
+        "post_id": 47200527,
+        "vote_type_id": 8,
+        "creation_date": "2017-11-29 00:00:00+00:00",
+        "post_owner_id": 8091553,
+        "title": "How does Reflection in Laravel work?",
+        "post_score": 41,
+        "tags": "php|laravel|reflection|inversion-of-control",
+        "reputation": 1256,
+        "display_name": "Krystian Polska",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 151925240,
+        "post_id": 47412570,
+        "vote_type_id": 8,
+        "creation_date": "2017-11-23 00:00:00+00:00",
+        "post_owner_id": 687677,
+        "title": "Is there a way to find all the global styles that apply to a web page?",
+        "post_score": 42,
+        "tags": "javascript|css",
+        "reputation": 44370,
+        "display_name": "superluminary",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 136369085,
+        "post_id": 42307949,
+        "vote_type_id": 8,
+        "creation_date": "2017-04-10 00:00:00+00:00",
+        "post_owner_id": 1409999,
+        "title": "Color theme for VS Code integrated terminal",
+        "post_score": 182,
+        "tags": "terminal|visual-studio-code|vscode-settings",
+        "reputation": 3133,
+        "display_name": "John Jai",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 73562612,
+        "post_id": 25211090,
+        "vote_type_id": 8,
+        "creation_date": "2014-08-19 00:00:00+00:00",
+        "post_owner_id": 3300593,
+        "title": "How to auto adjust the div size for all mobile / tablet display formats?",
+        "post_score": 26,
+        "tags": "html|css|jquery-ui|jquery-mobile",
+        "reputation": 2173,
+        "display_name": "Vinod",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 72143757,
+        "post_id": 24111984,
+        "vote_type_id": 8,
+        "creation_date": "2014-07-24 00:00:00+00:00",
+        "post_owner_id": 652038,
+        "title": "How do you test functions and closures for equality?",
+        "post_score": 96,
+        "tags": "closures|swift|equality",
+        "reputation": 11007,
+        "display_name": "Jessy",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 170468172,
+        "post_id": 51854593,
+        "vote_type_id": 9,
+        "creation_date": "2018-09-01 00:00:00+00:00",
+        "post_owner_id": 6233938,
+        "title": "WPF applications stop responding to touches after adding or removing tablet devices",
+        "post_score": 34,
+        "tags": "c#|.net|wpf|windows|.net-4.6.2",
+        "reputation": 2248,
+        "display_name": "walterlv",
+        "bounty_type": "BountyClose"
+      },
+      {
+        "vote_id": 169962190,
+        "post_id": 51854593,
+        "vote_type_id": 8,
+        "creation_date": "2018-08-24 00:00:00+00:00",
+        "post_owner_id": 6233938,
+        "title": "WPF applications stop responding to touches after adding or removing tablet devices",
+        "post_score": 34,
+        "tags": "c#|.net|wpf|windows|.net-4.6.2",
+        "reputation": 2248,
+        "display_name": "walterlv",
+        "bounty_type": "BountyStart"
+      },
+      {
+        "vote_id": 139613946,
+        "post_id": 44044956,
+        "vote_type_id": 8,
+        "creation_date": "2017-05-28 00:00:00+00:00",
+        "post_owner_id": null,
+        "title": "How does browser page lifecycle sequence work?",
+        "post_score": 40,
+        "tags": "javascript|html|css|browser|lifecycle",
+        "reputation": null,
+        "display_name": null,
+        "bounty_type": "BountyStart"
+      }
+    ],
+    "summary": {
+      "total_bounties": 91837,
+      "unique_users": 500,
+      "active_users": 23751,
+      "avg_bounties_per_user": 2.048997368659831,
+      "bounty_type_distribution": {
+        "BountyStart": 66588,
+        "BountyClose": 25249
+      }
+    }
+  },
+  "analysis_14_user_location": {
+    "graph": {
+      "nodes": 8,
+      "edges": 28
+    },
+    "users_df": [
+      {
+        "id": 1749,
+        "display_name": "Mikey P",
+        "reputation": 439,
+        "location": "Reading, PA",
+        "up_votes": 10,
+        "down_votes": 0,
+        "region": "Other"
+      },
+      {
+        "id": 2310,
+        "display_name": "Funkatron",
+        "reputation": 902,
+        "location": "West Lafayette, IN, United States",
+        "up_votes": 57,
+        "down_votes": 2,
+        "region": "North America"
+      },
+      {
+        "id": 3093,
+        "display_name": "Dave L.",
+        "reputation": 43039,
+        "location": "United States",
+        "up_votes": 676,
+        "down_votes": 77,
+        "region": "North America"
+      },
+      {
+        "id": 3219,
+        "display_name": "Danail Nachev",
+        "reputation": 18501,
+        "location": "Bay Area, CA, United States",
+        "up_votes": 121,
+        "down_votes": 4,
+        "region": "North America"
+      },
+      {
+        "id": 4842,
+        "display_name": "Max Caceres",
+        "reputation": 1976,
+        "location": "New York, NY",
+        "up_votes": 137,
+        "down_votes": 0,
+        "region": "North America"
+      },
+      {
+        "id": 8844,
+        "display_name": "Jeff Hubbard",
+        "reputation": 9724,
+        "location": "Pleasant Hill, CA, USA",
+        "up_votes": 350,
+        "down_votes": 37,
+        "region": "North America"
+      },
+      {
+        "id": 12192,
+        "display_name": "EricSch",
+        "reputation": 1768,
+        "location": "Switzerland",
+        "up_votes": 5,
+        "down_votes": 1,
+        "region": "Europe"
+      },
+      {
+        "id": 24246,
+        "display_name": "Buns of Aluminum",
+        "reputation": 2439,
+        "location": "Forest, VA, United States",
+        "up_votes": 36,
+        "down_votes": 2,
+        "region": "North America"
+      },
+      {
+        "id": 29411,
+        "display_name": "Christopher Edwards",
+        "reputation": 6561,
+        "location": "London, United Kingdom",
+        "up_votes": 401,
+        "down_votes": 12,
+        "region": "Europe"
+      },
+      {
+        "id": 39018,
+        "display_name": "Scott Densmore",
+        "reputation": 1449,
+        "location": "Redmond, WA",
+        "up_votes": 13,
+        "down_votes": 0,
+        "region": "Other"
+      }
+    ],
+    "summary": {
+      "total_users": 500,
+      "unique_regions": 8,
+      "region_distribution": {
+        "Europe": 157,
+        "Other": 107,
+        "North America": 98,
+        "Asia": 95,
+        "South America": 14,
+        "Oceania": 13,
+        "Middle East": 12,
+        "Africa": 4
+      },
+      "top_region": "Europe"
+    }
+  },
+  "analysis_15_time_series": {
+    "graph": {
+      "nodes": 170,
+      "edges": 14365
+    },
+    "posts_df": [
+      {
+        "post_id": 70759054,
+        "user_id": 17678271,
+        "creation_date": "2022-01-18 16:29:15.927000+00:00",
+        "post_type_id": 1,
+        "score": 1,
+        "month": 1,
+        "year": 2022,
+        "day_of_week": 3,
+        "hour": 16,
+        "reputation": 11,
+        "display_name": "Perla Hajjar",
+        "year_month": "2022-01"
+      },
+      {
+        "post_id": 70868638,
+        "user_id": 17590053,
+        "creation_date": "2022-01-26 18:38:12.480000+00:00",
+        "post_type_id": 1,
+        "score": -2,
+        "month": 1,
+        "year": 2022,
+        "day_of_week": 4,
+        "hour": 18,
+        "reputation": 1,
+        "display_name": "MWanderlust",
+        "year_month": "2022-01"
+      },
+      {
+        "post_id": 27803644,
+        "user_id": 1423787,
+        "creation_date": "2015-01-06 17:08:48.977000+00:00",
+        "post_type_id": 1,
+        "score": 0,
+        "month": 1,
+        "year": 2015,
+        "day_of_week": 3,
+        "hour": 17,
+        "reputation": 34659,
+        "display_name": "Lloyd Banks",
+        "year_month": "2015-01"
+      },
+      {
+        "post_id": 27778490,
+        "user_id": 6980,
+        "creation_date": "2015-01-05 11:23:14.457000+00:00",
+        "post_type_id": 1,
+        "score": 2,
+        "month": 1,
+        "year": 2015,
+        "day_of_week": 2,
+        "hour": 11,
+        "reputation": 2126,
+        "display_name": "SaguiItay",
+        "year_month": "2015-01"
+      },
+      {
+        "post_id": 27831974,
+        "user_id": 2808178,
+        "creation_date": "2015-01-08 02:22:01.910000+00:00",
+        "post_type_id": 1,
+        "score": 0,
+        "month": 1,
+        "year": 2015,
+        "day_of_week": 5,
+        "hour": 2,
+        "reputation": 2672,
+        "display_name": "HMdeveloper",
+        "year_month": "2015-01"
+      },
+      {
+        "post_id": 27753356,
+        "user_id": 4258165,
+        "creation_date": "2015-01-03 09:21:56.657000+00:00",
+        "post_type_id": 1,
+        "score": 9,
+        "month": 1,
+        "year": 2015,
+        "day_of_week": 7,
+        "hour": 9,
+        "reputation": 135,
+        "display_name": "Slim EN",
+        "year_month": "2015-01"
+      },
+      {
+        "post_id": 27801188,
+        "user_id": 4193983,
+        "creation_date": "2015-01-06 14:53:27.147000+00:00",
+        "post_type_id": 1,
+        "score": 4,
+        "month": 1,
+        "year": 2015,
+        "day_of_week": 3,
+        "hour": 14,
+        "reputation": 41,
+        "display_name": "givepatajob",
+        "year_month": "2015-01"
+      },
+      {
+        "post_id": 70707459,
+        "user_id": 4950717,
+        "creation_date": "2022-01-14 07:47:02.230000+00:00",
+        "post_type_id": 1,
+        "score": 0,
+        "month": 1,
+        "year": 2022,
+        "day_of_week": 6,
+        "hour": 7,
+        "reputation": 1495,
+        "display_name": "Mattew Eon",
+        "year_month": "2022-01"
+      },
+      {
+        "post_id": 70686405,
+        "user_id": 17499478,
+        "creation_date": "2022-01-12 18:09:55.517000+00:00",
+        "post_type_id": 1,
+        "score": -1,
+        "month": 1,
+        "year": 2022,
+        "day_of_week": 4,
+        "hour": 18,
+        "reputation": 32,
+        "display_name": "jokn",
+        "year_month": "2022-01"
+      },
+      {
+        "post_id": 2106342,
+        "user_id": 234322,
+        "creation_date": "2010-01-21 01:35:03.177000+00:00",
+        "post_type_id": 1,
+        "score": 1,
+        "month": 1,
+        "year": 2010,
+        "day_of_week": 5,
+        "hour": 1,
+        "reputation": 60019,
+        "display_name": "zjm1126",
+        "year_month": "2010-01"
+      }
+    ],
+    "summary": {
+      "total_posts": 100000,
+      "unique_months": 170,
+      "peak_month": "2016-04",
+      "avg_posts_per_month": 588.2352941176471,
+      "hour_distribution": {
+        "0": 2424,
+        "1": 2282,
+        "2": 2268,
+        "3": 2335,
+        "4": 2466,
+        "5": 3018,
+        "6": 3689,
+        "7": 4350,
+        "8": 4622,
+        "9": 5354,
+        "10": 5450,
+        "11": 5243,
+        "12": 5267,
+        "13": 5485,
+        "14": 5896,
+        "15": 5742,
+        "16": 5339,
+        "17": 5075,
+        "18": 4720,
+        "19": 4618,
+        "20": 4374,
+        "21": 3998,
+        "22": 3321,
+        "23": 2664
+      },
+      "day_of_week_distribution": {
+        "1": 8716,
+        "2": 15585,
+        "3": 17093,
+        "4": 17355,
+        "5": 17199,
+        "6": 15391,
+        "7": 8661
+      }
     }
   }
 }

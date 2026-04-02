@@ -80,12 +80,13 @@ class UserNetworkBuilder(GraphBuilder):
         """建構含聲望資訊的回答網路（研究方法1: 使用者聲望與網路中心度）"""
         posts_df = self.data_loader.load_posts_with_answers(limit=limit)
         
-        edges = []
+        edge_counts = {}
         for _, row in posts_df.iterrows():
             if pd.notna(row['answerer_id']) and pd.notna(row['questioner_id']):
-                edges.append((row['answerer_id'], row['questioner_id']))
+                key = (row['answerer_id'], row['questioner_id'])
+                edge_counts[key] = edge_counts.get(key, 0) + 1
         
-        unique_users = list(set([e[0] for e in edges] + [e[1] for e in edges]))
+        unique_users = list(set([e[0] for e in edge_counts.keys()] + [e[1] for e in edge_counts.keys()]))
         
         users_df = self.data_loader.load_users(user_ids=unique_users)
         
@@ -98,12 +99,14 @@ class UserNetworkBuilder(GraphBuilder):
         name_to_idx = {name: idx for idx, name in enumerate(unique_users)}
         
         weighted_edges = []
-        for e in edges:
-            if e[0] in name_to_idx and e[1] in name_to_idx:
-                weighted_edges.append((name_to_idx[e[0]], name_to_idx[e[1]]))
+        weights = []
+        for (src, dst), count in edge_counts.items():
+            if src in name_to_idx and dst in name_to_idx:
+                weighted_edges.append((name_to_idx[src], name_to_idx[dst]))
+                weights.append(count)
         
         self.graph.add_edges(weighted_edges)
-        self.graph.es['weight'] = [1] * len(weighted_edges)
+        self.graph.es['weight'] = weights
         
         self.graph.vs['user_id'] = unique_users
         self.graph.vs['reputation'] = [user_reputation.get(uid, 0) for uid in unique_users]
@@ -125,12 +128,13 @@ class UserNetworkBuilder(GraphBuilder):
         """
         posts_df = self.data_loader.load_posts_with_answers(limit=limit)
         
-        edges = []
+        edge_counts = {}
         for _, row in posts_df.iterrows():
             if pd.notna(row['answerer_id']) and pd.notna(row['questioner_id']):
-                edges.append((row['answerer_id'], row['questioner_id']))
+                key = (row['answerer_id'], row['questioner_id'])
+                edge_counts[key] = edge_counts.get(key, 0) + 1
         
-        unique_users = list(set([e[0] for e in edges] + [e[1] for e in edges]))
+        unique_users = list(set([e[0] for e in edge_counts.keys()] + [e[1] for e in edge_counts.keys()]))
         
         connectivity_df = self.data_loader.load_user_connectivity(limit=limit * 2, user_ids=unique_users)
         connectivity_df_filtered = connectivity_df[connectivity_df['user_id'].isin(unique_users)]
@@ -149,12 +153,14 @@ class UserNetworkBuilder(GraphBuilder):
         name_to_idx = {uid: idx for idx, uid in enumerate(unique_users)}
         
         weighted_edges = []
-        for e in edges:
-            if e[0] in name_to_idx and e[1] in name_to_idx:
-                weighted_edges.append((name_to_idx[e[0]], name_to_idx[e[1]]))
+        weights = []
+        for (src, dst), count in edge_counts.items():
+            if src in name_to_idx and dst in name_to_idx:
+                weighted_edges.append((name_to_idx[src], name_to_idx[dst]))
+                weights.append(count)
         
         self.graph.add_edges(weighted_edges)
-        self.graph.es['weight'] = [1] * len(weighted_edges)
+        self.graph.es['weight'] = weights
         
         undirected = self.graph.as_undirected()
         components = undirected.components()
@@ -182,12 +188,13 @@ class UserNetworkBuilder(GraphBuilder):
         """
         posts_df = self.data_loader.load_posts_with_answers(limit=limit)
         
-        edges = []
+        edge_counts = {}
         for _, row in posts_df.iterrows():
             if pd.notna(row['answerer_id']) and pd.notna(row['questioner_id']):
-                edges.append((row['answerer_id'], row['questioner_id']))
+                key = (row['answerer_id'], row['questioner_id'])
+                edge_counts[key] = edge_counts.get(key, 0) + 1
         
-        unique_users = list(set([e[0] for e in edges] + [e[1] for e in edges]))
+        unique_users = list(set([e[0] for e in edge_counts.keys()] + [e[1] for e in edge_counts.keys()]))
         
         age_df = self.data_loader.load_account_age(limit=limit * 2, user_ids=unique_users)
         age_df_filtered = age_df[age_df['user_id'].isin(unique_users)]
@@ -209,12 +216,14 @@ class UserNetworkBuilder(GraphBuilder):
         name_to_idx = {uid: idx for idx, uid in enumerate(unique_users)}
         
         weighted_edges = []
-        for e in edges:
-            if e[0] in name_to_idx and e[1] in name_to_idx:
-                weighted_edges.append((name_to_idx[e[0]], name_to_idx[e[1]]))
+        weights = []
+        for (src, dst), count in edge_counts.items():
+            if src in name_to_idx and dst in name_to_idx:
+                weighted_edges.append((name_to_idx[src], name_to_idx[dst]))
+                weights.append(count)
         
         self.graph.add_edges(weighted_edges)
-        self.graph.es['weight'] = [1] * len(weighted_edges)
+        self.graph.es['weight'] = weights
         
         self.graph.vs['user_id'] = unique_users
         self.graph.vs['name'] = [f"U{uid}" for uid in unique_users]
@@ -299,14 +308,15 @@ class CorePeripheryBuilder(GraphBuilder):
         """
         posts_df = self.data_loader.load_posts_with_answers(limit=limit)
         
-        edges = []
+        edge_counts = {}
         answer_time_levels = {}
         for _, row in posts_df.iterrows():
             if pd.notna(row['answerer_id']) and pd.notna(row['questioner_id']):
-                edges.append((row['answerer_id'], row['questioner_id']))
+                key = (row['answerer_id'], row['questioner_id'])
+                edge_counts[key] = edge_counts.get(key, 0) + 1
                 answer_time_levels[row['questioner_id']] = row.get('answer_time_level', '0_Unresolved')
         
-        unique_users = list(set([e[0] for e in edges] + [e[1] for e in edges]))
+        unique_users = list(set([e[0] for e in edge_counts.keys()] + [e[1] for e in edge_counts.keys()]))
         
         self.graph = Graph(directed=False)
         self.graph.add_vertices(len(unique_users))
@@ -314,12 +324,14 @@ class CorePeripheryBuilder(GraphBuilder):
         name_to_idx = {uid: idx for idx, uid in enumerate(unique_users)}
         
         weighted_edges = []
-        for e in edges:
-            if e[0] in name_to_idx and e[1] in name_to_idx:
-                weighted_edges.append((name_to_idx[e[0]], name_to_idx[e[1]]))
+        weights = []
+        for (src, dst), count in edge_counts.items():
+            if src in name_to_idx and dst in name_to_idx:
+                weighted_edges.append((name_to_idx[src], name_to_idx[dst]))
+                weights.append(count)
         
         self.graph.add_edges(weighted_edges)
-        self.graph.es['weight'] = [1] * len(weighted_edges)
+        self.graph.es['weight'] = weights
         
         undirected = self.graph.as_undirected()
         degrees = undirected.degree()

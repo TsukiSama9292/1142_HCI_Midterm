@@ -398,5 +398,280 @@ class TestCLI:
         print("最終輸出值: 分析主題列表正確顯示")
 
 
+class TestVotingBehaviorAnalyzer:
+    """測試分析主題 7: 投票行為網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試投票行為分析器初始化"""
+        print("\n測試投票行為分析器初始化")
+        print("輸入值: VotingBehaviorAnalyzer()")
+        
+        with patch('src.analysis.voting_behavior.DataLoader'):
+            from src.analysis.voting_behavior import VotingBehaviorAnalyzer
+            
+            analyzer = VotingBehaviorAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+    
+    def test_vote_colors(self):
+        """測試投票類型顏色映射"""
+        print("\n測試投票類型顏色映射")
+        
+        from src.analysis.voting_behavior import VoteNetworkBuilder
+        
+        assert 'accepted' in VoteNetworkBuilder.VOTE_COLORS
+        assert 'upvote' in VoteNetworkBuilder.VOTE_COLORS
+        assert 'downvote' in VoteNetworkBuilder.VOTE_COLORS
+        print(f"中間過程: VOTE_COLORS = {VoteNetworkBuilder.VOTE_COLORS}")
+        print("最終輸出值: 顏色映射正確")
+
+
+class TestCommentNetworkAnalyzer:
+    """測試分析主題 8: 評論互動網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試評論互動網路分析器初始化"""
+        print("\n測試評論互動網路分析器初始化")
+        print("輸入值: CommentNetworkAnalyzer()")
+        
+        with patch('src.analysis.comment_network.DataLoader'):
+            from src.analysis.comment_network import CommentNetworkAnalyzer
+            
+            analyzer = CommentNetworkAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+
+
+class TestBadgeNetworkAnalyzer:
+    """測試分析主題 9: 徽章成就網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試徽章成就網路分析器初始化"""
+        print("\n測試徽章成就網路分析器初始化")
+        print("輸入值: BadgeNetworkAnalyzer()")
+        
+        with patch('src.analysis.badge_network.DataLoader'):
+            from src.analysis.badge_network import BadgeNetworkAnalyzer
+            
+            analyzer = BadgeNetworkAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+    
+    def test_badge_colors(self):
+        """測試徽章等級顏色映射"""
+        print("\n測試徽章等級顏色映射")
+        
+        from src.analysis.badge_network import BadgeNetworkBuilder
+        
+        assert 1 in BadgeNetworkBuilder.BADGE_COLORS
+        assert 2 in BadgeNetworkBuilder.BADGE_COLORS
+        assert 3 in BadgeNetworkBuilder.BADGE_COLORS
+        print(f"中間過程: BADGE_COLORS = {BadgeNetworkBuilder.BADGE_COLORS}")
+        print("最終輸出值: 顏色映射正確")
+
+
+class TestEditCollaborationAnalyzer:
+    """測試分析主題 10: 編輯協作網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試編輯協作網路分析器初始化"""
+        print("\n測試編輯協作網路分析器初始化")
+        print("輸入值: EditCollaborationAnalyzer()")
+        
+        with patch('src.analysis.edit_collaboration.DataLoader'):
+            from src.analysis.edit_collaboration import EditCollaborationAnalyzer
+            
+            analyzer = EditCollaborationAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+
+
+class TestPostLinkAnalyzer:
+    """測試分析主題 11: 引用與重複問題網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試引用與重複問題網路分析器初始化"""
+        print("\n測試引用與重複問題網路分析器初始化")
+        print("輸入值: PostLinkAnalyzer()")
+        
+        with patch('src.analysis.post_link.DataLoader'):
+            from src.analysis.post_link import PostLinkAnalyzer
+            
+            analyzer = PostLinkAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+    
+    def test_link_types(self):
+        """測試連結類型映射"""
+        print("\n測試連結類型映射")
+        
+        from src.analysis.post_link import PostLinkNetworkBuilder
+        
+        assert 1 in PostLinkNetworkBuilder.LINK_TYPES
+        assert 3 in PostLinkNetworkBuilder.LINK_TYPES
+        print(f"中間過程: LINK_TYPES = {PostLinkNetworkBuilder.LINK_TYPES}")
+        print("最終輸出值: 連結類型映射正確")
+
+
+class TestReviewTaskAnalyzer:
+    """測試分析主題 12: 審核任務網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試審核任務網路分析器初始化"""
+        print("\n測試審核任務網路分析器初始化")
+        print("輸入值: ReviewTaskAnalyzer()")
+        
+        with patch('src.analysis.review_task.DataLoader'):
+            from src.analysis.review_task import ReviewTaskAnalyzer
+            
+            analyzer = ReviewTaskAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+    
+    def test_review_types(self):
+        """測試審核類型映射"""
+        print("\n測試審核類型映射")
+        
+        from src.analysis.review_task import ReviewTaskNetworkBuilder
+        
+        assert 10 in ReviewTaskNetworkBuilder.REVIEW_TYPES
+        assert 11 in ReviewTaskNetworkBuilder.REVIEW_TYPES
+        assert 12 in ReviewTaskNetworkBuilder.REVIEW_TYPES
+        assert 13 in ReviewTaskNetworkBuilder.REVIEW_TYPES
+        assert 24 in ReviewTaskNetworkBuilder.REVIEW_TYPES
+        print(f"中間過程: REVIEW_TYPES = {ReviewTaskNetworkBuilder.REVIEW_TYPES}")
+        print("最終輸出值: 審核類型映射正確")
+
+
+class TestBountyNetworkAnalyzer:
+    """測試分析主題 13: 賞金懸賞網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試賞金懸賞網路分析器初始化"""
+        print("\n測試賞金懸賞網路分析器初始化")
+        print("輸入值: BountyNetworkAnalyzer()")
+        
+        with patch('src.analysis.bounty_network.DataLoader'):
+            from src.analysis.bounty_network import BountyNetworkAnalyzer
+            
+            analyzer = BountyNetworkAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+
+
+class TestUserLocationAnalyzer:
+    """測試分析主題 14: 使用者地理分布網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試使用者地理分布網路分析器初始化"""
+        print("\n測試使用者地理分布網路分析器初始化")
+        print("輸入值: UserLocationAnalyzer()")
+        
+        with patch('src.analysis.user_location.DataLoader'):
+            from src.analysis.user_location import UserLocationAnalyzer
+            
+            analyzer = UserLocationAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+    
+    def test_region_classification(self):
+        """測試地理區域分類"""
+        print("\n測試地理區域分類")
+        
+        from src.analysis.user_location import UserLocationNetworkBuilder
+        
+        builder = UserLocationNetworkBuilder()
+        
+        assert builder._classify_region('USA') == 'North America'
+        assert builder._classify_region('London, UK') == 'Europe'
+        assert builder._classify_region('Tokyo, Japan') == 'Asia'
+        assert builder._classify_region('') == 'Other'
+        print(f"中間過程: REGION_MAP keys = {list(builder.REGION_MAP.keys())}")
+        print("最終輸出值: 地理區域分類正確")
+
+
+class TestTimeSeriesAnalyzer:
+    """測試分析主題 15: 時間序列活躍度網路"""
+    
+    def test_analyzer_initialization(self):
+        """測試時間序列活躍度網路分析器初始化"""
+        print("\n測試時間序列活躍度網路分析器初始化")
+        print("輸入值: TimeSeriesAnalyzer()")
+        
+        with patch('src.analysis.time_series.DataLoader'):
+            from src.analysis.time_series import TimeSeriesAnalyzer
+            
+            analyzer = TimeSeriesAnalyzer()
+            
+            assert analyzer is not None
+            assert analyzer.builder is not None
+            print(f"中間過程: builder = {type(analyzer.builder).__name__}")
+            print("最終輸出值: 初始化成功")
+
+
+class TestAllAnalyzersImport:
+    """測試所有分析模組匯入"""
+    
+    def test_all_analyzers_import(self):
+        """測試所有 15 個分析模組可正確匯入"""
+        print("\n測試所有 15 個分析模組匯入")
+        print("輸入值: from src.analysis import *")
+        
+        from src.analysis import (
+            CentralityAnalyzer,
+            CoreEfficiencyAnalyzer,
+            TagCooccurrenceAnalyzer,
+            ConnectedComponentAnalyzer,
+            ContentFeatureAnalyzer,
+            AccountAgeAnalyzer,
+            VotingBehaviorAnalyzer,
+            CommentNetworkAnalyzer,
+            BadgeNetworkAnalyzer,
+            EditCollaborationAnalyzer,
+            PostLinkAnalyzer,
+            ReviewTaskAnalyzer,
+            BountyNetworkAnalyzer,
+            UserLocationAnalyzer,
+            TimeSeriesAnalyzer,
+        )
+        
+        analyzers = [
+            CentralityAnalyzer, CoreEfficiencyAnalyzer, TagCooccurrenceAnalyzer,
+            ConnectedComponentAnalyzer, ContentFeatureAnalyzer, AccountAgeAnalyzer,
+            VotingBehaviorAnalyzer, CommentNetworkAnalyzer, BadgeNetworkAnalyzer,
+            EditCollaborationAnalyzer, PostLinkAnalyzer, ReviewTaskAnalyzer,
+            BountyNetworkAnalyzer, UserLocationAnalyzer, TimeSeriesAnalyzer,
+        ]
+        
+        print(f"中間過程: 共匯入 {len(analyzers)} 個分析器")
+        for a in analyzers:
+            print(f"  - {a.__name__}")
+        print("最終輸出值: 所有 15 個分析模組匯入成功")
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "-s"])
