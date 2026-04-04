@@ -2,10 +2,9 @@
 SNA 分析執行器 - 執行所有 15 個分析主題
 """
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from pathlib import Path
 import json
-import numpy as np
 import pandas as pd
 
 from src.data.data_loader import DataLoader
@@ -30,7 +29,7 @@ from src.utils.helpers import save_json
 
 class SNARunner:
     """社會網路分析執行器"""
-    
+
     def __init__(self, output_dir: str = "output", data_limit: int = 100):
         self.data_loader = DataLoader()
         self.plotter = SNAPlotter(output_dir=Path(output_dir))
@@ -53,15 +52,15 @@ class SNARunner:
             14: max(data_limit, 500),
             15: max(data_limit, 1000),
         }
-    
+
     def run_all(self) -> Dict[str, Dict[str, Any]]:
         """執行所有分析"""
         print("\n" + "=" * 70)
         print("Stack Overflow 社會網路分析 - 執行所有 15 個分析")
         print("=" * 70)
-        
+
         print(f"\n設定參數: data_limit={self.data_limit}")
-        
+
         self._run_analysis_1()
         self._run_analysis_2()
         self._run_analysis_3()
@@ -77,675 +76,1676 @@ class SNARunner:
         self._run_analysis_13()
         self._run_analysis_14()
         self._run_analysis_15()
-        
+
         self._generate_visualizations()
-        
+
         self._save_results()
-        
+
         return self.results
-    
+
     def _run_analysis_1(self):
         """執行分析 1: 使用者聲望與網路中心度"""
         print("\n" + "#" * 60)
         print("# 分析主題 1: 使用者聲望與網路中心度")
         print("#" * 60)
-        
+
         analyzer = CentralityAnalyzer(self.data_loader)
-        self.results['analysis_1_centrality'] = analyzer.run(limit=self.data_limit)
-    
+        self.results["analysis_1_centrality"] = analyzer.run(limit=self.data_limit)
+
     def _run_analysis_2(self):
         """執行分析 2: 網路核心結構與解答效率"""
         print("\n" + "#" * 60)
         print("# 分析主題 2: 網路核心結構與解答效率")
         print("#" * 60)
-        
+
         analyzer = CoreEfficiencyAnalyzer(self.data_loader)
-        self.results['analysis_2_core_efficiency'] = analyzer.run(limit=self.data_limit)
-    
+        self.results["analysis_2_core_efficiency"] = analyzer.run(limit=self.data_limit)
+
     def _run_analysis_3(self):
         """執行分析 3: 技術標籤共現與領域地圖"""
         print("\n" + "#" * 60)
         print("# 分析主題 3: 技術標籤共現與領域地圖")
         print("#" * 60)
-        
+
         analyzer = TagCooccurrenceAnalyzer(self.data_loader)
-        self.results['analysis_3_tag_cooccurrence'] = analyzer.run(limit=self.data_limit)
-    
+        self.results["analysis_3_tag_cooccurrence"] = analyzer.run(
+            limit=self.data_limit
+        )
+
     def _run_analysis_4(self):
         """執行分析 4: 知識孤島與連通分量分析"""
         print("\n" + "#" * 60)
         print("# 分析主題 4: 知識孤島與連通分量分析")
         print("#" * 60)
-        
+
         analyzer = ConnectedComponentAnalyzer(self.data_loader)
-        self.results['analysis_4_connected_components'] = analyzer.run(limit=self.data_limit)
-    
+        self.results["analysis_4_connected_components"] = analyzer.run(
+            limit=self.data_limit
+        )
+
     def _run_analysis_5(self):
         """執行分析 5: 內容特徵與互動反響"""
         print("\n" + "#" * 60)
         print("# 分析主題 5: 內容特徵與互動反響")
         print("#" * 60)
-        
+
         analyzer = ContentFeatureAnalyzer(self.data_loader)
-        self.results['analysis_5_content_features'] = analyzer.run(limit=self.data_limit)
-    
+        self.results["analysis_5_content_features"] = analyzer.run(
+            limit=self.data_limit
+        )
+
     def _run_analysis_6(self):
         """執行分析 6: 帳號年資與社群貢獻"""
         print("\n" + "#" * 60)
         print("# 分析主題 6: 帳號年資與社群貢獻")
         print("#" * 60)
-        
+
         analyzer = AccountAgeAnalyzer(self.data_loader)
-        self.results['analysis_6_account_age'] = analyzer.run(limit=self.data_limit)
-    
+        self.results["analysis_6_account_age"] = analyzer.run(limit=self.data_limit)
+
     def _run_analysis_7(self):
         """執行分析 7: 投票行為網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 7: 投票行為網路")
         print("#" * 60)
-        
+
         analyzer = VotingBehaviorAnalyzer(self.data_loader)
-        self.results['analysis_7_voting_behavior'] = analyzer.run(limit=self.analysis_limits[7])
-    
+        self.results["analysis_7_voting_behavior"] = analyzer.run(
+            limit=self.analysis_limits[7]
+        )
+
     def _run_analysis_8(self):
         """執行分析 8: 評論互動網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 8: 評論互動網路")
         print("#" * 60)
-        
+
         analyzer = CommentNetworkAnalyzer(self.data_loader)
-        self.results['analysis_8_comment_network'] = analyzer.run(limit=self.analysis_limits[8])
-    
+        self.results["analysis_8_comment_network"] = analyzer.run(
+            limit=self.analysis_limits[8]
+        )
+
     def _run_analysis_9(self):
         """執行分析 9: 徽章成就網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 9: 徽章成就網路")
         print("#" * 60)
-        
+
         analyzer = BadgeNetworkAnalyzer(self.data_loader)
-        self.results['analysis_9_badge_network'] = analyzer.run(limit=self.analysis_limits[9])
-    
+        self.results["analysis_9_badge_network"] = analyzer.run(
+            limit=self.analysis_limits[9]
+        )
+
     def _run_analysis_10(self):
         """執行分析 10: 編輯協作網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 10: 編輯協作網路")
         print("#" * 60)
-        
+
         analyzer = EditCollaborationAnalyzer(self.data_loader)
-        self.results['analysis_10_edit_collaboration'] = analyzer.run(limit=self.analysis_limits[10])
-    
+        self.results["analysis_10_edit_collaboration"] = analyzer.run(
+            limit=self.analysis_limits[10]
+        )
+
     def _run_analysis_11(self):
         """執行分析 11: 引用與重複問題網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 11: 引用與重複問題網路")
         print("#" * 60)
-        
+
         analyzer = PostLinkAnalyzer(self.data_loader)
-        self.results['analysis_11_post_link'] = analyzer.run(limit=self.analysis_limits[11])
-    
+        self.results["analysis_11_post_link"] = analyzer.run(
+            limit=self.analysis_limits[11]
+        )
+
     def _run_analysis_12(self):
         """執行分析 12: 審核任務網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 12: 審核任務網路")
         print("#" * 60)
-        
+
         analyzer = ReviewTaskAnalyzer(self.data_loader)
-        self.results['analysis_12_review_task'] = analyzer.run(limit=self.analysis_limits[12])
-    
+        self.results["analysis_12_review_task"] = analyzer.run(
+            limit=self.analysis_limits[12]
+        )
+
     def _run_analysis_13(self):
         """執行分析 13: 賞金懸賞網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 13: 賞金懸賞網路")
         print("#" * 60)
-        
+
         analyzer = BountyNetworkAnalyzer(self.data_loader)
-        self.results['analysis_13_bounty_network'] = analyzer.run(limit=self.analysis_limits[13])
-    
+        self.results["analysis_13_bounty_network"] = analyzer.run(
+            limit=self.analysis_limits[13]
+        )
+
     def _run_analysis_14(self):
         """執行分析 14: 使用者地理分布網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 14: 使用者地理分布網路")
         print("#" * 60)
-        
+
         analyzer = UserLocationAnalyzer(self.data_loader)
-        self.results['analysis_14_user_location'] = analyzer.run(limit=self.analysis_limits[14])
-    
+        self.results["analysis_14_user_location"] = analyzer.run(
+            limit=self.analysis_limits[14]
+        )
+
     def _run_analysis_15(self):
         """執行分析 15: 時間序列活躍度網路"""
         print("\n" + "#" * 60)
         print("# 分析主題 15: 時間序列活躍度網路")
         print("#" * 60)
-        
+
         analyzer = TimeSeriesAnalyzer(self.data_loader)
-        self.results['analysis_15_time_series'] = analyzer.run(limit=self.analysis_limits[15])
-    
+        self.results["analysis_15_time_series"] = analyzer.run(
+            limit=self.analysis_limits[15]
+        )
+
     def _generate_visualizations(self):
         """產生視覺化圖表"""
         print("\n" + "=" * 60)
         print("產生視覺化圖表 (使用 igraph)")
         print("=" * 60)
-        
+
         LEGEND_INFO = {
-            'analysis_1': {
-                'colors': {
-                    'Green-Newcomer (<1K)': '#4CAF50',
-                    'Yellow-Mid (1K~10K)': '#FFD700',
-                    'Orange-Senior (10K~50K)': '#FF9800',
-                    'Red-Expert (>50K)': '#F44336',
+            "analysis_1": {
+                "colors": {
+                    "Green-Newcomer (<1K)": "#4CAF50",
+                    "Yellow-Mid (1K~10K)": "#FFD700",
+                    "Orange-Senior (10K~50K)": "#FF9800",
+                    "Red-Expert (>50K)": "#F44336",
                 },
-                'shapes': {
-                    'Circle-High Centrality': 'o',
-                    'Triangle-Low Centrality': '^',
+                "shapes": {
+                    "Circle-High Centrality": "o",
+                    "Triangle-Low Centrality": "^",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
-                },
-            },
-            'analysis_2': {
-                'colors': {
-                    'Green-<1h': '#4CAF50',
-                    'Yellow-1~12h': '#FFD700',
-                    'LightRed-12~24h': '#FFCDD2',
-                    'Red->24h': '#F44336',
-                    'Gray-Unresolved': '#9E9E9E',
-                },
-                'shapes': {
-                    'Square-Core': 's',
-                    'Circle-Periphery': 'o',
-                },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
-            'analysis_3': {
-                'colors': {
-                    'LightBlue-Web': '#81D4FA',
-                    'Pink-AI/Data': '#F8BBD9',
-                    'Green-Mobile': '#A5D6A7',
-                    'Yellow-Backend': '#FFE082',
-                    'Purple-Database': '#CE93D8',
-                    'Gray-Other': '#E0E0E0',
+            "analysis_2": {
+                "colors": {
+                    "Green-<1h": "#4CAF50",
+                    "Yellow-1~12h": "#FFD700",
+                    "LightRed-12~24h": "#FFCDD2",
+                    "Red->24h": "#F44336",
+                    "Gray-Unresolved": "#9E9E9E",
                 },
-                'edge_weights': {
-                    'Thick-High Co-occurrence': 3.0,
-                    'Thin-Low Co-occurrence': 0.5,
+                "shapes": {
+                    "Square-Core": "s",
+                    "Circle-Periphery": "o",
                 },
-            },
-            'analysis_4': {
-                'colors': {
-                    'DarkBlue-Main Component': '#1565C0',
-                    'Gray-Isolated': '#9E9E9E',
-                },
-                'shapes': {
-                    'Circle-Continuous': 'o',
-                    'Triangle-Single': '^',
-                },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
-            'analysis_5': {
-                'colors': {
-                    'Gray-0 votes': '#BDBDBD',
-                    'Green-1~10 votes': '#66BB6A',
-                    'Yellow-11~50 votes': '#FFD54F',
-                    'Orange-51~100 votes': '#FF7043',
-                    'Red->100 votes': '#F44336',
+            "analysis_3": {
+                "colors": {
+                    "LightBlue-Web": "#81D4FA",
+                    "Pink-AI/Data": "#F8BBD9",
+                    "Green-Mobile": "#A5D6A7",
+                    "Yellow-Backend": "#FFE082",
+                    "Purple-Database": "#CE93D8",
+                    "Gray-Other": "#E0E0E0",
                 },
-                'shapes': {
-                    'Circle-Has Code': 'o',
-                    'Square-Text Only': 's',
-                },
-                'edge_weights': {
-                    'Thick-Similar Tags': 3.0,
-                    'Thin-Different Tags': 0.5,
+                "edge_weights": {
+                    "Thick-High Co-occurrence": 3.0,
+                    "Thin-Low Co-occurrence": 0.5,
                 },
             },
-            'analysis_6': {
-                'colors': {
-                    'Green-<1 year': '#4CAF50',
-                    'Yellow-1~3 years': '#FFD700',
-                    'Orange-3~6 years': '#FF9800',
-                    'Red-6~10 years': '#F44336',
-                    'Purple->10 years': '#9C27B0',
+            "analysis_4": {
+                "colors": {
+                    "DarkBlue-Main Component": "#1565C0",
+                    "Gray-Isolated": "#9E9E9E",
                 },
-                'shapes': {
-                    'Circle-Asker': 'o',
-                    'Triangle-Answerer': '^',
-                    'Square-Both': 's',
+                "shapes": {
+                    "Circle-Continuous": "o",
+                    "Triangle-Single": "^",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
-            'analysis_7': {
-                'colors': {
-                    'Gold-Accepted': '#FFD700',
-                    'Green-Upvote': '#4CAF50',
-                    'Red-Downvote': '#F44336',
-                    'Black-Spam': '#212121',
-                    'Blue-Favorite': '#2196F3',
+            "analysis_5": {
+                "colors": {
+                    "Gray-0 votes": "#BDBDBD",
+                    "Green-1~10 votes": "#66BB6A",
+                    "Yellow-11~50 votes": "#FFD54F",
+                    "Orange-51~100 votes": "#FF7043",
+                    "Red->100 votes": "#F44336",
                 },
-                'shapes': {
-                    'Circle-High Votes': 'o',
-                    'Triangle-Low Votes': '^',
+                "shapes": {
+                    "Circle-Has Code": "o",
+                    "Square-Text Only": "s",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
-                },
-            },
-            'analysis_8': {
-                'colors': {
-                    'Blue-Active': '#2196F3',
-                    'Green-Moderate': '#4CAF50',
-                    'Gray-Low': '#9E9E9E',
-                },
-                'shapes': {
-                    'Circle-Commenter': 'o',
-                },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Similar Tags": 3.0,
+                    "Thin-Different Tags": 0.5,
                 },
             },
-            'analysis_9': {
-                'colors': {
-                    'Gold-Gold Badge': '#FFD700',
-                    'Silver-Silver Badge': '#C0C0C0',
-                    'Bronze-Bronze Badge': '#CD7F32',
+            "analysis_6": {
+                "colors": {
+                    "Green-<1 year": "#4CAF50",
+                    "Yellow-1~3 years": "#FFD700",
+                    "Orange-3~6 years": "#FF9800",
+                    "Red-6~10 years": "#F44336",
+                    "Purple->10 years": "#9C27B0",
                 },
-                'shapes': {
-                    'Circle-Top Earner': 'o',
-                    'Triangle-Regular': '^',
+                "shapes": {
+                    "Circle-Asker": "o",
+                    "Triangle-Answerer": "^",
+                    "Square-Both": "s",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
-                },
-            },
-            'analysis_10': {
-                'colors': {
-                    'Green-Active': '#4CAF50',
-                    'Yellow-Moderate': '#FFC107',
-                    'Gray-Casual': '#9E9E9E',
-                },
-                'shapes': {
-                    'Circle-Editor': 'o',
-                },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
-            'analysis_11': {
-                'colors': {
-                    'Blue-Linked': '#2196F3',
-                    'Red-Duplicate': '#F44336',
+            "analysis_7": {
+                "colors": {
+                    "Gold-Accepted": "#FFD700",
+                    "Green-Upvote": "#4CAF50",
+                    "Red-Downvote": "#F44336",
+                    "Black-Spam": "#212121",
+                    "Blue-Favorite": "#2196F3",
                 },
-                'shapes': {
-                    'Circle-Question': 'o',
+                "shapes": {
+                    "Circle-High Votes": "o",
+                    "Triangle-Low Votes": "^",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
-                },
-            },
-            'analysis_12': {
-                'colors': {
-                    'Green-Active': '#4CAF50',
-                    'Yellow-Moderate': '#FFC107',
-                    'Gray-Casual': '#9E9E9E',
-                },
-                'shapes': {
-                    'Circle-Reviewer': 'o',
-                },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
-            'analysis_13': {
-                'colors': {
-                    'Gray-Meager': '#9E9E9E',
-                    'Green-Normal': '#4CAF50',
-                    'Yellow-Generous': '#FFC107',
-                    'Red-Extravagant': '#F44336',
+            "analysis_8": {
+                "colors": {
+                    "Blue-Active": "#2196F3",
+                    "Green-Moderate": "#4CAF50",
+                    "Gray-Low": "#9E9E9E",
                 },
-                'shapes': {
-                    'Circle-Bounty User': 'o',
+                "shapes": {
+                    "Circle-Commenter": "o",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
-                },
-            },
-            'analysis_14': {
-                'colors': {
-                    'Blue-North America': '#2196F3',
-                    'Green-Europe': '#4CAF50',
-                    'Yellow-Asia': '#FFC107',
-                    'Gray-Other': '#9E9E9E',
-                },
-                'shapes': {
-                    'Circle-Region': 'o',
-                },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
-            'analysis_15': {
-                'colors': {
-                    'Blue-High Activity': '#2196F3',
-                    'Green-Medium': '#4CAF50',
-                    'Gray-Low': '#9E9E9E',
+            "analysis_9": {
+                "colors": {
+                    "Gold-Gold Badge": "#FFD700",
+                    "Silver-Silver Badge": "#C0C0C0",
+                    "Bronze-Bronze Badge": "#CD7F32",
                 },
-                'shapes': {
-                    'Circle-Month': 'o',
+                "shapes": {
+                    "Circle-Top Earner": "o",
+                    "Triangle-Regular": "^",
                 },
-                'edge_weights': {
-                    'Thick-Strong Tie': 3.0,
-                    'Thin-Weak Tie': 0.5,
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
+                },
+            },
+            "analysis_10": {
+                "colors": {
+                    "Green-Active": "#4CAF50",
+                    "Yellow-Moderate": "#FFC107",
+                    "Gray-Casual": "#9E9E9E",
+                },
+                "shapes": {
+                    "Circle-Editor": "o",
+                },
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
+                },
+            },
+            "analysis_11": {
+                "colors": {
+                    "Blue-Linked": "#2196F3",
+                    "Red-Duplicate": "#F44336",
+                },
+                "shapes": {
+                    "Circle-Question": "o",
+                },
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
+                },
+            },
+            "analysis_12": {
+                "colors": {
+                    "Green-Active": "#4CAF50",
+                    "Yellow-Moderate": "#FFC107",
+                    "Gray-Casual": "#9E9E9E",
+                },
+                "shapes": {
+                    "Circle-Reviewer": "o",
+                },
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
+                },
+            },
+            "analysis_13": {
+                "colors": {
+                    "Gray-Meager": "#9E9E9E",
+                    "Green-Normal": "#4CAF50",
+                    "Yellow-Generous": "#FFC107",
+                    "Red-Extravagant": "#F44336",
+                },
+                "shapes": {
+                    "Circle-Bounty User": "o",
+                },
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
+                },
+            },
+            "analysis_14": {
+                "colors": {
+                    "Blue-North America": "#2196F3",
+                    "Green-Europe": "#4CAF50",
+                    "Yellow-Asia": "#FFC107",
+                    "Gray-Other": "#9E9E9E",
+                },
+                "shapes": {
+                    "Circle-Region": "o",
+                },
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
+                },
+            },
+            "analysis_15": {
+                "colors": {
+                    "Blue-High Activity": "#2196F3",
+                    "Green-Medium": "#4CAF50",
+                    "Gray-Low": "#9E9E9E",
+                },
+                "shapes": {
+                    "Circle-Month": "o",
+                },
+                "edge_weights": {
+                    "Thick-Strong Tie": 3.0,
+                    "Thin-Weak Tie": 0.5,
                 },
             },
         }
-        
-        if 'analysis_1_centrality' in self.results:
-            result = self.results['analysis_1_centrality']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_1_centrality" in self.results:
+            result = self.results["analysis_1_centrality"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_reputation_network_aggregated(result["graph"])
+
+        if "analysis_2_core_efficiency" in self.results:
+            result = self.results["analysis_2_core_efficiency"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_core_efficiency_network_aggregated(result["graph"], result)
+
+        if "analysis_3_tag_cooccurrence" in self.results:
+            result = self.results["analysis_3_tag_cooccurrence"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 1: Reputation vs Network Centrality\nNodes=Users, Edges=Answer (Answerer->Asker) | Color: Reputation Level | Shape: Centrality',
-                    color_by='reputation_level',
-                    shape_by='centrality_level',
-                    filename='analysis_1_network.png',
-                    legend_info=LEGEND_INFO['analysis_1']
+                    result["graph"],
+                    "Method 3: Tag Co-occurrence & Technology Map\nNodes=Tags, Edges=Co-occurrence | Color: Tech Domain | Size: Popularity",
+                    color_by="tech_domain",
+                    filename="analysis_3_tag_network.png",
+                    legend_info=LEGEND_INFO["analysis_3"],
                 )
-        
-        if 'analysis_2_core_efficiency' in self.results:
-            result = self.results['analysis_2_core_efficiency']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_4_connected_components" in self.results:
+            result = self.results["analysis_4_connected_components"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_connected_components_network_aggregated(
+                    result["graph"], result
+                )
+
+        if "analysis_5_content_features" in self.results:
+            result = self.results["analysis_5_content_features"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 2: Core-Periphery vs Answer Efficiency\nNodes=Users, Edges=Interaction | Color: Answer Time | Shape: Core/Periphery',
-                    color_by='answer_time_level',
-                    shape_by='is_core',
-                    filename='analysis_2_network.png',
-                    legend_info=LEGEND_INFO['analysis_2']
+                    result["graph"],
+                    "Method 5: Content Features vs Upvotes\nNodes=Posts, Edges=Similar Tags | Color: Score | Shape: Code Presence",
+                    color_by="score_level",
+                    shape_by="has_code",
+                    filename="analysis_5_network.png",
+                    legend_info=LEGEND_INFO["analysis_5"],
                 )
-        
-        if 'analysis_3_tag_cooccurrence' in self.results:
-            result = self.results['analysis_3_tag_cooccurrence']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_6_account_age" in self.results:
+            result = self.results["analysis_6_account_age"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_account_age_network_aggregated(result["graph"], result)
+
+        if "analysis_7_voting_behavior" in self.results:
+            result = self.results["analysis_7_voting_behavior"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 3: Tag Co-occurrence & Technology Map\nNodes=Tags, Edges=Co-occurrence | Color: Tech Domain | Size: Popularity',
-                    color_by='tech_domain',
-                    filename='analysis_3_tag_network.png',
-                    legend_info=LEGEND_INFO['analysis_3']
+                    result["graph"],
+                    "Method 7: Voting Behavior Network\nNodes=Users, Edges=Co-voted Posts | Color: Vote Type",
+                    color_by="vote_type",
+                    filename="analysis_7_network.png",
+                    legend_info=LEGEND_INFO["analysis_7"],
                 )
-        
-        if 'analysis_4_connected_components' in self.results:
-            result = self.results['analysis_4_connected_components']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_8_comment_network" in self.results:
+            result = self.results["analysis_8_comment_network"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_comment_network_aggregated(result["graph"], result)
+
+        if "analysis_9_badge_network" in self.results:
+            result = self.results["analysis_9_badge_network"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 4: Knowledge Islands & Connected Components\nNodes=Users, Edges=Interaction | Color: Connectivity | Shape: Type',
-                    color_by='connectivity_type',
-                    shape_by='interaction_type',
-                    filename='analysis_4_network.png',
-                    legend_info=LEGEND_INFO['analysis_4']
+                    result["graph"],
+                    "Method 9: Badge Achievement Network\nNodes=Users, Edges=Shared Badges | Color: Badge Level",
+                    color_by="badge_level",
+                    filename="analysis_9_network.png",
+                    legend_info=LEGEND_INFO["analysis_9"],
                 )
-        
-        if 'analysis_5_content_features' in self.results:
-            result = self.results['analysis_5_content_features']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_10_edit_collaboration" in self.results:
+            result = self.results["analysis_10_edit_collaboration"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_edit_collaboration_network_aggregated(
+                    result["graph"], result
+                )
+
+        if "analysis_11_post_link" in self.results:
+            result = self.results["analysis_11_post_link"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 5: Content Features vs Upvotes\nNodes=Posts, Edges=Similar Tags | Color: Score | Shape: Code Presence',
-                    color_by='score_level',
-                    shape_by='has_code',
-                    filename='analysis_5_network.png',
-                    legend_info=LEGEND_INFO['analysis_5']
+                    result["graph"],
+                    "Method 11: Post Link & Duplicate Network\nNodes=Posts, Edges=Link | Color: Link Type",
+                    color_by="link_type",
+                    filename="analysis_11_network.png",
+                    legend_info=LEGEND_INFO["analysis_11"],
                 )
-        
-        if 'analysis_6_account_age' in self.results:
-            result = self.results['analysis_6_account_age']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_12_review_task" in self.results:
+            result = self.results["analysis_12_review_task"]
+            if "graph" in result and result["graph"] is not None:
+                self._plot_review_task_network_aggregated(result["graph"], result)
+
+        if "analysis_13_bounty_network" in self.results:
+            result = self.results["analysis_13_bounty_network"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 6: Account Age vs Community Contribution\nColor: Age Level | Shape: Post Type',
-                    color_by='account_age_level',
-                    shape_by='post_type',
-                    filename='analysis_6_network.png',
-                    legend_info=LEGEND_INFO['analysis_6']
+                    result["graph"],
+                    "Method 13: Bounty Network\nNodes=Users, Edges=Bounty | Color: Bounty Level",
+                    color_by="bounty_level",
+                    filename="analysis_13_network.png",
+                    legend_info=LEGEND_INFO["analysis_13"],
                 )
-        
-        if 'analysis_7_voting_behavior' in self.results:
-            result = self.results['analysis_7_voting_behavior']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 7: Voting Behavior Network\nNodes=Users, Edges=Co-voted Posts | Color: Vote Type',
-                    color_by='vote_type',
-                    filename='analysis_7_network.png',
-                    legend_info=LEGEND_INFO['analysis_7']
-                )
-        
-        if 'analysis_8_comment_network' in self.results:
-            result = self.results['analysis_8_comment_network']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 8: Comment Interaction Network\nNodes=Users, Edges=Comment Co-occurrence | Color: Comment Count',
-                    color_by='comment_count',
-                    filename='analysis_8_network.png',
-                    legend_info=LEGEND_INFO['analysis_8']
-                )
-        
-        if 'analysis_9_badge_network' in self.results:
-            result = self.results['analysis_9_badge_network']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 9: Badge Achievement Network\nNodes=Users, Edges=Shared Badges | Color: Badge Level',
-                    color_by='badge_level',
-                    filename='analysis_9_network.png',
-                    legend_info=LEGEND_INFO['analysis_9']
-                )
-        
-        if 'analysis_10_edit_collaboration' in self.results:
-            result = self.results['analysis_10_edit_collaboration']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 10: Edit Collaboration Network\nNodes=Users, Edges=Co-edit | Color: Editor Level',
-                    color_by='editor_level',
-                    filename='analysis_10_network.png',
-                    legend_info=LEGEND_INFO['analysis_10']
-                )
-        
-        if 'analysis_11_post_link' in self.results:
-            result = self.results['analysis_11_post_link']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 11: Post Link & Duplicate Network\nNodes=Posts, Edges=Link | Color: Link Type',
-                    color_by='link_type',
-                    filename='analysis_11_network.png',
-                    legend_info=LEGEND_INFO['analysis_11']
-                )
-        
-        if 'analysis_12_review_task' in self.results:
-            result = self.results['analysis_12_review_task']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 12: Review Task Network\nNodes=Users, Edges=Co-review | Color: Reviewer Level',
-                    color_by='reviewer_level',
-                    filename='analysis_12_network.png',
-                    legend_info=LEGEND_INFO['analysis_12']
-                )
-        
-        if 'analysis_13_bounty_network' in self.results:
-            result = self.results['analysis_13_bounty_network']
-            if 'graph' in result and result['graph'] is not None:
-                self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 13: Bounty Network\nNodes=Users, Edges=Bounty | Color: Bounty Level',
-                    color_by='bounty_level',
-                    filename='analysis_13_network.png',
-                    legend_info=LEGEND_INFO['analysis_13']
-                )
-        
-        if 'analysis_14_user_location' in self.results:
-            result = self.results['analysis_14_user_location']
-            if 'graph' in result and result['graph'] is not None:
-                g = result['graph']
-                labels = g.vs['region'] if 'region' in g.vs.attribute_names() else None
+
+        if "analysis_14_user_location" in self.results:
+            result = self.results["analysis_14_user_location"]
+            if "graph" in result and result["graph"] is not None:
+                g = result["graph"]
+                labels = g.vs["region"] if "region" in g.vs.attribute_names() else None
                 self.plotter.plot_network_graph(
                     g,
-                    'Method 14: User Location Network\nNodes=Regions, Edges=Connection | Color: Region | Label: Region Name',
-                    color_by='region',
+                    "Method 14: User Location Network\nNodes=Regions, Edges=Connection | Color: Region | Label: Region Name",
+                    color_by="region",
                     vertex_labels=labels,
-                    filename='analysis_14_network.png',
-                    legend_info=LEGEND_INFO['analysis_14']
+                    filename="analysis_14_network.png",
+                    legend_info=LEGEND_INFO["analysis_14"],
                 )
-        
-        if 'analysis_15_time_series' in self.results:
-            result = self.results['analysis_15_time_series']
-            if 'graph' in result and result['graph'] is not None:
+
+        if "analysis_15_time_series" in self.results:
+            result = self.results["analysis_15_time_series"]
+            if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
-                    result['graph'],
-                    'Method 15: Time Series Activity Network\nNodes=Months, Edges=Activity | Color: Activity Level',
-                    color_by='activity_level',
-                    filename='analysis_15_network.png',
-                    legend_info=LEGEND_INFO['analysis_15']
+                    result["graph"],
+                    "Method 15: Time Series Activity Network\nNodes=Months, Edges=Activity | Color: Activity Level",
+                    color_by="activity_level",
+                    filename="analysis_15_network.png",
+                    legend_info=LEGEND_INFO["analysis_15"],
                 )
-    
+
+    def _plot_reputation_network_aggregated(self, graph):
+        """Plot aggregated 4-node reputation network visualization."""
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        node_positions = {
+            "1_Low": (0.5, 0.9),
+            "2_Medium": (0.85, 0.6),
+            "3_Senior": (0.15, 0.6),
+            "4_Expert": (0.5, 0.15),
+        }
+        node_colors = {
+            "1_Low": "#4CAF50",
+            "2_Medium": "#FFD700",
+            "3_Senior": "#FF9800",
+            "4_Expert": "#F44336",
+        }
+        node_labels = {
+            "1_Low": "Low",
+            "2_Medium": "Mid",
+            "3_Senior": "Senior",
+            "4_Expert": "Expert",
+        }
+
+        rep_counts = {"1_Low": 0, "2_Medium": 0, "3_Senior": 0, "4_Expert": 0}
+        node_rep_map = {}
+        for i, v in enumerate(graph.vs):
+            rep_level = (
+                v["reputation_level"]
+                if "reputation_level" in v.attributes()
+                else "1_Low"
+            )
+            if rep_level not in rep_counts:
+                rep_level = "1_Low"
+            rep_counts[rep_level] += 1
+            node_rep_map[i] = rep_level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_rep = node_rep_map[e.source]
+            tgt_rep = node_rep_map[e.target]
+            pair = tuple(sorted([src_rep, tgt_rep]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for rep_level, count in rep_counts.items():
+            x, y = node_positions[rep_level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[rep_level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{node_labels[rep_level]}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=11,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        pair_color_map = {
+            ("1_Low", "1_Low"): "#4CAF50",
+            ("1_Low", "2_Medium"): "#8BC34A",
+            ("1_Low", "3_Senior"): "#FFC107",
+            ("1_Low", "4_Expert"): "#FF9800",
+            ("2_Medium", "2_Medium"): "#FFD700",
+            ("2_Medium", "3_Senior"): "#FFB300",
+            ("2_Medium", "4_Expert"): "#FF7043",
+            ("3_Senior", "3_Senior"): "#FF9800",
+            ("3_Senior", "4_Expert"): "#F44336",
+            ("4_Expert", "4_Expert"): "#D32F2F",
+        }
+
+        pair_label_map = {
+            ("1_Low", "1_Low"): "Low↔Low",
+            ("1_Low", "2_Medium"): "Mid↔Low",
+            ("1_Low", "3_Senior"): "Senior↔Low",
+            ("1_Low", "4_Expert"): "Expert↔Low",
+            ("2_Medium", "2_Medium"): "Mid↔Mid",
+            ("2_Medium", "3_Senior"): "Senior↔Mid",
+            ("2_Medium", "4_Expert"): "Expert↔Mid",
+            ("3_Senior", "3_Senior"): "Senior↔Senior",
+            ("3_Senior", "4_Expert"): "Expert↔Senior",
+            ("4_Expert", "4_Expert"): "Expert↔Expert",
+        }
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = pair_color_map.get(pair, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for pair, color in pair_color_map.items():
+            if pair in edge_pair_counts:
+                label = pair_label_map.get(pair, f"{pair[0]}-{pair[1]}")
+                patch = mpatches.Patch(color=color, label=label)
+                legend_patches.append(patch)
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Interaction Types",
+        )
+
+        ax.set_title(
+            "Method 1: Reputation vs Network Centrality\nNodes=Users, Edges=Answer | Color: Reputation Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_1_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated reputation network: {output_path}")
+
+    def _plot_core_efficiency_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        node_positions = {
+            "1_VeryFast": (0.5, 0.88),
+            "2_Fast": (0.82, 0.55),
+            "3_Slow": (0.18, 0.55),
+            "4_VerySlow": (0.5, 0.22),
+            "0_Unresolved": (0.2, 0.22),
+        }
+        node_colors = {
+            "1_VeryFast": "#4CAF50",
+            "2_Fast": "#FFD700",
+            "3_Slow": "#FFCDD2",
+            "4_VerySlow": "#F44336",
+            "0_Unresolved": "#9E9E9E",
+        }
+        node_labels_map = {
+            "1_VeryFast": "VeryFast\n(<1h)",
+            "2_Fast": "Fast\n(1~12h)",
+            "3_Slow": "Slow\n(12~24h)",
+            "4_VerySlow": "VerySlow\n(>24h)",
+            "0_Unresolved": "Unresolved",
+        }
+
+        answer_time_levels = list(node_positions.keys())
+        level_counts = {lv: 0 for lv in answer_time_levels}
+        node_level_map = {}
+        for i, v in enumerate(graph.vs):
+            level = (
+                v["answer_time_level"]
+                if "answer_time_level" in v.attributes()
+                else "0_Unresolved"
+            )
+            if level not in level_counts:
+                level = "0_Unresolved"
+            level_counts[level] += 1
+            node_level_map[i] = level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = node_positions[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{node_labels_map[level]}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        pair_color_map = {}
+        for i, lv1 in enumerate(answer_time_levels):
+            for j, lv2 in enumerate(answer_time_levels):
+                if j >= i:
+                    pair_color_map[tuple(sorted([lv1, lv2]))] = node_colors.get(
+                        lv1, "#9E9E9E"
+                    )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in node_positions or n2 not in node_positions:
+                continue
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = pair_color_map.get(pair, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in node_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=node_labels_map.get(level, level))
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Answer Time Levels",
+        )
+        ax.set_title(
+            "Method 2: Core-Periphery vs Answer Efficiency\nNodes=Users (grouped by answer time), Edges=Interaction | Color: Answer Time",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_2_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated core-efficiency network: {output_path}")
+
+    def _plot_connected_components_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        components = result.get("components", [])
+        summary = result.get("summary", {})
+
+        main_size = summary.get("main_component_size", 0)
+        island_count = summary.get("island_count", 0)
+        island_user_count = summary.get("island_user_count", 0)
+        total_components = summary.get("total_components", 0)
+
+        node_positions = {
+            "Main\nComponent": (0.5, 0.7),
+            "Small\nIslands\n(2-5 users)": (0.2, 0.35),
+            "Tiny\nIslands\n(1 user)": (0.8, 0.35),
+        }
+        node_colors = {
+            "Main\nComponent": "#1565C0",
+            "Small\nIslands\n(2-5 users)": "#FF9800",
+            "Tiny\nIslands\n(1 user)": "#9E9E9E",
+        }
+
+        main_count = main_size
+        small_islands = sum(
+            1 for c in components if 2 <= c.size <= 5 and not c.is_main_component
+        )
+        tiny_islands = sum(1 for c in components if c.size == 1)
+
+        counts = {
+            "Main\nComponent": main_count,
+            "Small\nIslands\n(2-5 users)": small_islands,
+            "Tiny\nIslands\n(1 user)": tiny_islands,
+        }
+
+        edge_pair_counts = {}
+        node_component_map = {}
+        idx = 0
+        for c in components:
+            if c.is_main_component:
+                comp_label = "Main\nComponent"
+            elif c.size == 1:
+                comp_label = "Tiny\nIslands\n(1 user)"
+            else:
+                comp_label = "Small\nIslands\n(2-5 users)"
+            for uid in c.user_ids:
+                node_component_map[idx] = comp_label
+                idx += 1
+
+        for e in graph.es:
+            src_comp = node_component_map.get(e.source, "Main\nComponent")
+            tgt_comp = node_component_map.get(e.target, "Main\nComponent")
+            pair = tuple(sorted([src_comp, tgt_comp]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for comp_label, count in counts.items():
+            if count == 0:
+                continue
+            x, y = node_positions[comp_label]
+            size = max(500, count * 2)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[comp_label],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{comp_label}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in node_positions or n2 not in node_positions:
+                continue
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = node_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for comp_label, color in node_colors.items():
+            if counts.get(comp_label, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=comp_label.replace("\n", " "))
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Component Types",
+        )
+        ax.set_title(
+            f"Method 4: Knowledge Islands & Connected Components\nTotal: {total_components} components, {island_count} islands ({island_user_count} users)",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_4_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated connected components network: {output_path}")
+
+    def _plot_account_age_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        node_positions = {
+            "1_New": (0.5, 0.88),
+            "2_Young": (0.82, 0.65),
+            "3_Mature": (0.18, 0.65),
+            "4_Established": (0.82, 0.35),
+            "5_Senior": (0.18, 0.35),
+        }
+        node_colors = {
+            "1_New": "#4CAF50",
+            "2_Young": "#FFD700",
+            "3_Mature": "#FF9800",
+            "4_Established": "#F44336",
+            "5_Senior": "#9C27B0",
+        }
+        node_labels_map = {
+            "1_New": "New\n(<1yr)",
+            "2_Young": "Young\n(1~3yr)",
+            "3_Mature": "Mature\n(3~6yr)",
+            "4_Established": "Estab.\n(6~10yr)",
+            "5_Senior": "Senior\n(>10yr)",
+        }
+
+        age_levels = list(node_positions.keys())
+        level_counts = {lv: 0 for lv in age_levels}
+        node_level_map = {}
+        for i, v in enumerate(graph.vs):
+            level = (
+                v["account_age_level"]
+                if "account_age_level" in v.attributes()
+                else "1_New"
+            )
+            if level not in level_counts:
+                level = "1_New"
+            level_counts[level] += 1
+            node_level_map[i] = level
+
+        post_type_counts = {"1_Both": 0, "2_QuestionsOnly": 0, "3_AnswersOnly": 0}
+        if "post_type" in graph.vs.attribute_names():
+            for v in graph.vs:
+                pt = v["post_type"]
+                if pt in post_type_counts:
+                    post_type_counts[pt] += 1
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = node_positions[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{node_labels_map[level]}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in node_positions or n2 not in node_positions:
+                continue
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = node_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in node_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=node_labels_map.get(level, level))
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Account Age Levels",
+        )
+        ax.set_title(
+            "Method 6: Account Age vs Community Contribution\nNodes=Users (grouped by age), Edges=Interaction | Color: Age Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_6_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated account age network: {output_path}")
+
+    def _plot_comment_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        activity_levels = {
+            "High\n(>50 comments)": (0.5, 0.8),
+            "Medium\n(10~50)": (0.8, 0.45),
+            "Low\n(2~9)": (0.2, 0.45),
+            "Minimal\n(1)": (0.5, 0.15),
+        }
+        level_colors = {
+            "High\n(>50 comments)": "#2196F3",
+            "Medium\n(10~50)": "#4CAF50",
+            "Low\n(2~9)": "#FF9800",
+            "Minimal\n(1)": "#9E9E9E",
+        }
+
+        level_counts = {lv: 0 for lv in activity_levels}
+        node_level_map = {}
+        for i, v in enumerate(graph.vs):
+            cc = v["comment_count"] if "comment_count" in v.attributes() else 0
+            if cc > 50:
+                lv = "High\n(>50 comments)"
+            elif cc >= 10:
+                lv = "Medium\n(10~50)"
+            elif cc >= 2:
+                lv = "Low\n(2~9)"
+            else:
+                lv = "Minimal\n(1)"
+            level_counts[lv] += 1
+            node_level_map[i] = lv
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = activity_levels[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=level_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{level}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in activity_levels or n2 not in activity_levels:
+                continue
+            x1, y1 = activity_levels[n1]
+            x2, y2 = activity_levels[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = level_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in level_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=level.replace("\n", " "))
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Comment Activity",
+        )
+        ax.set_title(
+            "Method 8: Comment Interaction Network\nNodes=Users (grouped by activity), Edges=Comment Co-occurrence | Color: Activity Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_8_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated comment network: {output_path}")
+
+    def _plot_edit_collaboration_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        node_positions = {
+            "3_Power": (0.5, 0.8),
+            "2_Active": (0.8, 0.45),
+            "1_Casual": (0.2, 0.45),
+            "0_None": (0.5, 0.15),
+        }
+        node_colors = {
+            "3_Power": "#F44336",
+            "2_Active": "#FF9800",
+            "1_Casual": "#4CAF50",
+            "0_None": "#BDBDBD",
+        }
+        node_labels_map = {
+            "3_Power": "Power\n(>5 edits)",
+            "2_Active": "Active\n(3~5)",
+            "1_Casual": "Casual\n(1~2)",
+            "0_None": "None",
+        }
+
+        level_counts = {lv: 0 for lv in node_positions}
+        node_level_map = {}
+        for i, v in enumerate(graph.vs):
+            level = v["editor_level"] if "editor_level" in v.attributes() else "0_None"
+            if level not in level_counts:
+                level = "0_None"
+            level_counts[level] += 1
+            node_level_map[i] = level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = node_positions[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{node_labels_map[level]}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in node_positions or n2 not in node_positions:
+                continue
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = node_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in node_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=node_labels_map.get(level, level))
+                )
+
+        ax.legend(
+            handles=legend_patches, loc="lower right", fontsize=7, title="Editor Level"
+        )
+        ax.set_title(
+            "Method 10: Edit Collaboration Network\nNodes=Users (grouped by edits), Edges=Co-edit | Color: Editor Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_10_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated edit collaboration network: {output_path}")
+
+    def _plot_review_task_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        node_positions = {
+            "3_Power": (0.5, 0.8),
+            "2_Active": (0.8, 0.45),
+            "1_Casual": (0.2, 0.45),
+            "0_None": (0.5, 0.15),
+        }
+        node_colors = {
+            "3_Power": "#F44336",
+            "2_Active": "#FF9800",
+            "1_Casual": "#4CAF50",
+            "0_None": "#BDBDBD",
+        }
+        node_labels_map = {
+            "3_Power": "Power\n(>10)",
+            "2_Active": "Active\n(3~10)",
+            "1_Casual": "Casual\n(1~2)",
+            "0_None": "None",
+        }
+
+        level_counts = {lv: 0 for lv in node_positions}
+        node_level_map = {}
+        for i, v in enumerate(graph.vs):
+            level = (
+                v["reviewer_level"] if "reviewer_level" in v.attributes() else "0_None"
+            )
+            if level not in level_counts:
+                level = "0_None"
+            level_counts[level] += 1
+            node_level_map[i] = level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = node_positions[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{node_labels_map[level]}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in node_positions or n2 not in node_positions:
+                continue
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = node_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in node_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=node_labels_map.get(level, level))
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Reviewer Level",
+        )
+        ax.set_title(
+            "Method 12: Review Task Network\nNodes=Users (grouped by reviews), Edges=Co-review | Color: Reviewer Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_12_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated review task network: {output_path}")
+
     def _make_serializable(self, obj):
         """Recursively convert numpy types to Python native types"""
         if isinstance(obj, dict):
             return {str(k): self._make_serializable(v) for k, v in obj.items()}
         elif isinstance(obj, (list, tuple)):
             return [self._make_serializable(item) for item in obj]
-        elif hasattr(obj, 'item'):
+        elif hasattr(obj, "item"):
             return obj.item()
         elif isinstance(obj, (pd.Timestamp, pd.Timedelta)):
             return str(obj)
         else:
             return obj
-    
+
     def _save_results(self):
         """儲存分析結果"""
         print("\n" + "=" * 60)
         print("儲存分析結果")
         print("=" * 60)
-        
+
         output_dir = Path("output")
         output_dir.mkdir(exist_ok=True)
-        
+
         serializable_results = {}
         for name, result in self.results.items():
             serializable_results[name] = {}
             for key, value in result.items():
-                if key == 'graph':
+                if key == "graph":
                     serializable_results[name][key] = {
-                        'nodes': len(value.vs) if value else 0,
-                        'edges': len(value.es) if value else 0,
+                        "nodes": len(value.vs) if value else 0,
+                        "edges": len(value.es) if value else 0,
                     }
-                elif key == 'summary':
+                elif key == "summary":
                     serializable_results[name][key] = self._make_serializable(value)
-                elif key == 'posts_df':
-                    if hasattr(value, 'to_dict'):
+                elif key == "posts_df":
+                    if hasattr(value, "to_dict"):
                         df = value.copy()
                         for col in df.columns:
-                            if df[col].dtype.name == 'datetime64[ns, UTC]':
+                            if df[col].dtype.name == "datetime64[ns, UTC]":
                                 df[col] = df[col].astype(str)
-                        serializable_results[name][key] = df.to_dict(orient='records')[:10]
+                        serializable_results[name][key] = df.to_dict(orient="records")[
+                            :10
+                        ]
                     else:
                         serializable_results[name][key] = {}
-                elif key == 'analysis_df':
-                    if hasattr(value, 'to_dict'):
+                elif key == "analysis_df":
+                    if hasattr(value, "to_dict"):
                         df = value.copy()
                         for col in df.columns:
-                            if df[col].dtype.name == 'datetime64[ns, UTC]':
+                            if df[col].dtype.name == "datetime64[ns, UTC]":
                                 df[col] = df[col].astype(str)
-                        serializable_results[name][key] = df.to_dict(orient='records')[:10]
+                        serializable_results[name][key] = df.to_dict(orient="records")[
+                            :10
+                        ]
                     else:
                         serializable_results[name][key] = {}
-                elif key == 'age_df':
-                    if hasattr(value, 'to_dict'):
+                elif key == "age_df":
+                    if hasattr(value, "to_dict"):
                         df = value.copy()
                         for col in df.columns:
-                            if df[col].dtype.name == 'datetime64[ns, UTC]':
+                            if df[col].dtype.name == "datetime64[ns, UTC]":
                                 df[col] = df[col].astype(str)
-                        serializable_results[name][key] = df.to_dict(orient='records')[:10]
+                        serializable_results[name][key] = df.to_dict(orient="records")[
+                            :10
+                        ]
                     else:
                         serializable_results[name][key] = {}
-                elif key == 'connectivity_df':
-                    if hasattr(value, 'to_dict'):
+                elif key == "connectivity_df":
+                    if hasattr(value, "to_dict"):
                         df = value.copy()
                         for col in df.columns:
-                            if df[col].dtype.name == 'datetime64[ns, UTC]':
+                            if df[col].dtype.name == "datetime64[ns, UTC]":
                                 df[col] = df[col].astype(str)
-                        serializable_results[name][key] = df.to_dict(orient='records')[:10]
+                        serializable_results[name][key] = df.to_dict(orient="records")[
+                            :10
+                        ]
                     else:
                         serializable_results[name][key] = {}
-                elif key == 'tag_df':
-                    if hasattr(value, 'to_dict'):
+                elif key == "tag_df":
+                    if hasattr(value, "to_dict"):
                         df = value.copy()
                         for col in df.columns:
-                            if df[col].dtype.name == 'datetime64[ns, UTC]':
+                            if df[col].dtype.name == "datetime64[ns, UTC]":
                                 df[col] = df[col].astype(str)
-                        serializable_results[name][key] = df.to_dict(orient='records')[:10]
+                        serializable_results[name][key] = df.to_dict(orient="records")[
+                            :10
+                        ]
                     else:
                         serializable_results[name][key] = {}
-                elif key in ('votes_df', 'comments_df', 'badges_df', 'edits_df', 'links_df',
-                             'reviews_df', 'bounties_df', 'users_df'):
-                    if hasattr(value, 'to_dict'):
+                elif key in (
+                    "votes_df",
+                    "comments_df",
+                    "badges_df",
+                    "edits_df",
+                    "links_df",
+                    "reviews_df",
+                    "bounties_df",
+                    "users_df",
+                ):
+                    if hasattr(value, "to_dict"):
                         df = value.copy()
                         for col in df.columns:
-                            if df[col].dtype.name == 'datetime64[ns, UTC]':
+                            if df[col].dtype.name == "datetime64[ns, UTC]":
                                 df[col] = df[col].astype(str)
-                        serializable_results[name][key] = df.to_dict(orient='records')[:10]
+                        serializable_results[name][key] = df.to_dict(orient="records")[
+                            :10
+                        ]
                     else:
                         serializable_results[name][key] = {}
-                elif key == 'centrality_metrics':
-                    serializable_results[name][key] = value.to_dict() if hasattr(value, 'to_dict') else {}
-                elif key == 'metrics':
-                    serializable_results[name][key] = value.to_dict() if hasattr(value, 'to_dict') else {}
+                elif key == "centrality_metrics":
+                    serializable_results[name][key] = (
+                        value.to_dict() if hasattr(value, "to_dict") else {}
+                    )
+                elif key == "metrics":
+                    serializable_results[name][key] = (
+                        value.to_dict() if hasattr(value, "to_dict") else {}
+                    )
                 else:
                     try:
                         json.dumps(value)
                         serializable_results[name][key] = value
                     except:
                         serializable_results[name][key] = str(value)
-        
+
         save_json(serializable_results, output_dir / "analysis_results.json")
-        
+
         print("\n" + "=" * 60)
         print("分析完成！")
         print("=" * 60)
-        
+
         generate_summary_report(self.results)
 
 
 def main():
     """主函數"""
     import argparse
-    
-    parser = argparse.ArgumentParser(description='Stack Overflow Social Network Analysis')
-    parser.add_argument('--limit', type=int, default=100, help='Number of records to analyze')
-    parser.add_argument('--output', type=str, default='output', help='Output directory')
-    
+
+    parser = argparse.ArgumentParser(
+        description="Stack Overflow Social Network Analysis"
+    )
+    parser.add_argument(
+        "--limit", type=int, default=100, help="Number of records to analyze"
+    )
+    parser.add_argument("--output", type=str, default="output", help="Output directory")
+
     args = parser.parse_args()
-    
+
     runner = SNARunner(output_dir=args.output, data_limit=args.limit)
     runner.run_all()
 

@@ -13,14 +13,14 @@ DATASET = "`bigquery-public-data.stackoverflow`"
 
 class DataLoader:
     """資料載入器"""
-    
+
     def __init__(self, client: Optional[BigQueryClient] = None):
         self.client = client or get_client()
         self._cache = {}
-    
+
     def load_users(self, limit: int = 100, user_ids: list = None) -> pd.DataFrame:
         """載入用戶資料（含聲望等級分類）
-        
+
         聲望等級（研究方法規格）:
         - 1_Low: 新手 (<1,000)
         - 2_Medium: 中階 (1,000~10,000)
@@ -28,14 +28,14 @@ class DataLoader:
         - 4_Expert: 大神 (>50,000)
         """
         if user_ids:
-            user_ids_str = ','.join([str(uid) for uid in user_ids[:1000]])
+            user_ids_str = ",".join([str(uid) for uid in user_ids[:1000]])
             cache_key = f"users_by_ids_{user_ids_str}"
         else:
             cache_key = f"users_{limit}"
-        
+
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         if user_ids:
             sql = f"""
             SELECT
@@ -82,10 +82,12 @@ class DataLoader:
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
-    def load_posts_with_answers(self, limit: int = 100) -> pd.DataFrame:
-        """載入問題與獲納回答關係（含解答時間等級）
-        
+
+    def load_posts_with_answers(
+        self, limit: int = 100, only_accepted: bool = True
+    ) -> pd.DataFrame:
+        """載入問題與回答關係（含解答時間等級）
+
         解答時間等級（研究方法規格）:
         - 1_VeryFast: <1小時
         - 2_Fast: 1~12小時
@@ -93,46 +95,74 @@ class DataLoader:
         - 4_VerySlow: >24小時
         - 0_Unresolved: 未解決
         """
-        cache_key = f"posts_{limit}"
+        cache_key = f"posts_{limit}_{only_accepted}"
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
-        sql = f"""
-        SELECT
-            q.id AS question_id,
-            q.owner_user_id AS questioner_id,
-            q.accepted_answer_id,
-            q.score AS question_score,
-            q.answer_count,
-            q.creation_date AS question_date,
-            q.tags,
-            a.id AS answer_id,
-            a.owner_user_id AS answerer_id,
-            a.creation_date AS answer_date,
-            TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) AS hours_to_accept,
-            CASE
-                WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) < 1 THEN '1_VeryFast'
-                WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) BETWEEN 1 AND 12 THEN '2_Fast'
-                WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) BETWEEN 13 AND 24 THEN '3_Slow'
-                WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) > 24 THEN '4_VerySlow'
-                ELSE '0_Unresolved'
-            END AS answer_time_level
-        FROM {DATASET}.posts_questions q
-        INNER JOIN {DATASET}.posts_answers a
-            ON q.accepted_answer_id = a.id
-        WHERE q.accepted_answer_id IS NOT NULL
-        LIMIT {limit}
-        """
+
+        if only_accepted:
+            sql = f"""
+            SELECT
+                q.id AS question_id,
+                q.owner_user_id AS questioner_id,
+                q.accepted_answer_id,
+                q.score AS question_score,
+                q.answer_count,
+                q.creation_date AS question_date,
+                q.tags,
+                a.id AS answer_id,
+                a.owner_user_id AS answerer_id,
+                a.creation_date AS answer_date,
+                TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) AS hours_to_accept,
+                CASE
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) < 1 THEN '1_VeryFast'
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) BETWEEN 1 AND 12 THEN '2_Fast'
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) BETWEEN 13 AND 24 THEN '3_Slow'
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) > 24 THEN '4_VerySlow'
+                    ELSE '0_Unresolved'
+                END AS answer_time_level
+            FROM {DATASET}.posts_questions q
+            INNER JOIN {DATASET}.posts_answers a
+                ON q.accepted_answer_id = a.id
+            WHERE q.accepted_answer_id IS NOT NULL
+            LIMIT {limit}
+            """
+        else:
+            sql = f"""
+            SELECT
+                q.id AS question_id,
+                q.owner_user_id AS questioner_id,
+                q.accepted_answer_id,
+                q.score AS question_score,
+                q.answer_count,
+                q.creation_date AS question_date,
+                q.tags,
+                a.id AS answer_id,
+                a.owner_user_id AS answerer_id,
+                a.creation_date AS answer_date,
+                TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) AS hours_to_accept,
+                CASE
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) < 1 THEN '1_VeryFast'
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) BETWEEN 1 AND 12 THEN '2_Fast'
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) BETWEEN 13 AND 24 THEN '3_Slow'
+                    WHEN TIMESTAMP_DIFF(a.creation_date, q.creation_date, HOUR) > 24 THEN '4_VerySlow'
+                    ELSE '0_Unresolved'
+                END AS answer_time_level
+            FROM {DATASET}.posts_questions q
+            LEFT JOIN {DATASET}.posts_answers a
+                ON q.id = a.parent_id
+            WHERE q.post_type_id = 1
+            LIMIT {limit}
+            """
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
+
     def load_tag_cooccurrence(self, limit: int = 100) -> pd.DataFrame:
         """載入標籤共現關係"""
         cache_key = f"tags_{limit}"
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         sql = f"""
         SELECT
             tag1,
@@ -156,18 +186,20 @@ class DataLoader:
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
-    def load_user_connectivity(self, limit: int = 100, user_ids: list = None) -> pd.DataFrame:
+
+    def load_user_connectivity(
+        self, limit: int = 100, user_ids: list = None
+    ) -> pd.DataFrame:
         """載入用戶連通性（識別知識孤島）"""
         if user_ids:
-            user_ids_str = ','.join([str(uid) for uid in user_ids[:1000]])
+            user_ids_str = ",".join([str(uid) for uid in user_ids[:1000]])
             cache_key = f"connectivity_by_ids_{user_ids_str}"
         else:
             cache_key = f"connectivity_{limit}"
-        
+
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         if user_ids:
             sql = f"""
             SELECT
@@ -216,13 +248,13 @@ class DataLoader:
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
+
     def load_posts_with_code(self, limit: int = 100) -> pd.DataFrame:
         """載入包含程式碼區塊的貼文"""
         cache_key = f"code_{limit}"
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         sql = f"""
         SELECT
             id,
@@ -253,18 +285,18 @@ class DataLoader:
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
+
     def load_account_age(self, limit: int = 100, user_ids: list = None) -> pd.DataFrame:
         """載入帳號年資與發文類型"""
         if user_ids:
-            user_ids_str = ','.join([str(uid) for uid in user_ids[:1000]])
+            user_ids_str = ",".join([str(uid) for uid in user_ids[:1000]])
             cache_key = f"age_by_ids_{user_ids_str}"
         else:
             cache_key = f"age_{limit}"
-        
+
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         if user_ids:
             sql = f"""
             SELECT
@@ -345,13 +377,13 @@ class DataLoader:
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
+
     def load_tags_popularity(self, limit: int = 100) -> pd.DataFrame:
         """載入標籤熱度"""
         cache_key = f"tags_popularity_{limit}"
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         sql = f"""
         SELECT
             tag_name,
@@ -365,7 +397,7 @@ class DataLoader:
         df = self.client.query(sql)
         self._cache[cache_key] = df
         return df
-    
+
     def clear_cache(self):
         """清除快取"""
         self._cache.clear()
