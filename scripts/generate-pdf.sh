@@ -26,7 +26,20 @@ pandoc \
   "${FILES[@]}" \
   -H <(cat << 'EOF'
 \usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{caption}
 % emoji 字體會由系統自動選擇適當的備選
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\setCJKmainfont{Noto Serif CJK TC}
+\setCJKsansfont{Noto Sans CJK TC}
+\setCJKmonofont{Noto Sans CJK TC}
+\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{表}
+\renewcommand{\contentsname}{目錄}
+\captionsetup[figure]{name=圖}
+\captionsetup[table]{name=表}
 EOF
 ) \
   --pdf-engine=xelatex \
@@ -45,7 +58,8 @@ EOF
   --variable=mainfont:"Noto Sans" \
   --variable=sansfont:"Noto Sans" \
   --variable=monofont:"Noto Sans Mono" \
-  --variable=CJKmainfont:"Noto Serif CJK TC" \
+  --variable=documentclass:"report" \
+  --variable=classoption:"openany" \
   --variable=toc-title:"目錄" \
   --variable=lang:"zh-TW" \
   -o complete_book.pdf

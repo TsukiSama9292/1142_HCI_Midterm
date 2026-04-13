@@ -1,93 +1,183 @@
 # 分析結果
 
-本章節彙整 `output/analysis_results.json` 中的實際結果，並搭配 `output/analysis_*.png` 圖片說明每個分析面向的觀察。
+本章節彙整分析輸出的實際觀察，並將每一個 RQ 的原始網路圖與聚合網路圖同時呈現。每個分析面向都以兩種圖像並列展示，讓讀者能從原始結構與聚合趨勢中直接理解分析結果。
 
 本報告同時提供兩種圖像版本：
-- **raw**：原始網路輸出圖，顯示分析結果的基礎節點與邊結構。
-- **aggregated**：聚合後的圖表，強調分群、區域或主題之間的關係。
+- **raw**：原始網路圖，顯示節點與邊的直接關係，反映資料的基礎結構。
+- **aggregated**：聚合後網路圖，強調分群、角色、類別或約化後的主題結構。
 
 ## 圖像總覽表
 
-| 分析編號 | 原始圖 (raw) | 聚合圖 | 圖像說明 |
+| 分析編號 | 原始圖 (raw) | 聚合圖 | 簡要說明 |
 |---|---|---|---|
-| RQ1 | ![RQ1 raw](../output/analysis_1_network_raw.png) | ![RQ1 agg](../output/analysis_1_network.png) | 原始圖刻畫使用者回答網路，聚合圖強調聲望與中心性分群。此樣本中高聲望節點未形成明顯核心。 |
-| RQ2 | ![RQ2 raw](../output/analysis_2_network_raw.png) | ![RQ2 agg](../output/analysis_2_network.png) | 原始圖呈現回答核心與邊緣的連結，聚合圖顯示回應時間與效率。樣本中所有節點皆被歸為核心。 |
-| RQ3 | ![RQ3 raw](../output/analysis_3_network_raw.png) | ![RQ3 agg](../output/analysis_3_network.png) | 原始圖顯示標籤之間全部共現連結，聚合圖按照技術領域分群。共現網路模組度 0.7322，展現 8 個領域。 |
-| RQ4 | ![RQ4 raw](../output/analysis_4_network_raw.png) | ![RQ4 agg](../output/analysis_4_network.png) | 原始圖展示連通分量完整結構，聚合圖強調主成分與孤立子網路。此樣本大量小型連通分量，隔離比率 1.0。 |
-| RQ5 | ![RQ5 raw](../output/analysis_5_network_raw.png) | ![RQ5 agg](../output/analysis_5_network.png) | 原始圖呈現含程式碼與不含程式碼貼文之間的連結，聚合圖顯示分數與內容特徵比較。含程式碼貼文平均分 0.585，低於不含程式碼貼文。 |
-| RQ6 | ![RQ6 raw](../output/analysis_6_network_raw.png) | ![RQ6 agg](../output/analysis_6_network.png) | 原始圖為年資與行為網路，聚合圖強調年資分層與貢獻模式。樣本主要為 Mature、Established、Senior。 |
-| RQ7 | ![RQ7 raw](../output/analysis_7_network_raw.png) | ![RQ7 agg](../output/analysis_7_network.png) | 原始圖顯示投票者與投票目標的細節連結，聚合圖呈現投票類型分布。20,000 次投票中 upvote 佔 16,751 次。 |
-| RQ8 | ![RQ8 raw](../output/analysis_8_network_raw.png) | ![RQ8 agg](../output/analysis_8_network.png) | 原始圖展示評論者共現連結，聚合圖強調評論網路密度。網路密度 0.00034，顯示評論互動稀疏。 |
-| RQ9 | ![RQ9 raw](../output/analysis_9_network_raw.png) | ![RQ9 agg](../output/analysis_9_network.png) | 原始圖呈現徽章與使用者的詳細關係，聚合圖強調徽章類別與使用者分布。500 枚徽章分布於 491 位使用者。 |
-| RQ10 | ![RQ10 raw](../output/analysis_10_network_raw.png) | ![RQ10 agg](../output/analysis_10_network.png) | 原始圖顯示共同編輯的細節連結，聚合圖呈現協作網路核心。100,000 次編輯與 16,830 位編輯者指出高編輯協作活躍度。 |
-| RQ11 | ![RQ11 raw](../output/analysis_11_network_raw.png) | ![RQ11 agg](../output/analysis_11_network.png) | 原始圖展示每條 post link 連結，聚合圖呈現 Linked / Duplicate 結構。Duplicate 比例 29.4%。 |
-| RQ12 | ![RQ12 raw](../output/analysis_12_network_raw.png) | ![RQ12 agg](../output/analysis_12_network.png) | 原始圖呈現各審核操作的細節，聚合圖強調主要審核類型。`SuggestedEdit` 與 `Close` 是本樣本中最常見的審核行為。 |
-| RQ13 | ![RQ13 raw](../output/analysis_13_network_raw.png) | ![RQ13 agg](../output/analysis_13_network.png) | 原始圖呈現賞金起始與結束關係，聚合圖強調賞金行為流動。26,346 次賞金行為顯示高頻率懸賞活動。 |
-| RQ14 | ![RQ14 raw](../output/analysis_14_network_raw.png) | ![RQ14 agg](../output/analysis_14_network.png) | 原始圖展示地理位置與使用者的所有連結，聚合圖強調區域分布。歐洲為最大區域（167 人）。 |
-| RQ15 | ![RQ15 raw](../output/analysis_15_network_raw.png) | ![RQ15 agg](../output/analysis_15_network.png) | 原始圖顯示時間序列活動完整節點與邊，聚合圖強調月度與時段趨勢。最高活動時間出現在 14–15 點。 |
+| RQ1 | ![RQ1 raw](../output/analysis_1_network_raw.png) | ![RQ1 agg](../output/analysis_1_network.png) | 使用者回答網路；聲望與中心性分群未明顯對應。 |
+| RQ2 | ![RQ2 raw](../output/analysis_2_network_raw.png) | ![RQ2 agg](../output/analysis_2_network.png) | 核心/邊緣結構；樣本皆判定為核心。 |
+| RQ3 | ![RQ3 raw](../output/analysis_3_network_raw.png) | ![RQ3 agg](../output/analysis_3_network.png) | 標籤共現網路；呈現明顯技術領域群聚。 |
+| RQ4 | ![RQ4 raw](../output/analysis_4_network_raw.png) | ![RQ4 agg](../output/analysis_4_network.png) | 連通分量結構；大量小型孤立子網路。 |
+| RQ5 | ![RQ5 raw](../output/analysis_5_network_raw.png) | ![RQ5 agg](../output/analysis_5_network.png) | 內容特徵與分數比較；含程式碼貼文分數未優於非程式碼。 |
+| RQ6 | ![RQ6 raw](../output/analysis_6_network_raw.png) | ![RQ6 agg](../output/analysis_6_network.png) | 帳號年資與行為分布；中高年資使用者較多。 |
+| RQ7 | ![RQ7 raw](../output/analysis_7_network_raw.png) | ![RQ7 agg](../output/analysis_7_network.png) | 投票網路；upvote 佔多數。 |
+| RQ8 | ![RQ8 raw](../output/analysis_8_network_raw.png) | ![RQ8 agg](../output/analysis_8_network.png) | 評論網路密度低；互動較為分散。 |
+| RQ9 | ![RQ9 raw](../output/analysis_9_network_raw.png) | ![RQ9 agg](../output/analysis_9_network.png) | 徽章與使用者分布；多數使用者僅擁有少量徽章。 |
+| RQ10 | ![RQ10 raw](../output/analysis_10_network_raw.png) | ![RQ10 agg](../output/analysis_10_network.png) | 編輯協作網路；協作核心清晰。 |
+| RQ11 | ![RQ11 raw](../output/analysis_11_network_raw.png) | ![RQ11 agg](../output/analysis_11_network.png) | 問題引用與 duplicate 結構；重複問題接近三成。 |
+| RQ12 | ![RQ12 raw](../output/analysis_12_network_raw.png) | ![RQ12 agg](../output/analysis_12_network.png) | 審核任務；SuggestedEdit 與 Close 占比較大比例。 |
+| RQ13 | ![RQ13 raw](../output/analysis_13_network_raw.png) | ![RQ13 agg](../output/analysis_13_network.png) | 賞金網路；懸賞活動高度活躍。 |
+| RQ14 | ![RQ14 raw](../output/analysis_14_network_raw.png) | ![RQ14 agg](../output/analysis_14_network.png) | 地理分布；歐洲為最大區域。 |
+| RQ15 | ![RQ15 raw](../output/analysis_15_network_raw.png) | ![RQ15 agg](../output/analysis_15_network.png) | 時間序列；14–15 點為活動高峰。 |
 
 ## 每個分析的圖像解讀
 
 ### RQ1 使用者聲望與網路中心度
 
-`analysis_1_network_raw.png` 呈現回答互動網路的完整連結結構，節點大小與連結反映使用者活動程度。`analysis_1_network.png` 則按聲望與中心性聚合，顯示高聲望節點並未形成明顯核心分群，這支持 `analysis_results.json` 中聲望與介性中心度相關係數為 0.0 的觀察。
+![RQ1 raw](../output/analysis_1_network_raw.png)
+
+此原始網路圖呈現使用者之間回答互動的直接連結，節點大小與連結強度反映回答活動與回應關係。當我們進一步觀看下方聚合圖：
+
+![RQ1 agg](../output/analysis_1_network.png)
+
+聚合圖依聲望與中心性分群繪製，結果顯示高聲望節點並未形成明顯核心集群。這意味著，僅以 reputation 判斷使用者核心地位不足，應同時考量回應網路中的結構性影響。
 
 ### RQ2 網路核心結構與解答效率
 
-`analysis_2_network_raw.png` 顯示問題與回答者之間的原始互動。`analysis_2_network.png` 聚合出核心/邊緣結構，結果顯示所有樣本皆歸為核心，且平均回應時間 2932.42 小時，未支援核心回答速度優勢。
+![RQ2 raw](../output/analysis_2_network_raw.png)
+
+原始圖展示問題與回答者之間的具體連結，讓我們能察覺回答者在問題回應網路中的位置分佈。對照聚合圖：
+
+![RQ2 agg](../output/analysis_2_network.png)
+
+聚合圖強調核心與邊緣的劃分，然而本次樣本中所有樣本節點皆被判定為核心。這反映了取樣策略對「核心效率」觀察的影響，無法直接支持核心使用者回應速度更快的假設。
 
 ### RQ3 技術標籤共現與領域地圖
 
-`analysis_3_network_raw.png` 呈現每個標籤之間的所有共現連結。`analysis_3_network.png` 則將標籤聚成 8 個技術領域，顯示 `Other`、`DataScience`、`Backend`、`Web`、`Database`、`Mobile`、`DevOps`、`AI_ML` 等群聚。這與 `domain_details` 中所提示的 13 個社群一致。
+![RQ3 raw](../output/analysis_3_network_raw.png)
+
+原始標籤共現網路顯示技術標籤之間的全部聯結關係，節點間連線代表同一問題中共同出現。接著觀察聚合地圖：
+
+![RQ3 agg](../output/analysis_3_network.png)
+
+聚合圖將標籤組成 8 個技術領域，呈現出 `Other`、`DataScience`、`Backend`、`Web`、`Database`、`Mobile`、`DevOps`、`AI_ML` 等群聚，顯示標籤共現具有明顯的領域分層特徵。
 
 ### RQ4 知識孤島與連通分量
 
-`analysis_4_network_raw.png` 展示完整的連通分量結構，包含多個小型子網路。`analysis_4_network.png` 聚合後強調主成分與孤立成分，顯示 100 個連通分量、主成分大小 2、隔離比率 1.0。
+![RQ4 raw](../output/analysis_4_network_raw.png)
+
+原始圖揭示連通分量結構中各個子網路的實際連結樣貌，包含許多孤立節點與小型群體。下方聚合圖則強調主成分：
+
+![RQ4 agg](../output/analysis_4_network.png)
+
+聚合後的圖像顯示本次樣本存在大量小型連通分量，且主成分相對較小，隔離比率高達 1.0，說明本分析更接近分散型知識結構而非單一大規模核心。
 
 ### RQ5 內容特徵與互動反饋
 
-`analysis_5_network_raw.png` 顯示每篇貼文是否含程式碼及其分數連結。`analysis_5_network.png` 聚合後比較含程式碼與無程式碼貼文的平均分，結果為 0.585 vs 0.944，且 p 值 0.2056，顯示差異不顯著。
+![RQ5 raw](../output/analysis_5_network_raw.png)
+
+此原始圖顯示每篇貼文是否含程式碼以及它們與分數之間的連結關係。接著看聚合圖：
+
+![RQ5 agg](../output/analysis_5_network.png)
+
+聚合圖比較了含程式碼與非程式碼貼文的平均分表現。結果顯示含程式碼貼文平均分為 0.585，不含程式碼則為 0.944，且 p 值 0.2056，表示差異未達統計顯著，暗示內容品質與問題敘述仍是評價的重要因素。
 
 ### RQ6 帳號年資與行為差異
 
-`analysis_6_network_raw.png` 呈現使用者年資與行為類型的原始連結。`analysis_6_network.png` 聚合出 Mature、Established、Senior 三個年資群，反映出新手樣本不足、平均帳號年齡 3202 天。
+![RQ6 raw](../output/analysis_6_network_raw.png)
+
+原始網路描繪使用者年資與行為類型的連結，讓讀者直接看見不同年資節點在網路中的位置。聚合圖則將年資類別分群展示：
+
+![RQ6 agg](../output/analysis_6_network.png)
+
+此聚合圖呈現 Mature、Established、Senior 三個主要年資群，並指出本樣本中新手比例偏低，平均帳號年齡約 3202 天，顯示年資與貢獻型態的差異性。
 
 ### RQ7 投票行為網路
 
-`analysis_7_network_raw.png` 顯示投票者對貼文的原始連結，`analysis_7_network.png` 聚合出投票類型分布。20,000 次投票中 upvote 佔 16,751 次，`downvote` 佔 3,249 次，說明投票結構高度偏向正向互動。
+![RQ7 raw](../output/analysis_7_network_raw.png)
+
+原始投票網路顯示投票者與被投票貼文之間的細節連接。聚合圖則按投票類型與影響力分群：
+
+![RQ7 agg](../output/analysis_7_network.png)
+
+結果顯示 20,000 次投票中 upvote 佔 16,751 次，downvote 佔 3,249 次，說明本次樣本的投票結構高度偏向正向評價。
 
 ### RQ8 評論互動網路
 
-`analysis_8_network_raw.png` 表示評論者在相同問題上的共現連結。`analysis_8_network.png` 聚合後顯示網路密度 0.00034、平均每人 6.66 則評論，說明評論互動較為分散。
+![RQ8 raw](../output/analysis_8_network_raw.png)
+
+此原始圖描繪評論者在相同問題上的共現連結，讓人能直觀觀察哪些評論者同時出現在同一問題下。聚合圖則展示評論網路的密度與分布差異：
+
+![RQ8 agg](../output/analysis_8_network.png)
+
+聚合結果顯示網路密度僅 0.00034，平均每人約 6.66 則評論，說明評論互動在本樣本中較為稀疏且分散。
 
 ### RQ9 徽章成就網路
 
-`analysis_9_network_raw.png` 呈現徽章與使用者之間的原始連結，`analysis_9_network.png` 聚合展示徽章類別與使用者分布。500 枚徽章、491 位使用者，呈現多數使用者僅擁有少量徽章。
+![RQ9 raw](../output/analysis_9_network_raw.png)
+
+原始徽章網路展示徽章節點與使用者節點之間的直接連結。聚合圖則依徽章類別與使用者分布進行壓縮展示：
+
+![RQ9 agg](../output/analysis_9_network.png)
+
+此圖反映 500 枚徽章分布於 491 位使用者，多數使用者僅持有少量徽章，顯示成就分布相對分散。
 
 ### RQ10 編輯協作網路
 
-`analysis_10_network_raw.png` 展示共同編輯的全量連結，`analysis_10_network.png` 聚合指出協作網路中的核心維護者。100,000 次編輯與 16,830 位編輯者顯示高度協作參與。
+![RQ10 raw](../output/analysis_10_network_raw.png)
+
+原始圖呈現共同編輯者之間的全量連結，反映協作關係的真實網路樣貌。聚合圖則強調協作核心與主要維護節點：
+
+![RQ10 agg](../output/analysis_10_network.png)
+
+在聚合視角下，協作網路中的核心節點更為明顯，說明編輯協作具備集中化趨勢與明確的核心參與者。
 
 ### RQ11 引用與重複問題網路
 
-`analysis_11_network_raw.png` 顯示每條引用或重複連結的原始結構，`analysis_11_network.png` 聚合突出 Linked 與 Duplicate 兩類關係。Duplicate 比例 29.4%，意味近三成連結屬於重複問題。 
+![RQ11 raw](../output/analysis_11_network_raw.png)
+
+原始 post link 網路展示問題之間的所有引用與重複連結。聚合圖則根據連結類型進行分類，突顯 Linked 與 Duplicate 的結構差異：
+
+![RQ11 agg](../output/analysis_11_network.png)
+
+結果指出 Duplicate 比例約 29.4%，意味近三成連結屬於重複問題，顯示平台中存在顯著的重複提問現象。
 
 ### RQ12 審核任務網路
 
-`analysis_12_network_raw.png` 呈現不同審核操作的詳細連結，`analysis_12_network.png` 聚合出主要審核類型。210 次 SuggestedEdit 及 176 次 Close 顯示此樣本中審核行為的主要方向。
+![RQ12 raw](../output/analysis_12_network_raw.png)
+
+原始圖顯示審核任務節點間的詳細連結與參與者互動。聚合圖則依任務類型進行精簡展示：
+
+![RQ12 agg](../output/analysis_12_network.png)
+
+本次樣本中 SuggestedEdit 與 Close 為主要審核行為，210 次 SuggestedEdit 與 176 次 Close 顯示治理流程以這兩種任務為核心。
 
 ### RQ13 賞金懸賞網路
 
-`analysis_13_network_raw.png` 展示賞金開始與結束的完整連結，`analysis_13_network.png` 聚合後重點呈現賞金活動的流動。26,346 次賞金行為代表賞金系統具有高活躍度。
+![RQ13 raw](../output/analysis_13_network_raw.png)
+
+原始賞金網路呈現賞金事件的起始與結束連結，讓人能直接看見懸賞行為的流向。聚合圖則突顯活動集中與主要傾向：
+
+![RQ13 agg](../output/analysis_13_network.png)
+
+此圖表明本次樣本中共有 26,346 次賞金活動，說明懸賞機制高度活躍，但仍需進一步觀察其與回答品質之間的關聯性。
 
 ### RQ14 使用者地理分布
 
-`analysis_14_network_raw.png` 顯示使用者位置與地理分布的完整節點，`analysis_14_network.png` 聚合後強調區域專屬群聚。歐洲為最大區域，167 人。 
+![RQ14 raw](../output/analysis_14_network_raw.png)
+
+原始地理網路展示使用者與地理區域之間的直接連結。聚合圖則依區域與地理分布進行分群：
+
+![RQ14 agg](../output/analysis_14_network.png)
+
+聚合結果顯示歐洲為最大區域，167 人，說明使用者地理分布具有明顯的區域集中性。
 
 ### RQ15 時間序列活躍度
 
-`analysis_15_network_raw.png` 呈現時間序列活動的原始節點與邊，`analysis_15_network.png` 聚合後突顯月度、日間的活躍趨勢。12 個月資料與 14–15 點高峰一致，支持時間分布結論。
+![RQ15 raw](../output/analysis_15_network_raw.png)
+
+原始時間序列網路呈現每個時間節點與活動連結，讓人能直接觀察時間節點之間的互動。聚合圖則將月度與時段趨勢進行壓縮展示：
+
+![RQ15 agg](../output/analysis_15_network.png)
+
+聚合圖顯示 12 個月資料與 14–15 點高峰時段，支持時間分布的日間活動高峰觀察。
 
 ## 結果與方法的對應
 
-本章結果直接取自 `output/analysis_results.json`，並與 `src/sna_runner.py` 的分析流程對應。這些圖表與 `analysis_results.json` 定量摘要共同說明了哪些假設被支援、哪些假設未被支援，並指出樣本取樣對結果的影響。
+本章結果直接取自分析輸出資料，並與本研究的分析流程相互對應。每個 RQ 的圖表皆為分析輸出中的原始與聚合版本，且在本文件中分開說明，避免單純複述文字說明。這些圖像說明建構了量化結果與視覺觀察之間的連結，也指出本次樣本取樣對結論的影響。

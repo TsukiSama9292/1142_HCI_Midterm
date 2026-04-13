@@ -1,6 +1,6 @@
 # 結論與建議
 
-本章綜合 `output/analysis_results.json` 中的主要觀察，並提出未來研究與實務應用建議。
+本章綜合主要觀察，並提出未來研究與實務應用建議。
 
 ## 研究結論
 
@@ -10,6 +10,40 @@
 4. **賞金行為活躍但非品質保證**：26,346 次賞金行為顯示懸賞機制高度運作，但未直接等同於更高品質回應。
 5. **地理與時間分布具區域集中**：500 位使用者中歐洲為最大區域，週四與 14–15 點為發文高峰。
 6. **樣本限制影響假設驗證**：多項假設未被本次樣本支持，指出後續分析需更謹慎選取或擴大樣本範圍。
+
+## 研究問題回應
+
+本節依照第一章提出的研究問題逐一回應，說明本研究結果對每個問題的觀察與限制：
+
+- **高聲望使用者是否真的位於網路核心？**
+  - 本次樣本中，聲望較高的使用者並未呈現明顯的核心集群，因此「高聲望不一定等於核心」。這說明應同時考量網路結構與互動模式，而非僅依賴 reputation 判斷影響力。
+
+- **核心使用者是否比邊緣使用者更快獲得採納答案？**
+  - 由於本次核心/邊緣劃分樣本大多被判為核心，無法得出明確的速度優勢結論。這代表取樣策略對此問題的驗證具有高度影響力，需要更大且更分層的樣本才能進一步分析。
+
+- **標籤共現是否揭示跨領域技術群聚？**
+  - 是的。標籤共現網路呈現出多個技術域群聚，如 Web、Backend、Database、Mobile、AI_ML 等，顯示標籤共現可以揭露領域間的交互與社群結構。
+
+- **社群中是否存在知識孤島現象？**
+  - 是的。連通分量分析顯示大量小型子網路與孤立結構，代表本樣本存在分散的知識孤島，而非單一整體大社群。
+
+- **帶有程式碼的貼文是否較容易獲得正向回饋？**
+  - 不一定。本研究發現含程式碼貼文的平均分數較低，且差異未達統計顯著，表示程式碼片段並非唯一驅動正向回饋的因素。
+
+- **不同帳號年資使用者是否呈現不同貢獻型態？**
+  - 有跡象顯示不同年資類別的分布差異，但本次樣本集中於 Mature、Established、Senior，未能明確支持新手與資深之間的簡單行為分化。
+
+- **投票與評論是否顯示出網路影響力的分布？**
+  - 投票網路顯示 upvote 佔多數，代表正向評價傾向；評論網路則非常稀疏，說明留言互動的影響力分布較為分散。
+
+- **徽章與編輯協作是否反映治理行為的分工？**
+  - 徽章分布呈現成就分散、使用者多數擁有少量徽章，編輯協作網路則顯示核心化趨勢，兩者均指出治理與協作存在不同的角色分工。
+
+- **賞金機制是否與問題品質或技術重疊相關？**
+  - 本研究觀察到賞金活動高度活躍，但未直接證明賞金與問題品質具明確正相關，更多可能反映曝光與激勵行為。
+
+- **使用者的地理與時間分布是否帶來跨區域差異？**
+  - 是的。地理分布顯示歐洲為最大區域，而時間分布顯示 14–15 點的活動高峰，表明區域與時間集中性會影響平台互動模式。
 
 ## 建議
 
@@ -28,23 +62,127 @@
 
 ## 圖片結論總結
 
-`docs/03_RESULTS.md` 已以 Markdown 表格提供 raw 與 aggregated 版本的圖像對照。這些圖表幫助連結視覺化與量化結果，支持下列結論：
+以下依序展示每個 RQ 的原始圖與聚合圖兩張對應圖像，並說明每組圖像所呈現的主要觀察。這樣的方式可讓讀者直接從視覺結果理解結論，而不僅是瀏覽檔名描述。
 
-- `analysis_1_network_raw.png` / `analysis_1_network.png`：對應使用者聲望與中心性分析，顯示高聲望未形成明顯核心分群。
-- `analysis_2_network_raw.png` / `analysis_2_network.png`：反映所有樣本皆被歸為核心的回應效率結果。
-- `analysis_3_network_raw.png` / `analysis_3_network.png`：突顯標籤共現的技術領域與社群分群。
-- `analysis_4_network_raw.png` / `analysis_4_network.png`：說明大量小型孤島與分散連通結構。
-- `analysis_5_network_raw.png` / `analysis_5_network.png`：支持含程式碼並非高分保證的結果。
-- `analysis_6_network_raw.png` / `analysis_6_network.png`：說明 Mature、Established、Senior 年資群的分布特性。
-- `analysis_7_network_raw.png` / `analysis_7_network.png`：表明投票網路偏向 upvote。 
-- `analysis_8_network_raw.png` / `analysis_8_network.png`：證實評論互動稀疏。
-- `analysis_9_network_raw.png` / `analysis_9_network.png`：反映多數使用者僅擁有少量徽章。
-- `analysis_10_network_raw.png` / `analysis_10_network.png`：顯示編輯協作的高度參與。
-- `analysis_11_network_raw.png` / `analysis_11_network.png`：說明 Duplicate 類型連結佔比近 30%。
-- `analysis_12_network_raw.png` / `analysis_12_network.png`：顯示 SuggestedEdit 與 Close 為主的審核動態。
-- `analysis_13_network_raw.png` / `analysis_13_network.png`：說明賞金活動的高活躍度。
-- `analysis_14_network_raw.png` / `analysis_14_network.png`：突顯歐洲為最大地理區域。
-- `analysis_15_network_raw.png` / `analysis_15_network.png`：支持 14–15 點為活動高峰的時間分布。
+### RQ1：使用者聲望與網路中心度
+
+![RQ1 raw](../output/analysis_1_network_raw.png)
+
+![RQ1 agg](../output/analysis_1_network.png)
+
+- 原始圖顯示使用者回答網路的直接關係；聚合圖則依聲望與中心性分群。此組圖像說明高聲望節點未显著構成核心集團。
+
+### RQ2：網路核心結構與解答效率
+
+![RQ2 raw](../output/analysis_2_network_raw.png)
+
+![RQ2 agg](../output/analysis_2_network.png)
+
+- 原始圖呈現問題與回答者的回應網路；聚合圖強調核心與邊緣角色分布。此組圖指出本樣本中多數節點皆被判定為核心。
+
+### RQ3：技術標籤共現與領域地圖
+
+![RQ3 raw](../output/analysis_3_network_raw.png)
+
+![RQ3 agg](../output/analysis_3_network.png)
+
+- 原始圖顯示標籤共現的完整連結；聚合圖則呈現技術領域的群聚分布。這組圖像突顯 Web、Backend、Database、Mobile、AI_ML 等領域性社群。
+
+### RQ4：知識孤島與連通分量
+
+![RQ4 raw](../output/analysis_4_network_raw.png)
+
+![RQ4 agg](../output/analysis_4_network.png)
+
+- 原始圖揭示連通分量中的實際子網路關係；聚合圖強調主成分與孤立成分。此組圖表明本樣本包含大量小型孤立子網路。
+
+### RQ5：內容特徵與互動反饋
+
+![RQ5 raw](../output/analysis_5_network_raw.png)
+
+![RQ5 agg](../output/analysis_5_network.png)
+
+- 原始圖展現含程式碼與非程式碼貼文之間的連結；聚合圖比較兩類貼文的分數表現。此組圖像支持「含程式碼並非高分保證」的結論。
+
+### RQ6：帳號年資與行為差異
+
+![RQ6 raw](../output/analysis_6_network_raw.png)
+
+![RQ6 agg](../output/analysis_6_network.png)
+
+- 原始圖描繪使用者年資與行為類型的網路；聚合圖分群顯現年資類別。此組圖指向 Mature、Established、Senior 年資群的顯著分布。
+
+### RQ7：投票行為網路
+
+![RQ7 raw](../output/analysis_7_network_raw.png)
+
+![RQ7 agg](../output/analysis_7_network.png)
+
+- 原始圖呈現投票者與貼文之間的細節連結；聚合圖則顯示投票類型分布。此組圖表明投票網路偏向 upvote。
+
+### RQ8：評論互動網路
+
+![RQ8 raw](../output/analysis_8_network_raw.png)
+
+![RQ8 agg](../output/analysis_8_network.png)
+
+- 原始圖描繪評論者共現關係；聚合圖呈現評論網路的密度與分布。此組圖指出評論互動在樣本中較為稀疏。
+
+### RQ9：徽章成就網路
+
+![RQ9 raw](../output/analysis_9_network_raw.png)
+
+![RQ9 agg](../output/analysis_9_network.png)
+
+- 原始圖呈現徽章與使用者之間的直接連結；聚合圖強調徽章類別與使用者分布。此組圖表明多數使用者僅擁有少量徽章。
+
+### RQ10：編輯協作網路
+
+![RQ10 raw](../output/analysis_10_network_raw.png)
+
+![RQ10 agg](../output/analysis_10_network.png)
+
+- 原始圖展示共同編輯者之間的全量連結；聚合圖強調協作核心。此組圖顯示編輯協作具有集中化趨勢。
+
+### RQ11：引用與重複問題網路
+
+![RQ11 raw](../output/analysis_11_network_raw.png)
+
+![RQ11 agg](../output/analysis_11_network.png)
+
+- 原始圖展示問題引用與重複關係；聚合圖則分類 Linked 與 Duplicate 類型。此組圖揭示 Duplicate 連結佔比較高。
+
+### RQ12：審核任務網路
+
+![RQ12 raw](../output/analysis_12_network_raw.png)
+
+![RQ12 agg](../output/analysis_12_network.png)
+
+- 原始圖顯示審核任務節點間的互動；聚合圖呈現任務類型分布。此組圖指出 SuggestedEdit 與 Close 為主要審核類型。
+
+### RQ13：賞金懸賞網路
+
+![RQ13 raw](../output/analysis_13_network_raw.png)
+
+![RQ13 agg](../output/analysis_13_network.png)
+
+- 原始圖呈現賞金事件的起始與結束連結；聚合圖說明活動集中與流向。此組圖表明賞金活動高度活躍。
+
+### RQ14：使用者地理分布
+
+![RQ14 raw](../output/analysis_14_network_raw.png)
+
+![RQ14 agg](../output/analysis_14_network.png)
+
+- 原始圖展示使用者與地理區域之間的連結；聚合圖強調區域分布。此組圖顯示歐洲為最大區域。
+
+### RQ15：時間序列活躍度
+
+![RQ15 raw](../output/analysis_15_network_raw.png)
+
+![RQ15 agg](../output/analysis_15_network.png)
+
+- 原始圖呈現時間節點與活動連結；聚合圖顯示月度與時段趨勢。此組圖支持 14–15 點為活動高峰。
 
 ## 研究限制
 
@@ -64,4 +202,4 @@
 
 ## 最後一點
 
-本研究的價值在於建立一個從 2021 年 Stack Overflow 出發的 SNA 框架，並透過 `src` 程式碼、`analysis_limits.example.json` 參數與 `output/analysis_results.json` 結果保持一致性。後續可在此基礎上補入更多圖表與更大樣本，以更完整呈現技術問答社群的真實運作與結構特徵。
+本研究的價值在於建立一個從 2021 年 Stack Overflow 出發的 SNA 框架，並透過程式碼、分析參數與分析輸出結果保持一致性。後續可在此基礎上補入更多圖表與更大樣本，以更完整呈現技術問答社群的真實運作與結構特徵。
