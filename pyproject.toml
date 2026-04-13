@@ -1,5 +1,5 @@
 [project]
-name = "1141-hci-midterm"
+name = "hci-midterm"
 version = "1.0.0"
 description = "Stack Overflow Social Network Analysis (SNA) - HCI Midterm Project"
 readme = "README.md"
