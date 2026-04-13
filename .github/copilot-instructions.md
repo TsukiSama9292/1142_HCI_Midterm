@@ -5,10 +5,10 @@
 **Data Flow Pipeline:**
 ```
 BigQuery Public Dataset (9 tables)
-    └─ DataLoader (caching layer)
-       └─ GraphBuilder subclasses (igraph construction)
-          └─ 15 Analyzer classes (SNA algorithms)
-             └─ SNAPlotter + JSON output (results/)
+  └─ DataLoader (caching layer)
+    └─ GraphBuilder subclasses (igraph construction)
+      └─ 15 Analyzer classes (SNA algorithms)
+        └─ SNAPlotter + JSON output (results/)
 ```
 
 **Key Design**: The project uses the **Builder Pattern** to avoid duplicating BigQuery queries:
