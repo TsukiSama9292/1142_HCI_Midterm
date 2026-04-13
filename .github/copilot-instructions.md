@@ -1,5 +1,26 @@
 # Stack Overflow SNA - AI Agent Guidelines
 
+## Workspace Bootstrap
+This repository is a Python-based Stack Overflow social network analysis project. It uses Google BigQuery public data and `igraph` to compute 15 SNA research analyses.
+
+Use this file as the workspace-specific guidance for AI assistance. For general usage and project context, refer to `README.md`, `REPORT.md`, and `docs/`.
+
+### Quick start
+- Install dependencies via `pyproject.toml`.
+- Run the main analysis CLI: `python main.py` or `python main.py --run all`.
+- Run a specific analysis: `python main.py --run 3 --limit 200`.
+- Run tests: `pytest`.
+
+### Key files
+- `main.py`: CLI entrypoint and argument parsing.
+- `src/sna_runner.py`: analysis orchestration and runner logic.
+- `src/analysis/*.py`: analyzer implementations.
+- `src/models/graph_builder.py`: BigQuery graph construction.
+- `src/data/data_loader.py`: BigQuery client and caching.
+- `src/config.py`: project paths, BigQuery credentials, and limits.
+- `tests/test_analysis.py`: unit tests and CLI validation.
+- `DATASET_FEATURES.md`, `REPORT.md`, `docs/`: data definitions and research documentation.
+
 ## High-Level Architecture
 
 **Data Flow Pipeline:**
