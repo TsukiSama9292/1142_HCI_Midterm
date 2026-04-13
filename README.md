@@ -177,40 +177,40 @@ python main.py --run all -o output/
 
 ```
 DataLoader.load_posts_with_answers() 
-  → BigQuery SQL 查詢
-  → 回傳含解答時間的問題資料
+  -> BigQuery SQL 查詢
+  -> 回傳含解答時間的問題資料
 
 DataLoader.load_users() 
-  → BigQuery SQL 查詢  
-  → 回傳含聲望等級的用戶資料
+  -> BigQuery SQL 查詢  
+  -> 回傳含聲望等級的用戶資料
 ```
 
 ### 2. 圖形建構 (graph_builder.py)
 
 ```
 UserNetworkBuilder.build_answer_network_with_reputation()
-  → 建立回答者→發問者的有向圖
-  → 計算 betweenness centrality
-  → 設定節點屬性 (reputation, centrality_level)
+  -> 建立回答者->發問者的有向圖
+  -> 計算 betweenness centrality
+  -> 設定節點屬性 (reputation, centrality_level)
 ```
 
 ### 3. 分析執行 (analysis/*.py)
 
 ```
 CentralityAnalyzer.run()
-  → 建構網路圖
-  → 計算中心度指標 (betweenness, degree, closeness, pagerank)
-  → 計算聲望與中心度相關係數
-  → 回傳分析結果
+  -> 建構網路圖
+  -> 計算中心度指標 (betweenness, degree, closeness, pagerank)
+  -> 計算聲望與中心度相關係數
+  -> 回傳分析結果
 ```
 
 ### 4. 視覺化 (plots.py)
 
 ```
 SNAPlotter.plot_network_graph()
-  → 使用 igraph layout (Fruchterman-Reingold)
-  → 根據屬性設定顏色/形狀/大小
-  → 輸出 PNG 圖片
+  -> 使用 igraph layout (Fruchterman-Reingold)
+  -> 根據屬性設定顏色/形狀/大小
+  -> 輸出 PNG 圖片
 ```
 
 ## 資料來源

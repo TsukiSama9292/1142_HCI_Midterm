@@ -3,7 +3,7 @@
 ## Workspace Bootstrap
 This repository is a Python-based Stack Overflow social network analysis project. It uses Google BigQuery public data and `igraph` to compute 15 SNA research analyses.
 
-Use this file as the workspace-specific guidance for AI assistance. For general usage and project context, refer to `README.md`, `REPORT.md`, and `docs/`.
+Use this file as the workspace-specific guidance for AI assistance. For general usage and project context, refer to `README.md` and `docs/`.
 
 ### Quick start
 - Install dependencies via `pyproject.toml`.
@@ -19,7 +19,7 @@ Use this file as the workspace-specific guidance for AI assistance. For general 
 - `src/data/data_loader.py`: BigQuery client and caching.
 - `src/config.py`: project paths, BigQuery credentials, and limits.
 - `tests/test_analysis.py`: unit tests and CLI validation.
-- `DATASET_FEATURES.md`, `REPORT.md`, `docs/`: data definitions and research documentation.
+- `docs/`: research documentation and analysis reference.
 
 ## High-Level Architecture
 
@@ -50,13 +50,13 @@ class *Analyzer:
         # 3. return {graph, dataframes, metrics, summary}
 ```
 
-All analyzers print: **Input** → **Process** → **Output** (matches research methodology).
+All analyzers print: **Input** -> **Process** -> **Output** (matches research methodology).
 
 ---
 
 ## Quick Analyzer Reference
 
-Use this when modifying, debugging, or creating analyzers. See [REPORT.md](../REPORT.md) for full research questions.
+Use this when modifying, debugging, or creating analyzers. See `docs/` for research questions and analysis context.
 
 | RQ | Analysis | Builder | Key Output | Output File |
 |---|---|---|---|---|
@@ -283,7 +283,7 @@ loader.clear_cache()  # Force fresh queries
    - Analyses 7-14: minimum 500 (see `SNARunner.run_analysis()`)
    - Analysis 15: minimum 1,000
 
-2. **Query returns no data**: Check `DATASET_FEATURES.md` for which tables have relevant data
+2. **Query returns no data**: Check the schema and source files in `src/models/graph_builder.py` for which tables have relevant data
 
 3. **Builder filter too strict**: Review the builder's `WHERE` clause in BigQuery query
 
@@ -368,7 +368,7 @@ See `tests/test_analysis.py` for correct pattern.
 ❌ **Don't**: Return raw igraph.Graph without documentation  
 ✅ **Do**: Include `metrics_df` and `summary` dict so results are interpretable
 
-❌ **Don't**: Skip the print statements (Input → Process → Output)  
+❌ **Don't**: Skip the print statements (Input -> Process -> Output)  
 ✅ **Do**: Match research methodology by printing at each stage
 
 ---
@@ -376,7 +376,6 @@ See `tests/test_analysis.py` for correct pattern.
 ## See Also
 
 - **AGENTS.md**: Commands, code style, project structure, testing conventions
-- **REPORT.md**: Full research context, 15 research questions, dataset schema
-- **DATASET_FEATURES.md**: BigQuery table details and column→SNA mappings
+- **docs/**: research context, analysis descriptions, and dataset usage notes
 - **[src/config.py](../src/config.py)**: BigQuery credentials and query limits
 - **[src/sna_runner.py](../src/sna_runner.py)**: Analyzer orchestration and output pipeline

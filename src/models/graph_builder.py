@@ -36,7 +36,7 @@ class UserNetworkBuilder(GraphBuilder):
 
     def build_answer_network(self, limit: int = 100) -> Graph:
         """
-        建構回答者→發問者網路
+        建構回答者->發問者網路
         用於分析主題 1: 使用者聲望與網路中心度
         """
         posts_df = self.data_loader.load_posts_with_answers(limit=limit)
