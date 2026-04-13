@@ -36,6 +36,7 @@ class BadgeNetworkBuilder(GraphBuilder):
         FROM `bigquery-public-data.stackoverflow.badges` b
         LEFT JOIN `bigquery-public-data.stackoverflow.users` u
             ON b.user_id = u.id
+        WHERE EXTRACT(YEAR FROM b.date) = 2021
         ORDER BY b.date DESC
         LIMIT {limit}
         """

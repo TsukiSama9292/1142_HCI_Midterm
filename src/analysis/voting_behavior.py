@@ -24,7 +24,9 @@ class VoteNetworkBuilder(GraphBuilder):
         INNER JOIN `bigquery-public-data.stackoverflow.posts_questions` p
         ON v.post_id = p.id
         WHERE v.vote_type_id IN (1, 2, 3)
-        AND p.owner_user_id IS NOT NULL
+          AND p.owner_user_id IS NOT NULL
+          AND EXTRACT(YEAR FROM v.creation_date) = 2021
+          AND EXTRACT(YEAR FROM p.creation_date) = 2021
         LIMIT {limit * 20}
         """
 

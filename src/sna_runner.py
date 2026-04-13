@@ -2598,8 +2598,8 @@ class SNARunner:
         print("儲存分析結果")
         print("=" * 60)
 
-        output_dir = Path("output")
-        output_dir.mkdir(exist_ok=True)
+        output_dir = Path(self.plotter.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
 
         serializable_results = {}
         for name, result in self.results.items():

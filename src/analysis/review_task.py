@@ -51,6 +51,7 @@ class ReviewTaskNetworkBuilder(GraphBuilder):
         LEFT JOIN `bigquery-public-data.stackoverflow.users` u
             ON ph.user_id = u.id
         WHERE ph.post_history_type_id IN (10, 11, 12, 13, 24)
+          AND EXTRACT(YEAR FROM ph.creation_date) = 2021
         ORDER BY ph.creation_date DESC
         LIMIT {limit}
         """

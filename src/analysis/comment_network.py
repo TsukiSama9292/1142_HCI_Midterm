@@ -33,6 +33,8 @@ class CommentNetworkBuilder(GraphBuilder):
         ON c.post_id = p.id
         LEFT JOIN `bigquery-public-data.stackoverflow.users` u
         ON c.user_id = u.id
+        WHERE EXTRACT(YEAR FROM c.creation_date) = 2021
+          AND EXTRACT(YEAR FROM p.creation_date) = 2021
         LIMIT {limit * 20}
         """
         

@@ -183,6 +183,7 @@ def run_analysis(
     if key:
         runner.results[key] = result
         runner._generate_visualizations()
+        runner._save_results()
 
     return 0
 

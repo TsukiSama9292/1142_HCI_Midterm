@@ -32,6 +32,7 @@ class EditCollaborationNetworkBuilder(GraphBuilder):
         LEFT JOIN `bigquery-public-data.stackoverflow.users` u
         ON ph.user_id = u.id
         WHERE ph.post_history_type_id IN (4, 5, 6)
+          AND EXTRACT(YEAR FROM ph.creation_date) = 2021
         LIMIT {query_limit}
         """
         

@@ -492,6 +492,8 @@ class MultiInteractionNetworkBuilder(GraphBuilder):
                 INNER JOIN `bigquery-public-data.stackoverflow.posts_questions` p
                 ON c.post_id = p.id
                 WHERE c.user_id IS NOT NULL AND p.owner_user_id IS NOT NULL
+                  AND EXTRACT(YEAR FROM c.creation_date) = 2021
+                  AND EXTRACT(YEAR FROM p.creation_date) = 2021
                 LIMIT {limit * 10}
                 """
                 comments_df = self.data_loader.client.query(sql)
@@ -512,6 +514,8 @@ class MultiInteractionNetworkBuilder(GraphBuilder):
                 INNER JOIN `bigquery-public-data.stackoverflow.posts_questions` p
                 ON v.post_id = p.id
                 WHERE v.user_id IS NOT NULL AND p.owner_user_id IS NOT NULL
+                  AND EXTRACT(YEAR FROM v.creation_date) = 2021
+                  AND EXTRACT(YEAR FROM p.creation_date) = 2021
                 LIMIT {limit * 10}
                 """
                 votes_df = self.data_loader.client.query(sql)
@@ -535,6 +539,7 @@ class MultiInteractionNetworkBuilder(GraphBuilder):
                     WHERE post_history_type_id = 5
                 ) e ON p.id = e.post_id AND e.rn = 1
                 WHERE e.user_id IS NOT NULL AND p.owner_user_id IS NOT NULL
+                  AND EXTRACT(YEAR FROM e.creation_date) = 2021
                 LIMIT {limit * 5}
                 """
                 edits_df = self.data_loader.client.query(sql)

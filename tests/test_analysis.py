@@ -5,7 +5,7 @@
 """
 
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 import pandas as pd
 
 
@@ -395,6 +395,37 @@ class TestCLI:
         assert '使用者聲望與網路中心度' in result.stdout
         assert '技術標籤共現' in result.stdout
         print("最終輸出值: 分析主題列表正確顯示")
+
+    def test_cli_single_run_saves_json(self, tmp_path):
+        """測試單一分析執行時保存 JSON 結果"""
+        print("\n測試 CLI 單一分析 JSON 保存")
+
+        import src.main as sna_main
+
+        mock_analysis_result = {
+            "summary": {"dummy_metric": 1},
+            "graph": MagicMock(vs=[], es=[]),
+        }
+
+        with patch("src.main.TagCooccurrenceAnalyzer") as mock_analyzer_class, \
+             patch("src.main.SNARunner._generate_visualizations") as mock_visualize, \
+             patch("src.main.SNARunner._save_results") as mock_save:
+            mock_analyzer = MagicMock()
+            mock_analyzer.run.return_value = mock_analysis_result
+            mock_analyzer_class.return_value = mock_analyzer
+
+            result_code = sna_main.run_analysis(
+                "3",
+                100,
+                str(tmp_path),
+                "answer",
+                None,
+            )
+
+            assert result_code == 0
+            assert mock_visualize.called
+            assert mock_save.called
+            print("最終輸出值: 單一分析已觸發 JSON 結果保存")
 
 
 class TestVotingBehaviorAnalyzer:

@@ -34,7 +34,8 @@ class TimeSeriesNetworkBuilder(GraphBuilder):
         FROM `bigquery-public-data.stackoverflow.posts_questions` p
         LEFT JOIN `bigquery-public-data.stackoverflow.users` u
         ON p.owner_user_id = u.id
-        WHERE MOD(ABS(FARM_FINGERPRINT(CAST(p.id AS STRING))), 10000) < {sample_size}
+        WHERE EXTRACT(YEAR FROM p.creation_date) = 2021
+          AND MOD(ABS(FARM_FINGERPRINT(CAST(p.id AS STRING))), 10000) < {sample_size}
         LIMIT {limit * 100}
         """
         

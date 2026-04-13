@@ -124,6 +124,7 @@ class DataLoader:
             INNER JOIN {DATASET}.posts_answers a
                 ON q.accepted_answer_id = a.id
             WHERE q.accepted_answer_id IS NOT NULL
+              AND EXTRACT(YEAR FROM q.creation_date) = 2021
             LIMIT {limit}
             """
         else:
@@ -151,6 +152,7 @@ class DataLoader:
             LEFT JOIN {DATASET}.posts_answers a
                 ON q.id = a.parent_id
             WHERE q.post_type_id = 1
+              AND EXTRACT(YEAR FROM q.creation_date) = 2021
             LIMIT {limit}
             """
         df = self.client.query(sql)
@@ -177,6 +179,7 @@ class DataLoader:
                  UNNEST(SPLIT(q.tags, '|')) AS t1,
                  UNNEST(SPLIT(q.tags, '|')) AS t2
             WHERE q.tags IS NOT NULL AND q.tags != ''
+              AND EXTRACT(YEAR FROM q.creation_date) = 2021
         )
         WHERE tag1 < tag2 AND tag1 != '' AND tag2 != ''
         GROUP BY tag1, tag2
@@ -216,8 +219,8 @@ class DataLoader:
                     ELSE '4_Active'
                 END AS connectivity_level
             FROM {DATASET}.users u
-            LEFT JOIN {DATASET}.posts_questions p ON u.id = p.owner_user_id
-            LEFT JOIN {DATASET}.comments c ON u.id = c.user_id
+            LEFT JOIN {DATASET}.posts_questions p ON u.id = p.owner_user_id AND EXTRACT(YEAR FROM p.creation_date) = 2021
+            LEFT JOIN {DATASET}.comments c ON u.id = c.user_id AND EXTRACT(YEAR FROM c.creation_date) = 2021
             WHERE u.id IN ({user_ids_str})
             GROUP BY u.id, u.display_name, u.reputation
             ORDER BY total_interactions ASC
@@ -239,8 +242,8 @@ class DataLoader:
                     ELSE '4_Active'
                 END AS connectivity_level
             FROM {DATASET}.users u
-            LEFT JOIN {DATASET}.posts_questions p ON u.id = p.owner_user_id
-            LEFT JOIN {DATASET}.comments c ON u.id = c.user_id
+            LEFT JOIN {DATASET}.posts_questions p ON u.id = p.owner_user_id AND EXTRACT(YEAR FROM p.creation_date) = 2021
+            LEFT JOIN {DATASET}.comments c ON u.id = c.user_id AND EXTRACT(YEAR FROM c.creation_date) = 2021
             GROUP BY u.id, u.display_name, u.reputation
             ORDER BY total_interactions ASC
             LIMIT {limit}
@@ -280,6 +283,7 @@ class DataLoader:
             END AS score_level
         FROM {DATASET}.posts_questions
         WHERE body IS NOT NULL
+          AND EXTRACT(YEAR FROM creation_date) = 2021
         LIMIT {limit}
         """
         df = self.client.query(sql)
@@ -328,9 +332,9 @@ class DataLoader:
                 END AS account_age_level
             FROM {DATASET}.users u
             LEFT JOIN (
-                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_questions
+                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_questions WHERE EXTRACT(YEAR FROM creation_date) = 2021
                 UNION ALL
-                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_answers
+                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_answers WHERE EXTRACT(YEAR FROM creation_date) = 2021
             ) p ON u.id = p.owner_user_id
             WHERE u.id IN ({user_ids_str})
             GROUP BY u.id, u.display_name, u.reputation, u.creation_date
@@ -366,9 +370,9 @@ class DataLoader:
                 END AS account_age_level
             FROM {DATASET}.users u
             LEFT JOIN (
-                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_questions
+                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_questions WHERE EXTRACT(YEAR FROM creation_date) = 2021
                 UNION ALL
-                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_answers
+                SELECT id, owner_user_id, post_type_id FROM {DATASET}.posts_answers WHERE EXTRACT(YEAR FROM creation_date) = 2021
             ) p ON u.id = p.owner_user_id
             GROUP BY u.id, u.display_name, u.reputation, u.creation_date
             ORDER BY account_age_days DESC

@@ -44,6 +44,7 @@ class PostLinkNetworkBuilder(GraphBuilder):
         LEFT JOIN `bigquery-public-data.stackoverflow.posts_questions` tp
             ON pl.related_post_id = tp.id
         WHERE pl.link_type_id IN (1, 3)
+          AND EXTRACT(YEAR FROM pl.creation_date) = 2021
         LIMIT {limit}
         """
         
