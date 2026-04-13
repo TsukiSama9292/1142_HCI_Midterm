@@ -40,12 +40,6 @@ dev = [
     { name = "pytest" },
 ]
 
-[package.dev-dependencies]
-dev = [
-    { name = "httpx" },
-    { name = "pytest" },
-]
-
 [package.metadata]
 requires-dist = [
     { name = "db-dtypes", specifier = ">=1.5.1" },
@@ -63,12 +57,6 @@ requires-dist = [
     { name = "uvicorn", specifier = ">=0.27.0" },
 ]
 provides-extras = ["dev"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "httpx", specifier = ">=0.25.0" },
-    { name = "pytest", specifier = ">=7.0.0" },
-]
 
 [[package]]
 name = "annotated-doc"

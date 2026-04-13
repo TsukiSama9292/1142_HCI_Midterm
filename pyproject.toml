@@ -41,8 +41,3 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 pythonpath = ["."]
 
-[tool.uv]
-dev-dependencies = [
-    "pytest>=7.0.0",
-    "httpx>=0.25.0",
-]

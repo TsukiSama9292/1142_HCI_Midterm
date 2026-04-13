@@ -155,6 +155,7 @@ class SNAPlotter:
             )
             ax.axis("off")
             output_path = self.output_dir / filename
+            output_path.unlink(missing_ok=True)
             plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
             plt.close()
             return str(output_path)
@@ -254,6 +255,7 @@ class SNAPlotter:
         ax.axis("off")
 
         output_path = self.output_dir / filename
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
         plt.close()
 

@@ -4,6 +4,7 @@ Stack Overflow Social Network Analysis (SNA)
 """
 
 import argparse
+import json
 import sys
 import warnings
 
@@ -55,8 +56,57 @@ def print_banner():
     print()
 
 
+def load_limit_config(config_path: str) -> dict:
+    """Load JSON config for per-analysis limits."""
+    with open(config_path, "r", encoding="utf-8") as f:
+        config = json.load(f)
+
+    if not isinstance(config, dict):
+        raise ValueError("Limit config must be a JSON object")
+
+    normalized = {}
+    for key, value in config.items():
+        if key == "default":
+            normalized["default"] = int(value)
+            continue
+
+        idx = None
+        if isinstance(key, int):
+            idx = key
+        elif isinstance(key, str) and key.isdigit():
+            idx = int(key)
+        elif isinstance(key, str) and key.startswith("analysis_"):
+            suffix = key.split("analysis_")[-1]
+            if suffix.isdigit():
+                idx = int(suffix)
+
+        if idx is None:
+            raise ValueError(f"Invalid analysis key in config: {key}")
+
+        if idx < 1 or idx > 15:
+            raise ValueError(f"Analysis id must be between 1 and 15: {key}")
+
+        normalized[idx] = int(value)
+
+    return normalized
+
+
+def get_analysis_limit(analysis_id: int, base_limit: int, limit_config: dict | None):
+    if not limit_config:
+        return base_limit
+    if analysis_id in limit_config:
+        return limit_config[analysis_id]
+    if "default" in limit_config:
+        return limit_config["default"]
+    return base_limit
+
+
 def run_analysis(
-    analysis_id: str, limit: int, output_dir: str, network_type: str = "answer"
+    analysis_id: str,
+    limit: int,
+    output_dir: str,
+    network_type: str = "answer",
+    limit_config: dict | None = None,
 ):
     """執行單一分析"""
     if analysis_id not in ANALYSIS_MODULES:
@@ -107,7 +157,11 @@ def run_analysis(
     # 產生視覺化圖表
     from src.sna_runner import SNARunner
 
-    runner = SNARunner(output_dir=output_dir, data_limit=limit)
+    runner = SNARunner(
+        output_dir=output_dir,
+        data_limit=limit,
+        analysis_limit_map=limit_config,
+    )
     key_map = {
         "1": "analysis_1_centrality",
         "2": "analysis_2_core_efficiency",
@@ -133,13 +187,17 @@ def run_analysis(
     return 0
 
 
-def run_all_analyses(limit: int, output_dir: str):
+def run_all_analyses(limit: int, output_dir: str, limit_config: dict | None = None):
     """執行所有分析"""
     print("\n" + "=" * 70)
     print("執行所有 15 個分析主題")
     print("=" * 70)
 
-    runner = SNARunner(output_dir=output_dir, data_limit=limit)
+    runner = SNARunner(
+        output_dir=output_dir,
+        data_limit=limit,
+        analysis_limit_map=limit_config,
+    )
     runner.run_all()
 
     print("\n" + "=" * 70)
@@ -199,7 +257,19 @@ def main():
     )
 
     parser.add_argument(
-        "--output", "-o", type=str, default="output", help="輸出目錄 (預設: output)"
+        "--config",
+        "-c",
+        type=str,
+        default=None,
+        help="JSON 設定檔路徑，用於指定每個分析的資料量",
+    )
+
+    parser.add_argument(
+        "--output",
+        "-o",
+        type=str,
+        default="output",
+        help="輸出目錄 (預設: output)",
     )
 
     parser.add_argument(
@@ -228,10 +298,17 @@ def main():
 
     run_id = str(args.run).lower()
 
+    limit_config = None
+    if args.config:
+        limit_config = load_limit_config(args.config)
+
     if run_id == "all":
-        return run_all_analyses(args.limit, args.output)
+        return run_all_analyses(args.limit, args.output, limit_config)
     elif run_id in ANALYSIS_MODULES:
-        return run_analysis(run_id, args.limit, args.output, args.network_type)
+        effective_limit = get_analysis_limit(int(run_id), args.limit, limit_config)
+        return run_analysis(
+            run_id, effective_limit, args.output, args.network_type, limit_config
+        )
     else:
         print(f"錯誤: 無效的選擇 '{args.run}'")
         print(f"可用選項: {', '.join(ANALYSIS_MODULES.keys())} 或 all")

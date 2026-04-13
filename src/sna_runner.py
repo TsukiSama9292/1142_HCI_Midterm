@@ -30,28 +30,36 @@ from src.utils.helpers import save_json
 class SNARunner:
     """社會網路分析執行器"""
 
-    def __init__(self, output_dir: str = "output", data_limit: int = 100):
+    def __init__(
+        self,
+        output_dir: str = "output",
+        data_limit: int = 100,
+        analysis_limit_map: dict | None = None,
+    ):
         self.data_loader = DataLoader()
         self.plotter = SNAPlotter(output_dir=Path(output_dir))
         self.data_limit = data_limit
+        self.analysis_limit_map = analysis_limit_map or {}
         self.results: Dict[str, Dict[str, Any]] = {}
-        self.analysis_limits = {
-            1: data_limit,
-            2: data_limit,
-            3: data_limit,
-            4: data_limit,
-            5: data_limit,
-            6: data_limit,
-            7: max(data_limit, 500),
-            8: max(data_limit, 500),
-            9: max(data_limit, 500),
-            10: max(data_limit, 500),
-            11: max(data_limit, 500),
-            12: max(data_limit, 500),
-            13: max(data_limit, 500),
-            14: max(data_limit, 500),
-            15: max(data_limit, 1000),
-        }
+        self.analysis_limits = self._build_analysis_limits()
+
+    def _build_analysis_limits(self) -> Dict[int, int]:
+        default_limit = self.analysis_limit_map.get("default", self.data_limit)
+        limits: Dict[int, int] = {}
+
+        for analysis_id in range(1, 16):
+            if analysis_id in self.analysis_limit_map:
+                limits[analysis_id] = self.analysis_limit_map[analysis_id]
+                continue
+
+            if analysis_id in [7, 8, 9, 10, 11, 12, 13, 14]:
+                limits[analysis_id] = max(default_limit, 500)
+            elif analysis_id == 15:
+                limits[analysis_id] = max(default_limit, 1000)
+            else:
+                limits[analysis_id] = default_limit
+
+        return limits
 
     def run_all(self) -> Dict[str, Dict[str, Any]]:
         """執行所有分析"""
@@ -481,11 +489,25 @@ class SNARunner:
         if "analysis_1_centrality" in self.results:
             result = self.results["analysis_1_centrality"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 1: Reputation vs Network Centrality (Raw User Graph)",
+                    color_by="reputation_level",
+                    filename="analysis_1_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_1"],
+                )
                 self._plot_reputation_network_aggregated(result["graph"])
 
         if "analysis_2_core_efficiency" in self.results:
             result = self.results["analysis_2_core_efficiency"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 2: Core-Periphery vs Answer Efficiency (Raw User Graph)",
+                    color_by="answer_time_level",
+                    filename="analysis_2_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_2"],
+                )
                 self._plot_core_efficiency_network_aggregated(result["graph"], result)
 
         if "analysis_3_tag_cooccurrence" in self.results:
@@ -495,13 +517,21 @@ class SNARunner:
                     result["graph"],
                     "Method 3: Tag Co-occurrence & Technology Map\nNodes=Tags, Edges=Co-occurrence | Color: Tech Domain | Size: Popularity",
                     color_by="tech_domain",
-                    filename="analysis_3_tag_network.png",
+                    filename="analysis_3_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_3"],
                 )
+                self._plot_tag_cooccurrence_network_aggregated(result["graph"], result)
 
         if "analysis_4_connected_components" in self.results:
             result = self.results["analysis_4_connected_components"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 4: Knowledge Islands & Connected Components (Raw User Graph)",
+                    color_by="connectivity_level",
+                    filename="analysis_4_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_4"],
+                )
                 self._plot_connected_components_network_aggregated(
                     result["graph"], result
                 )
@@ -514,23 +544,45 @@ class SNARunner:
                     "Method 5: Content Features vs Upvotes\nNodes=Posts, Edges=Similar Tags | Color: Score | Shape: Code Presence",
                     color_by="score_level",
                     shape_by="has_code",
-                    filename="analysis_5_network.png",
+                    filename="analysis_5_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_5"],
                 )
+                self._plot_content_features_network_aggregated(result["graph"], result)
 
         if "analysis_6_account_age" in self.results:
             result = self.results["analysis_6_account_age"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 6: Account Age vs Community Contribution (Raw User Graph)",
+                    color_by="account_age_level",
+                    filename="analysis_6_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_6"],
+                )
                 self._plot_account_age_network_aggregated(result["graph"], result)
 
         if "analysis_7_voting_behavior" in self.results:
             result = self.results["analysis_7_voting_behavior"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 7: Voting Behavior Network (Raw User Graph)",
+                    color_by="vote_type",
+                    filename="analysis_7_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_7"],
+                )
                 self._plot_voting_behavior_network_aggregated(result["graph"], result)
 
         if "analysis_8_comment_network" in self.results:
             result = self.results["analysis_8_comment_network"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 8: Comment Interaction Network (Raw User Graph)",
+                    color_by="activity_level",
+                    filename="analysis_8_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_8"],
+                )
                 self._plot_comment_network_aggregated(result["graph"], result)
 
         if "analysis_9_badge_network" in self.results:
@@ -540,9 +592,10 @@ class SNARunner:
                     result["graph"],
                     "Method 9: Badge Achievement Network\nNodes=Users, Edges=Shared Badges | Color: Badge Level",
                     color_by="badge_level",
-                    filename="analysis_9_network.png",
+                    filename="analysis_9_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_9"],
                 )
+                self._plot_badge_network_aggregated(result["graph"], result)
 
         if "analysis_10_edit_collaboration" in self.results:
             result = self.results["analysis_10_edit_collaboration"]
@@ -558,13 +611,21 @@ class SNARunner:
                     result["graph"],
                     "Method 11: Post Link & Duplicate Network\nNodes=Posts, Edges=Link | Color: Link Type",
                     color_by="link_type",
-                    filename="analysis_11_network.png",
+                    filename="analysis_11_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_11"],
                 )
+                self._plot_post_link_network_aggregated(result["graph"], result)
 
         if "analysis_12_review_task" in self.results:
             result = self.results["analysis_12_review_task"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 12: Review Task Network (Raw User Graph)",
+                    color_by="reviewer_level",
+                    filename="analysis_12_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_12"],
+                )
                 self._plot_review_task_network_aggregated(result["graph"], result)
 
         if "analysis_13_bounty_network" in self.results:
@@ -574,9 +635,10 @@ class SNARunner:
                     result["graph"],
                     "Method 13: Bounty Network\nNodes=Users, Edges=Bounty | Color: Bounty Level",
                     color_by="bounty_level",
-                    filename="analysis_13_network.png",
+                    filename="analysis_13_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_13"],
                 )
+                self._plot_bounty_network_aggregated(result["graph"], result)
 
         if "analysis_14_user_location" in self.results:
             result = self.results["analysis_14_user_location"]
@@ -588,13 +650,21 @@ class SNARunner:
                     "Method 14: User Location Network\nNodes=Regions, Edges=Connection | Color: Region | Label: Region Name",
                     color_by="region",
                     vertex_labels=labels,
-                    filename="analysis_14_network.png",
+                    filename="analysis_14_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_14"],
                 )
+                self._plot_user_location_network_aggregated(result["graph"], result)
 
         if "analysis_15_time_series" in self.results:
             result = self.results["analysis_15_time_series"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 15: Time Series Activity Network (Raw Node Graph)",
+                    color_by="activity_level",
+                    filename="analysis_15_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_15"],
+                )
                 self._plot_time_series_network_aggregated(result["graph"], result)
 
     def _plot_reputation_network_aggregated(self, graph):
@@ -752,6 +822,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_1_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated reputation network: {output_path}")
@@ -875,6 +946,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_15_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated time series network: {output_path}")
@@ -1022,6 +1094,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_2_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated core-efficiency network: {output_path}")
@@ -1169,6 +1242,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_4_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated connected components network: {output_path}")
@@ -1315,9 +1389,653 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_6_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated account age network: {output_path}")
+
+    def _plot_tag_cooccurrence_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        domain_positions = {
+            "Web": (0.5, 0.9),
+            "Backend": (0.85, 0.55),
+            "Database": (0.15, 0.55),
+            "AI_ML": (0.2, 0.2),
+            "DevOps": (0.8, 0.2),
+            "DataScience": (0.5, 0.5),
+            "Other": (0.5, 0.1),
+        }
+        domain_colors = {
+            "Web": "#42A5F5",
+            "Backend": "#8E24AA",
+            "Database": "#FFB300",
+            "AI_ML": "#FB8C00",
+            "DevOps": "#43A047",
+            "DataScience": "#5E35B1",
+            "Other": "#9E9E9E",
+        }
+
+        domain_counts = {domain: 0 for domain in domain_positions}
+        node_domain_map = {}
+        attrs = graph.vs.attribute_names()
+        for i, v in enumerate(graph.vs):
+            domain = v["tech_domain"] if "tech_domain" in attrs else "Other"
+            if domain not in domain_counts:
+                domain = "Other"
+            domain_counts[domain] += 1
+            node_domain_map[i] = domain
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_domain = node_domain_map[e.source]
+            tgt_domain = node_domain_map[e.target]
+            pair = tuple(sorted([src_domain, tgt_domain]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for domain, count in domain_counts.items():
+            if count == 0:
+                continue
+            x, y = domain_positions[domain]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=domain_colors[domain],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{domain}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in domain_positions or n2 not in domain_positions:
+                continue
+            x1, y1 = domain_positions[n1]
+            x2, y2 = domain_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = domain_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for domain, color in domain_colors.items():
+            if domain_counts.get(domain, 0) > 0:
+                legend_patches.append(mpatches.Patch(color=color, label=domain))
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=8,
+            title="Technology Domains",
+        )
+        ax.set_title(
+            "Method 3: Tag Co-occurrence Technology Map\nNodes=Tags (grouped by domain), Edges=Co-occurrence",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_3_network.png"
+        plt.tight_layout()
+        output_path.unlink(missing_ok=True)
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated tag co-occurrence network: {output_path}")
+
+    def _plot_content_features_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        positions = {
+            "HasCode": (0.25, 0.55),
+            "NoCode": (0.75, 0.55),
+        }
+        colors = {
+            "HasCode": "#42A5F5",
+            "NoCode": "#FFB300",
+        }
+
+        counts = {"HasCode": 0, "NoCode": 0}
+        node_map = {}
+        attrs = graph.vs.attribute_names()
+        for i, v in enumerate(graph.vs):
+            has_code = v["has_code"] if "has_code" in attrs else "no"
+            group = "HasCode" if str(has_code).lower() in ("yes", "true", "1") else "NoCode"
+            counts[group] += 1
+            node_map[i] = group
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src = node_map[e.source]
+            tgt = node_map[e.target]
+            pair = tuple(sorted([src, tgt]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for group, count in counts.items():
+            if count == 0:
+                continue
+            x, y = positions[group]
+            size = max(500, count * 4)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=colors[group],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{group}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=11,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            x1, y1 = positions[n1]
+            x2, y2 = positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = [mpatches.Patch(color=colors[g], label=g) for g in counts if counts[g] > 0]
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=8,
+            title="Code Presence",
+        )
+        ax.set_title(
+            "Method 5: Content Features & Code Presence\nNodes=Posts, Edges=Tag Similarity | Color: Code Present",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_5_network.png"
+        plt.tight_layout()
+        output_path.unlink(missing_ok=True)
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated content features network: {output_path}")
+
+    def _plot_badge_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        positions = {
+            "0_None": (0.5, 0.15),
+            "1_Gold": (0.5, 0.85),
+            "2_Silver": (0.2, 0.45),
+            "3_Bronze": (0.8, 0.45),
+        }
+        colors = {
+            "0_None": "#9E9E9E",
+            "1_Gold": "#FFD700",
+            "2_Silver": "#C0C0C0",
+            "3_Bronze": "#CD7F32",
+        }
+
+        counts = {level: 0 for level in positions}
+        node_map = {}
+        attrs = graph.vs.attribute_names()
+        for i, v in enumerate(graph.vs):
+            level = v["badge_level"] if "badge_level" in attrs else "0_None"
+            if level not in counts:
+                level = "0_None"
+            counts[level] += 1
+            node_map[i] = level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src = node_map[e.source]
+            tgt = node_map[e.target]
+            pair = tuple(sorted([src, tgt]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in counts.items():
+            if count == 0:
+                continue
+            x, y = positions[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{level.replace('_', ' ')}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in positions or n2 not in positions:
+                continue
+            x1, y1 = positions[n1]
+            x2, y2 = positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in colors.items():
+            if counts.get(level, 0) > 0:
+                legend_patches.append(mpatches.Patch(color=color, label=level.replace('_', ' ')))
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=8,
+            title="Badge Level",
+        )
+        ax.set_title(
+            "Method 9: Badge Achievement Network\nNodes=Users (grouped by badge level), Edges=Shared Badges",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_9_network.png"
+        plt.tight_layout()
+        output_path.unlink(missing_ok=True)
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated badge network: {output_path}")
+
+    def _plot_post_link_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        link_positions = {
+            "Linked": (0.3, 0.75),
+            "Duplicate": (0.7, 0.75),
+            "Other": (0.5, 0.25),
+        }
+        link_colors = {
+            "Linked": "#2196F3",
+            "Duplicate": "#F44336",
+            "Other": "#9E9E9E",
+        }
+
+        type_counts = {t: 0 for t in link_positions}
+        edge_types = graph.es["link_type"] if "link_type" in graph.es.attribute_names() else []
+        for t in edge_types:
+            typ = t if t in type_counts else "Other"
+            type_counts[typ] += 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for typ, count in type_counts.items():
+            if count == 0:
+                continue
+            x, y = link_positions[typ]
+            size = max(500, count * 6)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=link_colors[typ],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{typ}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=11,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        legend_patches = [mpatches.Patch(color=link_colors[k], label=k) for k, v in type_counts.items() if v > 0]
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=8,
+            title="Link Type",
+        )
+        ax.set_title(
+            "Method 11: Post Link & Duplicate Network\nNodes=Posts, Edges=Linked/Duplicate Relationships",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_11_network.png"
+        plt.tight_layout()
+        output_path.unlink(missing_ok=True)
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated post link network: {output_path}")
+
+    def _plot_bounty_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        positions = {
+            "0_None": (0.5, 0.1),
+            "1_Meager": (0.2, 0.55),
+            "2_Normal": (0.5, 0.85),
+            "3_Generous": (0.8, 0.55),
+            "4_Extravagant": (0.5, 0.35),
+        }
+        colors = {
+            "0_None": "#9E9E9E",
+            "1_Meager": "#42A5F5",
+            "2_Normal": "#4CAF50",
+            "3_Generous": "#FFC107",
+            "4_Extravagant": "#F44336",
+        }
+
+        counts = {lvl: 0 for lvl in positions}
+        node_map = {}
+        attrs = graph.vs.attribute_names()
+        for i, v in enumerate(graph.vs):
+            lvl = v["bounty_level"] if "bounty_level" in attrs else "0_None"
+            if lvl not in counts:
+                lvl = "0_None"
+            counts[lvl] += 1
+            node_map[i] = lvl
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src = node_map.get(e.source, "0_None")
+            tgt = node_map.get(e.target, "0_None")
+            pair = tuple(sorted([src, tgt]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for lvl, count in counts.items():
+            if count == 0:
+                continue
+            x, y = positions[lvl]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=colors[lvl],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{lvl.replace('_', ' ')}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in positions or n2 not in positions:
+                continue
+            x1, y1 = positions[n1]
+            x2, y2 = positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for lvl, color in colors.items():
+            if counts.get(lvl, 0) > 0:
+                legend_patches.append(mpatches.Patch(color=color, label=lvl.replace('_', ' ')))
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=8,
+            title="Bounty Level",
+        )
+        ax.set_title(
+            "Method 13: Bounty Network\nNodes=Users (grouped by bounty activity), Edges=Shared Tags",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_13_network.png"
+        plt.tight_layout()
+        output_path.unlink(missing_ok=True)
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated bounty network: {output_path}")
+
+    def _plot_user_location_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        region_positions = {
+            "North America": (0.5, 0.85),
+            "Europe": (0.2, 0.6),
+            "Asia": (0.8, 0.6),
+            "Oceania": (0.85, 0.25),
+            "South America": (0.35, 0.25),
+            "Africa": (0.65, 0.25),
+            "Middle East": (0.5, 0.45),
+            "Other": (0.5, 0.1),
+        }
+        region_colors = {
+            "North America": "#2196F3",
+            "Europe": "#4CAF50",
+            "Asia": "#FFC107",
+            "Oceania": "#9E9E9E",
+            "South America": "#FF5722",
+            "Africa": "#795548",
+            "Middle East": "#607D8B",
+            "Other": "#BDBDBD",
+        }
+
+        region_counts = {region: 0 for region in region_positions}
+        attrs = graph.vs.attribute_names()
+        for v in graph.vs:
+            region = v["region"] if "region" in attrs else "Other"
+            if region not in region_counts:
+                region = "Other"
+            region_counts[region] += 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for region, count in region_counts.items():
+            if count == 0:
+                continue
+            x, y = region_positions[region]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=region_colors[region],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{region}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        legend_patches = [mpatches.Patch(color=region_colors[r], label=r) for r, c in region_counts.items() if c > 0]
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=8,
+            title="Region",
+        )
+        ax.set_title(
+            "Method 14: User Location Network\nNodes=Regions, Edges=Regional Connections",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_14_network.png"
+        plt.tight_layout()
+        output_path.unlink(missing_ok=True)
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated user location network: {output_path}")
 
     def _plot_comment_network_aggregated(self, graph, result):
         import matplotlib
@@ -1446,6 +2164,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_8_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated comment network: {output_path}")
@@ -1578,6 +2297,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_7_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated voting behavior network: {output_path}")
@@ -1664,6 +2384,23 @@ class SNARunner:
             x2, y2 = node_positions[n2]
             thickness = max(2, cnt / max_count * 12)
             color = node_colors.get(n1, "#9E9E9E")
+
+            if n1 == n2:
+                # do not draw self-loop lines for same-level aggregation
+                mx, my = x1, y1 - 0.12
+                ax.text(
+                    mx,
+                    my,
+                    str(cnt),
+                    ha="center",
+                    va="center",
+                    fontsize=9,
+                    fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                    zorder=5,
+                )
+                continue
+
             ax.annotate(
                 "",
                 xy=(x2, y2),
@@ -1671,10 +2408,7 @@ class SNARunner:
                 arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
                 zorder=2,
             )
-            if n1 == n2:
-                mx, my = x1, y1 + 0.08
-            else:
-                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
             ax.text(
                 mx,
                 my,
@@ -1706,6 +2440,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_10_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated edit collaboration network: {output_path}")
@@ -1839,6 +2574,7 @@ class SNARunner:
 
         output_path = self.plotter.output_dir / "analysis_12_network.png"
         plt.tight_layout()
+        output_path.unlink(missing_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated review task network: {output_path}")

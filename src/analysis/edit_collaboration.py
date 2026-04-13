@@ -17,7 +17,7 @@ class EditCollaborationNetworkBuilder(GraphBuilder):
     """編輯協作網路建構器"""
 
     def build_edit_network(self, limit: int = 100) -> Tuple[ig.Graph, pd.DataFrame]:
-        query_limit = min(limit * 10, 5000)
+        query_limit = limit
         sql = f"""
         SELECT
         ph.id AS history_id,

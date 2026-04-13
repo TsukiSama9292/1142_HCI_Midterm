@@ -42,6 +42,7 @@ class BountyNetworkBuilder(GraphBuilder):
         ON p.owner_user_id = u.id
         WHERE v.vote_type_id IN (8, 9)
         AND MOD(ABS(FARM_FINGERPRINT(CAST(v.post_id AS STRING))), 100000) < {sample_size}
+        LIMIT {sample_size}
         """
 
         df = self.data_loader.client.query(sql)

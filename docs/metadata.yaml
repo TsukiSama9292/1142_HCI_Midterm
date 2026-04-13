@@ -1,0 +1,16 @@
+title: "Stack Overflow 社會網路分析報告"
+author: "專案團隊"
+date: "2026-04-13"
+lang: "zh-TW"
+geometry: margin=2.5cm
+fontsize: 12pt
+linkcolor: blue
+urlcolor: blue
+colorlinks: true
+mainfont: "Noto Sans"
+sansfont: "Noto Sans"
+monofont: "Noto Sans Mono"
+CJKmainfont: "Noto Serif CJK TC"
+numbersections: true
+toc: true
+tocdepth: 3
