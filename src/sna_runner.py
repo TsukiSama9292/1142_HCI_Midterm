@@ -1482,6 +1482,22 @@ class SNARunner:
             x1, y1 = domain_positions[n1]
             x2, y2 = domain_positions[n2]
             thickness = max(2, cnt / max_count * 12)
+            if n1 == n2:
+                # 自環邊文字顯示在節點上方，使用綠底黑字以區別
+                label_y = y1 + 0.08
+                ax.text(
+                    x1,
+                    label_y,
+                    str(cnt),
+                    ha="center",
+                    va="bottom",
+                    fontsize=9,
+                    fontweight="bold",
+                    color="black",
+                    bbox=dict(boxstyle="round,pad=0.3", facecolor="#A5D6A7", edgecolor="black", alpha=0.9),
+                    zorder=5,
+                )
+                continue
             color = domain_colors.get(n1, "#9E9E9E")
             ax.annotate(
                 "",
@@ -1491,17 +1507,24 @@ class SNARunner:
                 zorder=2,
             )
             mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-            ax.text(
-                mx,
-                my,
-                str(cnt),
-                ha="center",
-                va="center",
-                fontsize=9,
-                fontweight="bold",
-                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
-                zorder=5,
-            )
+            label_kwargs = {
+                "ha": "center",
+                "va": "center",
+                "fontsize": 9,
+                "fontweight": "bold",
+                "bbox": dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                "zorder": 5,
+            }
+            if pair == ("Other", "Web"):
+                mx += 0.05
+                my += 0.08
+                label_kwargs["bbox"] = dict(
+                    boxstyle="round,pad=0.2",
+                    facecolor="#42A5F5",
+                    edgecolor="black",
+                    alpha=0.9,
+                )
+            ax.text(mx, my, str(cnt), **label_kwargs)
 
         legend_patches = []
         for domain, color in domain_colors.items():

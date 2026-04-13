@@ -64,7 +64,9 @@ class TagCooccurrenceAnalyzer:
         
         community_structure = self._analyze_community_structure()
         
-        result = self._generate_summary(clusters, community_structure)
+        domain_internal_edge_counts = self._compute_domain_internal_edges()
+        
+        result = self._generate_summary(clusters, community_structure, domain_internal_edge_counts)
         
         print("最終輸出值:")
         print(f"  - 識別出 {len(clusters)} 個技術領域")
@@ -162,7 +164,27 @@ class TagCooccurrenceAnalyzer:
             print(f"社群偵測失敗: {e}")
             return {'num_communities': 1, 'modularity': 0, 'community_sizes': [len(self.graph.vs)]}
     
-    def _generate_summary(self, clusters: List[TagCluster], community: Dict[str, Any]) -> Dict[str, Any]:
+    def _compute_domain_internal_edges(self) -> Dict[str, int]:
+        """計算每個技術領域內部的共現邊數"""
+        if self.graph is None:
+            return {}
+
+        node_domain_map = {}
+        attrs = self.graph.vs.attribute_names()
+        for i, v in enumerate(self.graph.vs):
+            domain = v["tech_domain"] if "tech_domain" in attrs else "Other"
+            node_domain_map[i] = domain
+
+        internal_counts = {domain: 0 for domain in self.DOMAIN_KEYWORDS.keys()}
+        internal_counts["Other"] = 0
+        for e in self.graph.es:
+            src_domain = node_domain_map[e.source]
+            tgt_domain = node_domain_map[e.target]
+            if src_domain == tgt_domain:
+                internal_counts[src_domain] += 1
+        return internal_counts
+
+    def _generate_summary(self, clusters: List[TagCluster], community: Dict[str, Any], domain_internal_edge_counts: Dict[str, int]) -> Dict[str, Any]:
         """生成分析摘要"""
         print("\n中間過程: 生成分析摘要...")
         
@@ -172,11 +194,13 @@ class TagCooccurrenceAnalyzer:
             'num_domains': len(clusters),
             'num_communities': community['num_communities'],
             'modularity': community['modularity'],
+            'domain_internal_edges': domain_internal_edge_counts,
             'domain_details': {
                 c.name: {
                     'tag_count': len(c.tags),
                     'avg_popularity': c.avg_popularity,
                     'total_connections': c.total_connections,
+                    'internal_edges': domain_internal_edge_counts.get(c.name, 0),
                     'tags': c.tags[:10],
                 }
                 for c in clusters
