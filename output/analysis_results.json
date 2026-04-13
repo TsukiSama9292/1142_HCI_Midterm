@@ -1507,177 +1507,177 @@
         "co_occurrence_count": 15923
       }
     ],
-    "clusters": "[TagCluster(name='Other', tags=['wpf', 'list', 'beautifulsoup', 'json', 'amazon-s3', 'shiny', 'csv', 'asp.net', 'selenium', 'ggplot2', 'vba', '.net', 'opencv', 'excel', 'xcode', 'unity3d', 'next.js'], avg_popularity=np.float64(126810.70588235294), total_connections=19), TagCluster(name='DataScience', tags=['dataframe', 'pandas', 'typescript', 'dictionary', 'asp.net-core', 'dplyr', 'express', 'discord.py', 'material-ui', 'tkinter', 'r', '.net-core', 'wordpress', 'amazon-web-services', 'numpy', 'redux', 'discord.js', 'dart', 'arrays', 'string', 'matplotlib', 'apache-spark', 'firebase', 'pyspark', 'web-scraping'], avg_popularity=np.float64(91171.6), total_connections=40), TagCluster(name='Backend', tags=['django', 'google-apps-script', 'flask', 'laravel', 'spring', 'python-3.x', 'spring-boot', 'google-sheets', 'django-views', 'django-models', 'django-rest-framework', 'php', 'mongodb', 'java', 'mongoose', 'google-cloud-firestore', 'python', 'c#'], avg_popularity=np.float64(456178.5), total_connections=59), TagCluster(name='Database', tags=['postgresql', 'oracle', 'tsql', 'mysql', 'sql', 'sql-server'], avg_popularity=np.float64(320390.8333333333), total_connections=11), TagCluster(name='Web', tags=['angular', 'html', 'vue.js', 'css', 'react-hooks', 'node.js', 'jquery', 'react-native', 'javascript', 'reactjs'], avg_popularity=np.float64(673751.2), total_connections=48), TagCluster(name='DevOps', tags=['docker-compose', 'docker'], avg_popularity=np.float64(60249.5), total_connections=2), TagCluster(name='Mobile', tags=['flutter', 'swiftui', 'android-studio', 'swift', 'kotlin', 'android', 'ios'], avg_popularity=np.float64(383935.5714285714), total_connections=16), TagCluster(name='AI_ML', tags=['keras', 'machine-learning', 'tensorflow'], avg_popularity=0.0, total_connections=5)]",
+    "clusters": "[TagCluster(name='Web', tags=['react-native', 'react-hooks', 'html', 'css', 'reactjs', 'jquery', 'javascript', 'vue.js', 'angular', 'node.js'], avg_popularity=np.float64(673751.2), total_connections=48), TagCluster(name='DataScience', tags=['discord.py', 'pyspark', '.net-core', 'express', 'typescript', 'redux', 'dart', 'firebase', 'arrays', 'tkinter', 'string', 'asp.net-core', 'matplotlib', 'web-scraping', 'material-ui', 'dictionary', 'dplyr', 'r', 'dataframe', 'apache-spark', 'wordpress', 'discord.js', 'numpy', 'pandas', 'amazon-web-services'], avg_popularity=np.float64(91171.6), total_connections=40), TagCluster(name='Backend', tags=['c#', 'flask', 'laravel', 'spring', 'spring-boot', 'python', 'python-3.x', 'google-cloud-firestore', 'mongoose', 'php', 'django', 'django-rest-framework', 'google-apps-script', 'google-sheets', 'django-views', 'mongodb', 'django-models', 'java'], avg_popularity=np.float64(456178.5), total_connections=59), TagCluster(name='AI_ML', tags=['tensorflow', 'keras', 'machine-learning'], avg_popularity=0.0, total_connections=5), TagCluster(name='Mobile', tags=['ios', 'swift', 'android', 'flutter', 'swiftui', 'android-studio', 'kotlin'], avg_popularity=np.float64(383935.5714285714), total_connections=16), TagCluster(name='Other', tags=['asp.net', 'wpf', '.net', 'ggplot2', 'amazon-s3', 'next.js', 'shiny', 'selenium', 'opencv', 'csv', 'unity3d', 'list', 'json', 'beautifulsoup', 'excel', 'xcode', 'vba'], avg_popularity=np.float64(126810.70588235294), total_connections=19), TagCluster(name='Database', tags=['postgresql', 'sql-server', 'oracle', 'tsql', 'mysql', 'sql'], avg_popularity=np.float64(320390.8333333333), total_connections=11), TagCluster(name='DevOps', tags=['docker', 'docker-compose'], avg_popularity=np.float64(60249.5), total_connections=2)]",
     "community_structure": {
       "num_communities": 13,
       "modularity": 0.7322,
       "community_sizes": [
-        7,
-        21,
-        4,
-        2,
         19,
+        21,
+        7,
+        4,
+        2,
         9,
-        2,
-        4,
         10,
+        4,
         2,
         4,
+        2,
         2,
         2
       ],
       "community_info": {
         "Community_1": {
-          "size": 7,
+          "size": 19,
           "tags": [
-            "wpf",
-            "asp.net-core",
-            "asp.net",
-            ".net-core",
-            ".net",
-            "unity3d",
-            "c#"
+            "react-native",
+            "react-hooks",
+            "html",
+            "express",
+            "typescript",
+            "redux",
+            "css",
+            "reactjs",
+            "jquery",
+            "next.js",
+            "arrays",
+            "mongoose",
+            "material-ui",
+            "javascript",
+            "mongodb",
+            "vue.js",
+            "angular",
+            "discord.js",
+            "node.js"
           ]
         },
         "Community_2": {
           "size": 21,
           "tags": [
-            "dataframe",
-            "pandas",
-            "list",
-            "beautifulsoup",
-            "dictionary",
-            "json",
-            "flask",
-            "csv",
             "discord.py",
+            "tensorflow",
+            "flask",
+            "python",
             "python-3.x",
             "tkinter",
-            "keras",
-            "selenium",
-            "numpy",
-            "machine-learning",
             "string",
-            "opencv",
+            "keras",
             "matplotlib",
-            "tensorflow",
+            "selenium",
+            "opencv",
+            "csv",
             "web-scraping",
-            "python"
+            "list",
+            "json",
+            "dictionary",
+            "beautifulsoup",
+            "dataframe",
+            "machine-learning",
+            "numpy",
+            "pandas"
           ]
         },
         "Community_3": {
-          "size": 4,
+          "size": 7,
           "tags": [
-            "django",
-            "django-views",
-            "django-models",
-            "django-rest-framework"
+            "c#",
+            "asp.net",
+            ".net-core",
+            "wpf",
+            ".net",
+            "asp.net-core",
+            "unity3d"
           ]
         },
         "Community_4": {
-          "size": 2,
+          "size": 4,
           "tags": [
-            "google-apps-script",
-            "google-sheets"
+            "ios",
+            "swift",
+            "swiftui",
+            "xcode"
           ]
         },
         "Community_5": {
-          "size": 19,
+          "size": 2,
           "tags": [
-            "typescript",
-            "angular",
-            "html",
-            "express",
-            "material-ui",
-            "vue.js",
-            "css",
-            "react-hooks",
-            "node.js",
-            "jquery",
-            "redux",
-            "react-native",
-            "discord.js",
-            "mongodb",
-            "arrays",
-            "mongoose",
-            "javascript",
-            "reactjs",
-            "next.js"
+            "pyspark",
+            "apache-spark"
           ]
         },
         "Community_6": {
           "size": 9,
           "tags": [
-            "postgresql",
             "laravel",
+            "postgresql",
+            "sql-server",
             "oracle",
+            "php",
             "tsql",
             "mysql",
-            "sql",
-            "sql-server",
             "wordpress",
-            "php"
+            "sql"
           ]
         },
         "Community_7": {
-          "size": 2,
+          "size": 10,
           "tags": [
-            "docker-compose",
-            "docker"
+            "spring",
+            "dart",
+            "spring-boot",
+            "firebase",
+            "android",
+            "flutter",
+            "google-cloud-firestore",
+            "android-studio",
+            "kotlin",
+            "java"
           ]
         },
         "Community_8": {
           "size": 4,
           "tags": [
-            "dplyr",
+            "ggplot2",
             "shiny",
-            "r",
-            "ggplot2"
+            "dplyr",
+            "r"
           ]
         },
         "Community_9": {
-          "size": 10,
-          "tags": [
-            "spring",
-            "spring-boot",
-            "flutter",
-            "dart",
-            "android-studio",
-            "java",
-            "kotlin",
-            "firebase",
-            "android",
-            "google-cloud-firestore"
-          ]
-        },
-        "Community_10": {
           "size": 2,
           "tags": [
             "amazon-s3",
             "amazon-web-services"
           ]
         },
-        "Community_11": {
+        "Community_10": {
           "size": 4,
           "tags": [
-            "swiftui",
-            "swift",
-            "xcode",
-            "ios"
+            "django",
+            "django-rest-framework",
+            "django-views",
+            "django-models"
+          ]
+        },
+        "Community_11": {
+          "size": 2,
+          "tags": [
+            "docker",
+            "docker-compose"
           ]
         },
         "Community_12": {
           "size": 2,
           "tags": [
-            "vba",
-            "excel"
+            "google-apps-script",
+            "google-sheets"
           ]
         },
         "Community_13": {
           "size": 2,
           "tags": [
-            "apache-spark",
-            "pyspark"
+            "excel",
+            "vba"
           ]
         }
       }
@@ -1689,21 +1689,21 @@
       "num_communities": 13,
       "modularity": 0.7322,
       "domain_details": {
-        "Other": {
-          "tag_count": 17,
-          "avg_popularity": 126810.70588235294,
-          "total_connections": 19,
+        "Web": {
+          "tag_count": 10,
+          "avg_popularity": 673751.2,
+          "total_connections": 48,
           "tags": [
-            "wpf",
-            "list",
-            "beautifulsoup",
-            "json",
-            "amazon-s3",
-            "shiny",
-            "csv",
-            "asp.net",
-            "selenium",
-            "ggplot2"
+            "react-native",
+            "react-hooks",
+            "html",
+            "css",
+            "reactjs",
+            "jquery",
+            "javascript",
+            "vue.js",
+            "angular",
+            "node.js"
           ]
         },
         "DataScience": {
@@ -1711,15 +1711,15 @@
           "avg_popularity": 91171.6,
           "total_connections": 40,
           "tags": [
-            "dataframe",
-            "pandas",
-            "typescript",
-            "dictionary",
-            "asp.net-core",
-            "dplyr",
-            "express",
             "discord.py",
-            "material-ui",
+            "pyspark",
+            ".net-core",
+            "express",
+            "typescript",
+            "redux",
+            "dart",
+            "firebase",
+            "arrays",
             "tkinter"
           ]
         },
@@ -1728,16 +1728,57 @@
           "avg_popularity": 456178.5,
           "total_connections": 59,
           "tags": [
-            "django",
-            "google-apps-script",
+            "c#",
             "flask",
             "laravel",
             "spring",
-            "python-3.x",
             "spring-boot",
-            "google-sheets",
-            "django-views",
-            "django-models"
+            "python",
+            "python-3.x",
+            "google-cloud-firestore",
+            "mongoose",
+            "php"
+          ]
+        },
+        "AI_ML": {
+          "tag_count": 3,
+          "avg_popularity": 0.0,
+          "total_connections": 5,
+          "tags": [
+            "tensorflow",
+            "keras",
+            "machine-learning"
+          ]
+        },
+        "Mobile": {
+          "tag_count": 7,
+          "avg_popularity": 383935.5714285714,
+          "total_connections": 16,
+          "tags": [
+            "ios",
+            "swift",
+            "android",
+            "flutter",
+            "swiftui",
+            "android-studio",
+            "kotlin"
+          ]
+        },
+        "Other": {
+          "tag_count": 17,
+          "avg_popularity": 126810.70588235294,
+          "total_connections": 19,
+          "tags": [
+            "asp.net",
+            "wpf",
+            ".net",
+            "ggplot2",
+            "amazon-s3",
+            "next.js",
+            "shiny",
+            "selenium",
+            "opencv",
+            "csv"
           ]
         },
         "Database": {
@@ -1746,28 +1787,11 @@
           "total_connections": 11,
           "tags": [
             "postgresql",
+            "sql-server",
             "oracle",
             "tsql",
             "mysql",
-            "sql",
-            "sql-server"
-          ]
-        },
-        "Web": {
-          "tag_count": 10,
-          "avg_popularity": 673751.2,
-          "total_connections": 48,
-          "tags": [
-            "angular",
-            "html",
-            "vue.js",
-            "css",
-            "react-hooks",
-            "node.js",
-            "jquery",
-            "react-native",
-            "javascript",
-            "reactjs"
+            "sql"
           ]
         },
         "DevOps": {
@@ -1775,32 +1799,8 @@
           "avg_popularity": 60249.5,
           "total_connections": 2,
           "tags": [
-            "docker-compose",
-            "docker"
-          ]
-        },
-        "Mobile": {
-          "tag_count": 7,
-          "avg_popularity": 383935.5714285714,
-          "total_connections": 16,
-          "tags": [
-            "flutter",
-            "swiftui",
-            "android-studio",
-            "swift",
-            "kotlin",
-            "android",
-            "ios"
-          ]
-        },
-        "AI_ML": {
-          "tag_count": 3,
-          "avg_popularity": 0.0,
-          "total_connections": 5,
-          "tags": [
-            "keras",
-            "machine-learning",
-            "tensorflow"
+            "docker",
+            "docker-compose"
           ]
         }
       }
@@ -2165,6 +2165,105 @@
     },
     "age_df": [
       {
+        "user_id": 12002600,
+        "display_name": "Bitfinicon",
+        "reputation": 163,
+        "account_creation_date": "2019-08-31 09:32:19.763000+00:00",
+        "account_age_days": 2417,
+        "question_count": 6,
+        "answer_count": 9,
+        "post_type": "1_Both",
+        "account_age_level": "4_Established"
+      },
+      {
+        "user_id": 50617,
+        "display_name": "Employed Russian",
+        "reputation": 186263,
+        "account_creation_date": "2008-12-31 23:01:32.583000+00:00",
+        "account_age_days": 6312,
+        "question_count": 0,
+        "answer_count": 431,
+        "post_type": "3_AnswersOnly",
+        "account_age_level": "5_Senior"
+      },
+      {
+        "user_id": 7270493,
+        "display_name": "trishcode",
+        "reputation": 2963,
+        "account_creation_date": "2016-12-09 01:33:54.760000+00:00",
+        "account_age_days": 3412,
+        "question_count": 1,
+        "answer_count": 5,
+        "post_type": "1_Both",
+        "account_age_level": "4_Established"
+      },
+      {
+        "user_id": 1511337,
+        "display_name": "Chan Kim",
+        "reputation": 4515,
+        "account_creation_date": "2012-07-09 07:56:05.970000+00:00",
+        "account_age_days": 5026,
+        "question_count": 81,
+        "answer_count": 22,
+        "post_type": "1_Both",
+        "account_age_level": "5_Senior"
+      },
+      {
+        "user_id": 12828626,
+        "display_name": "Timo",
+        "reputation": 128,
+        "account_creation_date": "2020-02-02 15:56:49.227000+00:00",
+        "account_age_days": 2262,
+        "question_count": 6,
+        "answer_count": 5,
+        "post_type": "1_Both",
+        "account_age_level": "4_Established"
+      },
+      {
+        "user_id": 13343978,
+        "display_name": "Facundo Farall",
+        "reputation": 375,
+        "account_creation_date": "2020-04-17 23:49:58.523000+00:00",
+        "account_age_days": 2187,
+        "question_count": 4,
+        "answer_count": 5,
+        "post_type": "1_Both",
+        "account_age_level": "3_Mature"
+      },
+      {
+        "user_id": 14336165,
+        "display_name": "Lynx",
+        "reputation": 23,
+        "account_creation_date": "2020-09-24 19:01:29.710000+00:00",
+        "account_age_days": 2027,
+        "question_count": 6,
+        "answer_count": 2,
+        "post_type": "1_Both",
+        "account_age_level": "3_Mature"
+      },
+      {
+        "user_id": 1778275,
+        "display_name": "pmor",
+        "reputation": 4630,
+        "account_creation_date": "2012-10-26 21:02:05.047000+00:00",
+        "account_age_days": 4917,
+        "question_count": 126,
+        "answer_count": 16,
+        "post_type": "1_Both",
+        "account_age_level": "5_Senior"
+      },
+      {
+        "user_id": 13634970,
+        "display_name": "RakeshP-0304",
+        "reputation": 141,
+        "account_creation_date": "2020-05-28 13:45:27.467000+00:00",
+        "account_age_days": 2146,
+        "question_count": 2,
+        "answer_count": 1,
+        "post_type": "1_Both",
+        "account_age_level": "3_Mature"
+      },
+      {
         "user_id": 4865723,
         "display_name": "buhtz",
         "reputation": 9064,
@@ -2172,105 +2271,6 @@
         "account_age_days": 3996,
         "question_count": 34,
         "answer_count": 13,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
-      },
-      {
-        "user_id": 8593689,
-        "display_name": "Shane Bishop",
-        "reputation": 3285,
-        "account_creation_date": "2017-09-11 17:53:56.283000+00:00",
-        "account_age_days": 3136,
-        "question_count": 16,
-        "answer_count": 89,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 15219846,
-        "display_name": "KoMaBeLu",
-        "reputation": 63,
-        "account_creation_date": "2021-02-16 10:37:51.290000+00:00",
-        "account_age_days": 1882,
-        "question_count": 5,
-        "answer_count": 4,
-        "post_type": "1_Both",
-        "account_age_level": "3_Mature"
-      },
-      {
-        "user_id": 2347999,
-        "display_name": "Krzysztof Madej",
-        "reputation": 26102,
-        "account_creation_date": "2013-05-03 18:27:18.903000+00:00",
-        "account_age_days": 4728,
-        "question_count": 7,
-        "answer_count": 372,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
-      },
-      {
-        "user_id": 12932677,
-        "display_name": "Phoenix",
-        "reputation": 17,
-        "account_creation_date": "2020-02-20 13:40:14.020000+00:00",
-        "account_age_days": 2244,
-        "question_count": 4,
-        "answer_count": 2,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 10381291,
-        "display_name": "web1connoisseur",
-        "reputation": 114,
-        "account_creation_date": "2018-09-18 15:52:24.807000+00:00",
-        "account_age_days": 2764,
-        "question_count": 3,
-        "answer_count": 0,
-        "post_type": "2_QuestionsOnly",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 9893677,
-        "display_name": "Shruti sharma",
-        "reputation": 165,
-        "account_creation_date": "2018-06-04 18:03:51.407000+00:00",
-        "account_age_days": 2870,
-        "question_count": 75,
-        "answer_count": 3,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 7881859,
-        "display_name": "Wenfang Du",
-        "reputation": 6485,
-        "account_creation_date": "2017-04-18 04:08:55.167000+00:00",
-        "account_age_days": 3282,
-        "question_count": 94,
-        "answer_count": 100,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 10087419,
-        "display_name": "Behnam Aminazad",
-        "reputation": 417,
-        "account_creation_date": "2018-07-16 09:29:52.947000+00:00",
-        "account_age_days": 2828,
-        "question_count": 14,
-        "answer_count": 12,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
-      },
-      {
-        "user_id": 2049986,
-        "display_name": "Jacob van Lingen",
-        "reputation": 8501,
-        "account_creation_date": "2013-02-07 08:36:45.130000+00:00",
-        "account_age_days": 4813,
-        "question_count": 1,
-        "answer_count": 11,
         "post_type": "1_Both",
         "account_age_level": "5_Senior"
       }

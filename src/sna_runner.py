@@ -600,6 +600,13 @@ class SNARunner:
         if "analysis_10_edit_collaboration" in self.results:
             result = self.results["analysis_10_edit_collaboration"]
             if "graph" in result and result["graph"] is not None:
+                self.plotter.plot_network_graph(
+                    result["graph"],
+                    "Method 10: Edit Collaboration Network (Raw User Graph)",
+                    color_by="edit_level",
+                    filename="analysis_10_network_raw.png",
+                    legend_info=LEGEND_INFO["analysis_10"],
+                )
                 self._plot_edit_collaboration_network_aggregated(
                     result["graph"], result
                 )
