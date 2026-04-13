@@ -52,7 +52,6 @@ class BigQueryClient:
     
     def query_to_file(self, sql: str, output_path: str):
         """執行 SQL 查詢並儲存為 CSV"""
-        import pandas as pd
         df = self.query(sql)
         df.to_csv(output_path, index=False)
         return df

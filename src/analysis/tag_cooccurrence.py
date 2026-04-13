@@ -4,9 +4,8 @@
 建構技術領域發展地圖：透過技術標籤的共現分析，描繪出不同程式語言或框架之間的群聚效應和技術關聯性
 """
 
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List
 from dataclasses import dataclass
-from collections import defaultdict
 
 import pandas as pd
 import igraph as ig
@@ -57,7 +56,7 @@ class TagCooccurrenceAnalyzer:
         
         self.graph, self.tag_df = self.builder.build_tag_cooccurrence_network(limit=limit)
         
-        print(f"\n測試技術標籤共現與領域地圖功能")
+        print("\n測試技術標籤共現與領域地圖功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 建立 {len(self.graph.vs)} 個標籤節點, {len(self.graph.es)} 條共現關係邊")
         
@@ -67,7 +66,7 @@ class TagCooccurrenceAnalyzer:
         
         result = self._generate_summary(clusters, community_structure)
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 識別出 {len(clusters)} 個技術領域")
         for cluster in clusters[:5]:
             print(f"    * {cluster.name}: {len(cluster.tags)} 個標籤")
@@ -82,7 +81,7 @@ class TagCooccurrenceAnalyzer:
     
     def _identify_technology_domains(self) -> List[TagCluster]:
         """識別技術領域群聚"""
-        print(f"\n中間過程: 識別技術領域群聚...")
+        print("\n中間過程: 識別技術領域群聚...")
         
         clusters = []
         tag_to_domain = {}
@@ -133,7 +132,7 @@ class TagCooccurrenceAnalyzer:
     
     def _analyze_community_structure(self) -> Dict[str, Any]:
         """分析社群結構"""
-        print(f"\n中間過程: 分析社群結構...")
+        print("\n中間過程: 分析社群結構...")
         
         if len(self.graph.vs) < 2:
             return {'num_communities': 0, 'modularity': 0, 'community_sizes': []}
@@ -165,7 +164,7 @@ class TagCooccurrenceAnalyzer:
     
     def _generate_summary(self, clusters: List[TagCluster], community: Dict[str, Any]) -> Dict[str, Any]:
         """生成分析摘要"""
-        print(f"\n中間過程: 生成分析摘要...")
+        print("\n中間過程: 生成分析摘要...")
         
         summary = {
             'total_tags': len(self.graph.vs),

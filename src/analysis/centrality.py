@@ -4,7 +4,7 @@
 驗證高聲望使用者的核心作用：分析高聲望使用者是否在網路結構中具有更高的介性中心度
 """
 
-from typing import Dict, Any, Tuple, List
+from typing import Dict, Any, List
 from dataclasses import dataclass
 
 import pandas as pd
@@ -13,7 +13,6 @@ import igraph as ig
 from ..data.data_loader import DataLoader
 from ..models.graph_builder import (
     UserNetworkBuilder,
-    MultiInteractionNetworkBuilder,
     MultiInteractionNetworkBuilder,
 )
 
@@ -72,7 +71,7 @@ class CentralityAnalyzer:
         print("=" * 60)
 
         if network_type == "combined":
-            print(f"\n使用綜合網路類型（回答+評論+投票+編輯）")
+            print("\n使用綜合網路類型（回答+評論+投票+編輯）")
             self.graph, self.users_df = self.multi_builder.build_combined_network(
                 limit=limit
             )
@@ -81,7 +80,7 @@ class CentralityAnalyzer:
                 self.builder.build_answer_network_with_reputation(limit=limit)
             )
 
-        print(f"\n測試使用者聲望與網路中心度功能")
+        print("\n測試使用者聲望與網路中心度功能")
         print(f"輸入值: limit={limit}")
         print(
             f"中間過程: 建立 {len(self.graph.vs)} 個節點, {len(self.graph.es)} 條邊的網路"
@@ -95,7 +94,7 @@ class CentralityAnalyzer:
 
         result = self._generate_summary(analysis_df, correlation)
 
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 聲望與介性中心度相關係數: {correlation:.4f}")
         print(f"  - 高聲望用戶平均介性中心度: {result['high_rep_avg_betweenness']:.4f}")
         print(f"  - 低聲望用戶平均介性中心度: {result['low_rep_avg_betweenness']:.4f}")
@@ -111,7 +110,7 @@ class CentralityAnalyzer:
 
     def _calculate_centrality(self) -> CentralityMetrics:
         """計算各種中心度指標"""
-        print(f"\n中間過程: 計算網路中心度指標...")
+        print("\n中間過程: 計算網路中心度指標...")
 
         betweenness = self.graph.betweenness()
         degree = self.graph.degree()
@@ -135,7 +134,7 @@ class CentralityAnalyzer:
 
     def _combine_with_reputation(self) -> pd.DataFrame:
         """結合聲望資料與中心度指標"""
-        print(f"\n中間過程: 結合聲望資料與中心度指標...")
+        print("\n中間過程: 結合聲望資料與中心度指標...")
 
         metrics_df = self.centrality_metrics.to_dataframe()
 
@@ -155,7 +154,7 @@ class CentralityAnalyzer:
 
     def _calculate_correlation(self, df: pd.DataFrame) -> float:
         """計算聲望與介性中心度的相關係數"""
-        print(f"\n中間過程: 計算聲望與介性中心度相關係數...")
+        print("\n中間過程: 計算聲望與介性中心度相關係數...")
 
         if df["reputation"].sum() == 0:
             return 0.0
@@ -169,7 +168,7 @@ class CentralityAnalyzer:
 
     def _generate_summary(self, df: pd.DataFrame, correlation: float) -> Dict[str, Any]:
         """生成分析摘要"""
-        print(f"\n中間過程: 生成分析摘要...")
+        print("\n中間過程: 生成分析摘要...")
 
         high_rep = df[df["reputation_level"] == "4_High"]
         low_rep = df[df["reputation_level"] == "1_Low"]

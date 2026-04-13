@@ -104,13 +104,13 @@ class PostLinkAnalyzer:
         
         self.graph, self.links_df = self.builder.build_post_link_network(limit=limit)
         
-        print(f"\n測試引用與重複問題網路功能")
+        print("\n測試引用與重複問題網路功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 建立 {len(self.graph.vs)} 個節點, {len(self.graph.es)} 條邊的網路")
         
         summary = self._generate_summary()
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 總連結數: {summary['total_links']}")
         print(f"  - 重複問題比例: {summary['duplicate_ratio']:.2%}")
         

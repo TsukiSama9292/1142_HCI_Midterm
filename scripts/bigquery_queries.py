@@ -5,11 +5,9 @@ BigQuery Stack Overflow 數據查詢範例
 """
 
 import json
-import subprocess
 from pathlib import Path
 from google.cloud import bigquery
 from google.oauth2 import credentials
-import pandas as pd
 
 DATASET = "`bigquery-public-data.stackoverflow`"
 
@@ -228,7 +226,7 @@ def main():
     
     try:
         client = create_client()
-        print(f"✓ BigQuery 客戶端建立成功")
+        print("✓ BigQuery 客戶端建立成功")
         print(f"  專案: {client.project}")
         
         # 測試用戶查詢

@@ -8,7 +8,6 @@ from typing import Dict, Any, List
 from dataclasses import dataclass
 
 import pandas as pd
-import numpy as np
 import igraph as ig
 
 from ..data.data_loader import DataLoader
@@ -49,7 +48,7 @@ class AccountAgeAnalyzer:
         
         self.graph, self.age_df = self.builder.build_account_age_network(limit=limit)
         
-        print(f"\n測試帳號年資與社群貢獻功能")
+        print("\n測試帳號年資與社群貢獻功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 分析 {len(self.age_df)} 個用戶的帳號年資與發文類型...")
         
@@ -59,7 +58,7 @@ class AccountAgeAnalyzer:
         
         result = self._generate_summary(patterns, behavior_evolution)
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 新手(問題為主)比例: {result['newcomer_questions_only_ratio']:.1%}")
         print(f"  - 老手(回答為主)比例: {result['senior_answers_only_ratio']:.1%}")
         print(f"  - 全能型用戶比例: {result['veteran_both_ratio']:.1%}")
@@ -74,7 +73,7 @@ class AccountAgeAnalyzer:
     
     def _analyze_age_contribution_patterns(self) -> List[AgeContributionPattern]:
         """分析年資貢獻模式"""
-        print(f"\n中間過程: 分析不同年資層級的貢獻模式...")
+        print("\n中間過程: 分析不同年資層級的貢獻模式...")
         
         patterns = []
         
@@ -106,7 +105,7 @@ class AccountAgeAnalyzer:
     
     def _analyze_behavior_evolution(self, patterns: List[AgeContributionPattern]) -> Dict[str, Any]:
         """分析行為演變"""
-        print(f"\n中間過程: 分析新手到老手的行為演變...")
+        print("\n中間過程: 分析新手到老手的行為演變...")
         
         if not patterns:
             return {}
@@ -136,7 +135,7 @@ class AccountAgeAnalyzer:
     def _generate_summary(self, patterns: List[AgeContributionPattern],
                          evolution: Dict[str, Any]) -> Dict[str, Any]:
         """生成分析摘要"""
-        print(f"\n中間過程: 生成分析摘要...")
+        print("\n中間過程: 生成分析摘要...")
         
         newcomer = next((p for p in patterns if 'New' in p.age_level), None)
         senior = next((p for p in patterns if 'Senior' in p.age_level), None)

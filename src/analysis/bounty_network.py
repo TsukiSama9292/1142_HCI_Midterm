@@ -135,13 +135,13 @@ class BountyNetworkAnalyzer:
 
         self.graph, self.bounties_df = self.builder.build_bounty_network(limit=limit)
 
-        print(f"\n測試賞金懸賞網路功能")
+        print("\n測試賞金懸賞網路功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 建立 {len(self.graph.vs)} 個節點, {len(self.graph.es)} 條邊的網路")
 
         summary = self._generate_summary()
 
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f" - 總賞金數: {summary['total_bounties']}")
         print(f" - 活躍用戶: {summary['active_users']}")
 

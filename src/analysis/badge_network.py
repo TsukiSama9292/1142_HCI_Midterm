@@ -118,13 +118,13 @@ class BadgeNetworkAnalyzer:
         
         self.graph, self.badges_df = self.builder.build_badge_network(limit=limit)
         
-        print(f"\n測試徽章成就網路功能")
+        print("\n測試徽章成就網路功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 建立 {len(self.graph.vs)} 個節點, {len(self.graph.es)} 條邊的網路")
         
         summary = self._generate_summary()
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 總徽章數: {summary['total_badges']}")
         print(f"  - 平均每人徽章數: {summary['avg_badges_per_user']:.2f}")
         

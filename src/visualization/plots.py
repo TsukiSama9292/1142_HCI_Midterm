@@ -6,11 +6,9 @@
 - 不同類別使用不同形狀
 """
 
-import os
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List, Optional
 
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
@@ -538,7 +536,7 @@ def save_analysis_results(results: Dict[str, Any], output_path: str):
     """儲存分析結果到 CSV"""
     from ..utils.helpers import save_json
 
-    print(f"\n中間過程: 儲存分析結果...")
+    print("\n中間過程: 儲存分析結果...")
 
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)

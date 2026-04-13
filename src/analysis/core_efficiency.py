@@ -8,7 +8,6 @@ from typing import Dict, Any, List
 from dataclasses import dataclass
 
 import pandas as pd
-import numpy as np
 import igraph as ig
 
 from ..data.data_loader import DataLoader
@@ -53,7 +52,7 @@ class CoreEfficiencyAnalyzer:
         
         self.graph, self.posts_df = self.builder.build_core_periphery_network(limit=limit)
         
-        print(f"\n測試網路核心結構與解答效率功能")
+        print("\n測試網路核心結構與解答效率功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 建立 {len(self.graph.vs)} 個節點, {len(self.graph.es)} 條邊的網路")
         
@@ -65,7 +64,7 @@ class CoreEfficiencyAnalyzer:
         
         result = self._generate_summary(analysis_df, efficiency_comparison)
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 核心用戶平均解答時間: {result['core_avg_hours']:.2f} 小時")
         print(f"  - 邊緣用戶平均解答時間: {result['periphery_avg_hours']:.2f} 小時")
         print(f"  - 核心用戶數量: {result['core_user_count']}")
@@ -81,7 +80,7 @@ class CoreEfficiencyAnalyzer:
     
     def _calculate_core_metrics(self) -> CorePeripheryMetrics:
         """計算核心-邊緣結構指標"""
-        print(f"\n中間過程: 計算網路核心-邊緣結構指標...")
+        print("\n中間過程: 計算網路核心-邊緣結構指標...")
         
         undirected = self.graph.as_undirected()
         
@@ -106,7 +105,7 @@ class CoreEfficiencyAnalyzer:
     
     def _combine_with_efficiency(self) -> pd.DataFrame:
         """結合核心結構與解答效率"""
-        print(f"\n中間過程: 結合核心結構與解答效率資料...")
+        print("\n中間過程: 結合核心結構與解答效率資料...")
         
         posts_with_efficiency = self.posts_df.copy()
         posts_with_efficiency = posts_with_efficiency[
@@ -156,7 +155,7 @@ class CoreEfficiencyAnalyzer:
     
     def _compare_core_periphery_efficiency(self, df: pd.DataFrame) -> Dict[str, Any]:
         """比較核心與邊緣用戶的解答效率"""
-        print(f"\n中間過程: 比較核心與邊緣用戶的解答效率...")
+        print("\n中間過程: 比較核心與邊緣用戶的解答效率...")
         
         if len(df) == 0:
             return {
@@ -182,7 +181,7 @@ class CoreEfficiencyAnalyzer:
     
     def _generate_summary(self, df: pd.DataFrame, comparison: Dict[str, Any]) -> Dict[str, Any]:
         """生成分析摘要"""
-        print(f"\n中間過程: 生成分析摘要...")
+        print("\n中間過程: 生成分析摘要...")
         
         efficiency_level = pd.cut(
             df['hours_to_accept'],

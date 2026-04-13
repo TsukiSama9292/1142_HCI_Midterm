@@ -108,13 +108,13 @@ class UserLocationAnalyzer:
         
         self.graph, self.users_df = self.builder.build_location_network(limit=limit)
         
-        print(f"\n測試地理分布網路功能")
+        print("\n測試地理分布網路功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 建立 {len(self.graph.vs)} 個節點, {len(self.graph.es)} 條邊的網路")
         
         summary = self._generate_summary()
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 總使用者數: {summary['total_users']}")
         print(f"  - 主要區域: {summary['top_region']}")
         

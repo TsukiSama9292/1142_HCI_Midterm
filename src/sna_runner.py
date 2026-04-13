@@ -526,13 +526,7 @@ class SNARunner:
         if "analysis_7_voting_behavior" in self.results:
             result = self.results["analysis_7_voting_behavior"]
             if "graph" in result and result["graph"] is not None:
-                self.plotter.plot_network_graph(
-                    result["graph"],
-                    "Method 7: Voting Behavior Network\nNodes=Users, Edges=Co-voted Posts | Color: Vote Type",
-                    color_by="vote_type",
-                    filename="analysis_7_network.png",
-                    legend_info=LEGEND_INFO["analysis_7"],
-                )
+                self._plot_voting_behavior_network_aggregated(result["graph"], result)
 
         if "analysis_8_comment_network" in self.results:
             result = self.results["analysis_8_comment_network"]
@@ -601,13 +595,7 @@ class SNARunner:
         if "analysis_15_time_series" in self.results:
             result = self.results["analysis_15_time_series"]
             if "graph" in result and result["graph"] is not None:
-                self.plotter.plot_network_graph(
-                    result["graph"],
-                    "Method 15: Time Series Activity Network\nNodes=Months, Edges=Activity | Color: Activity Level",
-                    color_by="activity_level",
-                    filename="analysis_15_network.png",
-                    legend_info=LEGEND_INFO["analysis_15"],
-                )
+                self._plot_time_series_network_aggregated(result["graph"], result)
 
     def _plot_reputation_network_aggregated(self, graph):
         """Plot aggregated 4-node reputation network visualization."""
@@ -767,6 +755,129 @@ class SNARunner:
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated reputation network: {output_path}")
+
+    def _plot_time_series_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        activity_levels = {
+            "high": (0.5, 0.8),
+            "medium": (0.8, 0.4),
+            "low": (0.2, 0.4),
+        }
+        level_colors = {
+            "high": "#2196F3",
+            "medium": "#4CAF50",
+            "low": "#9E9E9E",
+        }
+
+        level_counts = {lv: 0 for lv in activity_levels}
+        node_level_map = {}
+        for i, v in enumerate(graph.vs):
+            level = v["activity_level"] if "activity_level" in v.attributes() else "low"
+            if level not in level_counts:
+                level = "low"
+            level_counts[level] += 1
+            node_level_map[i] = level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = activity_levels[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=level_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{level.capitalize()}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in activity_levels or n2 not in activity_levels:
+                continue
+            x1, y1 = activity_levels[n1]
+            x2, y2 = activity_levels[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = level_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in level_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=level.capitalize())
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Activity Level",
+        )
+        ax.set_title(
+            "Method 15: Time Series Activity Network\nNodes=Months (grouped by activity), Edges=Activity Flow | Color: Activity Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_15_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated time series network: {output_path}")
 
     def _plot_core_efficiency_network_aggregated(self, graph, result):
         import matplotlib
@@ -1338,6 +1449,138 @@ class SNARunner:
         plt.savefig(output_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"  Saved aggregated comment network: {output_path}")
+
+    def _plot_voting_behavior_network_aggregated(self, graph, result):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+
+        node_positions = {
+            "1_NoVotes": (0.5, 0.88),
+            "2_Low": (0.82, 0.6),
+            "3_Medium": (0.18, 0.6),
+            "4_High": (0.5, 0.2),
+        }
+        node_colors = {
+            "1_NoVotes": "#9E9E9E",
+            "2_Low": "#4CAF50",
+            "3_Medium": "#FFD700",
+            "4_High": "#F44336",
+        }
+        node_labels_map = {
+            "1_NoVotes": "NoVotes",
+            "2_Low": "Low\n(1~3)",
+            "3_Medium": "Medium\n(4~10)",
+            "4_High": "High\n(>10)",
+        }
+
+        level_counts = {lv: 0 for lv in node_positions}
+        node_level_map = {}
+        attrs = graph.vs.attribute_names()
+        for i, v in enumerate(graph.vs):
+            level = v["vote_level"] if "vote_level" in attrs else "1_NoVotes"
+            if level not in level_counts:
+                level = "1_NoVotes"
+            level_counts[level] += 1
+            node_level_map[i] = level
+
+        edge_pair_counts = {}
+        for e in graph.es:
+            src_lv = node_level_map[e.source]
+            tgt_lv = node_level_map[e.target]
+            pair = tuple(sorted([src_lv, tgt_lv]))
+            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+        for level, count in level_counts.items():
+            if count == 0:
+                continue
+            x, y = node_positions[level]
+            size = max(500, count * 3)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=node_colors[level],
+                zorder=3,
+                edgecolors="black",
+                linewidths=1.5,
+            )
+            ax.text(
+                x,
+                y,
+                f"{node_labels_map[level]}\n({count})",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                zorder=4,
+            )
+
+        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
+
+        for pair, cnt in edge_pair_counts.items():
+            n1, n2 = pair
+            if n1 not in node_positions or n2 not in node_positions:
+                continue
+            x1, y1 = node_positions[n1]
+            x2, y2 = node_positions[n2]
+            thickness = max(2, cnt / max_count * 12)
+            color = node_colors.get(n1, "#9E9E9E")
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
+                zorder=2,
+            )
+            if n1 == n2:
+                mx, my = x1, y1 + 0.08
+            else:
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(
+                mx,
+                my,
+                str(cnt),
+                ha="center",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                zorder=5,
+            )
+
+        legend_patches = []
+        for level, color in node_colors.items():
+            if level_counts.get(level, 0) > 0:
+                legend_patches.append(
+                    mpatches.Patch(color=color, label=node_labels_map.get(level, level))
+                )
+
+        ax.legend(
+            handles=legend_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Vote Level",
+        )
+        ax.set_title(
+            "Method 7: Voting Behavior Network\nNodes=Users (grouped by vote count), Edges=Co-vote | Color: Vote Level",
+            fontsize=13,
+            fontweight="bold",
+            pad=15,
+        )
+
+        output_path = self.plotter.output_dir / "analysis_7_network.png"
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  Saved aggregated voting behavior network: {output_path}")
 
     def _plot_edit_collaboration_network_aggregated(self, graph, result):
         import matplotlib

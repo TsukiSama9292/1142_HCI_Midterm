@@ -2,11 +2,11 @@
 圖形建構器 - 使用 igraph 建構社會網路圖
 """
 
-from typing import List, Optional, Tuple, Dict, Any
+from typing import List, Optional, Tuple
 
 import pandas as pd
 import numpy as np
-from igraph import Graph, Vertex
+from igraph import Graph
 
 from ..data.data_loader import DataLoader
 

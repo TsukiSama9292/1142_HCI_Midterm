@@ -48,7 +48,7 @@ class ConnectedComponentAnalyzer:
         
         self.graph, self.connectivity_df = self.builder.build_connectivity_network(limit=limit)
         
-        print(f"\n測試知識孤島與連通分量功能")
+        print("\n測試知識孤島與連通分量功能")
         print(f"輸入值: limit={limit}")
         print(f"中間過程: 分析 {len(self.graph.vs)} 個用戶節點的連通分量...")
         
@@ -58,7 +58,7 @@ class ConnectedComponentAnalyzer:
         
         result = self._generate_summary(islands)
         
-        print(f"最終輸出值:")
+        print("最終輸出值:")
         print(f"  - 總連通分量數: {len(self.components)}")
         print(f"  - 主連通分量大小: {result['main_component_size']}")
         print(f"  - 識別出的知識孤島數: {result['island_count']}")
@@ -74,7 +74,7 @@ class ConnectedComponentAnalyzer:
     
     def _analyze_connected_components(self) -> List[ComponentInfo]:
         """分析連通分量"""
-        print(f"\n中間過程: 計算連通分量...")
+        print("\n中間過程: 計算連通分量...")
         
         undirected = self.graph.as_undirected()
         components = undirected.components()
@@ -102,7 +102,7 @@ class ConnectedComponentAnalyzer:
     
     def _identify_knowledge_islands(self) -> List[ComponentInfo]:
         """識別知識孤島"""
-        print(f"\n中間過程: 識別知識孤島...")
+        print("\n中間過程: 識別知識孤島...")
         
         islands = []
         for comp in self.components:
@@ -113,7 +113,7 @@ class ConnectedComponentAnalyzer:
     
     def _generate_summary(self, islands: List[ComponentInfo]) -> Dict[str, Any]:
         """生成分析摘要"""
-        print(f"\n中間過程: 生成分析摘要...")
+        print("\n中間過程: 生成分析摘要...")
         
         main_component = next((c for c in self.components if c.is_main_component), None)
         
