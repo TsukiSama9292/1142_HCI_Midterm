@@ -477,12 +477,9 @@ class SNARunner:
             },
             "analysis_15": {
                 "colors": {
-                    "Blue-High Activity": "#2196F3",
-                    "Green-Medium": "#4CAF50",
-                    "Gray-Low": "#9E9E9E",
-                },
-                "shapes": {
-                    "Circle-Month": "o",
+                    "Red-High Activity": "#F44336",
+                    "Orange-Medium Activity": "#FF9800",
+                    "Green-Low Activity": "#4CAF50",
                 },
                 "edge_weights": {
                     "Thick-Strong Tie": 3.0,
@@ -672,10 +669,13 @@ class SNARunner:
         if "analysis_15_time_series" in self.results:
             result = self.results["analysis_15_time_series"]
             if "graph" in result and result["graph"] is not None:
+                g = result["graph"]
+                labels = g.vs["year_month"] if "year_month" in g.vs.attribute_names() else None
                 self.plotter.plot_network_graph(
-                    result["graph"],
+                    g,
                     "Method 15: Time Series Activity Network (Raw Node Graph)",
                     color_by="activity_level",
+                    vertex_labels=labels,
                     filename="analysis_15_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_15"],
                 )
