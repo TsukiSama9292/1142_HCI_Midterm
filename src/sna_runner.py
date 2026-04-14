@@ -426,10 +426,6 @@ class SNARunner:
                 "shapes": {
                     "Circle-Question": "o",
                 },
-                "edge_weights": {
-                    "Thick-Strong Tie": 3.0,
-                    "Thin-Weak Tie": 0.5,
-                },
             },
             "analysis_12": {
                 "colors": {
@@ -621,7 +617,9 @@ class SNARunner:
                 self.plotter.plot_network_graph(
                     result["graph"],
                     "Method 11: Post Link & Duplicate Network\nNodes=Posts, Edges=Link | Color: Link Type",
-                    color_by="link_type",
+                    color_by=None,
+                    edge_color_by="link_type",
+                    default_vertex_color="#9E9E9E",
                     filename="analysis_11_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_11"],
                 )

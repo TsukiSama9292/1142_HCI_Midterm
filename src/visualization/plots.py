@@ -111,6 +111,8 @@ class SNAPlotter:
         title: str,
         color_by: Optional[str] = None,
         shape_by: Optional[str] = None,
+        edge_color_by: Optional[str] = None,
+        default_vertex_color: str = "#87CEEB",
         vertex_labels: Optional[List[str]] = None,
         filename: str = "network.png",
         legend_info: Optional[Dict] = None,
@@ -125,6 +127,7 @@ class SNAPlotter:
             title: 圖表標題
             color_by: 節點顏色依據的屬性
             shape_by: 節點形狀依據的屬性
+            edge_color_by: 邊顏色依據的屬性
             vertex_labels: 節點標籤列表
             filename: 輸出檔案名
             legend_info: 圖例資訊
@@ -160,7 +163,7 @@ class SNAPlotter:
             plt.close()
             return str(output_path)
 
-        colors = self._get_colors(graph, color_by)
+        colors = self._get_colors(graph, color_by, default_vertex_color)
         sizes = self._get_sizes(graph, color_by)
 
         if shape_by:
@@ -197,6 +200,8 @@ class SNAPlotter:
                 zorder=2,
             )
 
+        edge_colors = self._get_edge_colors(graph, edge_color_by)
+
         if show_edge_weights and edge_weight_attribute in graph.es.attribute_names():
             weights = graph.es[edge_weight_attribute]
             if weights and len(weights) > 0:
@@ -213,26 +218,26 @@ class SNAPlotter:
                     source, target = edge.tuple
                     x_coords = [layout[source][0], layout[target][0]]
                     y_coords = [layout[source][1], layout[target][1]]
-                    alpha = 0.5 + norm_weights[i] * 0.3 if max_w > min_w else 0.5
+                    alpha = 0.5 + norm_weights[i] * 0.3 if max_w > min_w else 0.7
                     ax.plot(
                         x_coords,
                         y_coords,
-                        color="#666666",
+                        color=edge_colors[i] if edge_colors else "#666666",
                         alpha=alpha,
                         linewidth=line_widths[i],
                         zorder=1,
                     )
         else:
-            for edge in graph.es:
+            for i, edge in enumerate(graph.es):
                 source, target = edge.tuple
                 x_coords = [layout[source][0], layout[target][0]]
                 y_coords = [layout[source][1], layout[target][1]]
                 ax.plot(
                     x_coords,
                     y_coords,
-                    color="#444444",
-                    alpha=0.6,
-                    linewidth=1.5,
+                    color=edge_colors[i] if edge_colors else "#444444",
+                    alpha=0.78,
+                    linewidth=1.8,
                     zorder=1,
                 )
 
@@ -262,9 +267,14 @@ class SNAPlotter:
         print(f"最終輸出值: 圖片已儲存至 {output_path}")
         return str(output_path)
 
-    def _get_colors(self, graph: ig.Graph, color_by: Optional[str]) -> List[str]:
+    def _get_colors(
+        self,
+        graph: ig.Graph,
+        color_by: Optional[str],
+        default_vertex_color: str = "#87CEEB",
+    ) -> List[str]:
         """根據屬性獲取顏色"""
-        default_color = "#87CEEB"
+        default_color = default_vertex_color
 
         if not color_by or color_by not in graph.vs.attribute_names():
             return [default_color] * len(graph.vs)
@@ -404,6 +414,22 @@ class SNAPlotter:
             return [plt.cm.RdYlGn_r(v) for v in norm_values]
 
         return [default_color] * len(graph.vs)
+
+    def _get_edge_colors(self, graph: ig.Graph, color_by: Optional[str]) -> List[str]:
+        default_color = "#9E9E9E"
+        if not color_by or color_by not in graph.es.attribute_names():
+            return [default_color] * len(graph.es)
+
+        values = graph.es[color_by]
+        if color_by == "link_type":
+            color_map = {
+                "Linked": "#2196F3",
+                "Duplicate": "#F44336",
+                "Other": "#9E9E9E",
+            }
+            return [color_map.get(str(v), default_color) for v in values]
+
+        return [default_color] * len(graph.es)
 
     def _get_sizes(self, graph: ig.Graph, color_by: Optional[str]) -> List[int]:
         """根據屬性獲取節點大小"""
