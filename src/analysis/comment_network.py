@@ -86,14 +86,22 @@ class CommentNetworkBuilder(GraphBuilder):
             'commenter_name': 'first',
         }).reset_index()
         
+        user_data['activity_level'] = pd.cut(
+            user_data['post_id'],
+            bins=[-1, 2, 5, float('inf')],
+            labels=['Low', 'Moderate', 'Active'],
+        ).astype(str)
+
         user_dict = dict(zip(user_data['commenter_id'], user_data['comment_score']))
         rep_dict = dict(zip(user_data['commenter_id'], user_data['commenter_reputation']))
         name_dict = dict(zip(user_data['commenter_id'], user_data['commenter_name']))
+        activity_dict = dict(zip(user_data['commenter_id'], user_data['activity_level']))
         
         self.graph.vs['user_id'] = unique_users
         self.graph.vs['name'] = [str(name_dict.get(uid, f"U{uid}")) for uid in unique_users]
         self.graph.vs['comment_count'] = [user_dict.get(uid, 0) for uid in unique_users]
         self.graph.vs['reputation'] = [rep_dict.get(uid, 0) for uid in unique_users]
+        self.graph.vs['activity_level'] = [activity_dict.get(uid, 'Low') for uid in unique_users]
         
         return self.graph, df
 

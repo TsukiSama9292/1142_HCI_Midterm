@@ -374,12 +374,14 @@ class SNARunner:
             },
             "analysis_8": {
                 "colors": {
-                    "Blue-Active": "#2196F3",
-                    "Green-Moderate": "#4CAF50",
-                    "Gray-Low": "#9E9E9E",
+                    "Active": "#2196F3",
+                    "Moderate": "#4CAF50",
+                    "Low": "#9E9E9E",
                 },
                 "shapes": {
-                    "Circle-Commenter": "o",
+                    "Active Commenters": "o",
+                    "Moderate Commenters": "^",
+                    "Low Commenters": "s",
                 },
                 "edge_weights": {
                     "Thick-Strong Tie": 3.0,
@@ -406,12 +408,10 @@ class SNARunner:
             },
             "analysis_10": {
                 "colors": {
-                    "Green-Active": "#4CAF50",
-                    "Yellow-Moderate": "#FFC107",
-                    "Gray-Casual": "#9E9E9E",
-                },
-                "shapes": {
-                    "Circle-Editor": "o",
+                    "Red-Power (>5 edits)": "#F44336",
+                    "Orange-Active (3~5 edits)": "#FF9800",
+                    "Green-Casual (1~2 edits)": "#4CAF50",
+                    "Gray-None": "#BDBDBD",
                 },
                 "edge_weights": {
                     "Thick-Strong Tie": 3.0,
@@ -581,6 +581,7 @@ class SNARunner:
                     result["graph"],
                     "Method 8: Comment Interaction Network (Raw User Graph)",
                     color_by="activity_level",
+                    shape_by="activity_level",
                     filename="analysis_8_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_8"],
                 )
@@ -605,7 +606,7 @@ class SNARunner:
                 self.plotter.plot_network_graph(
                     result["graph"],
                     "Method 10: Edit Collaboration Network (Raw User Graph)",
-                    color_by="edit_level",
+                    color_by="editor_level",
                     filename="analysis_10_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_10"],
                 )
@@ -2460,6 +2461,7 @@ class SNARunner:
                 y,
                 s=size,
                 c=node_colors[level],
+                marker="o",
                 zorder=3,
                 edgecolors="black",
                 linewidths=1.5,
@@ -2522,15 +2524,18 @@ class SNARunner:
                 zorder=5,
             )
 
-        legend_patches = []
+        color_patches = []
         for level, color in node_colors.items():
             if level_counts.get(level, 0) > 0:
-                legend_patches.append(
+                color_patches.append(
                     mpatches.Patch(color=color, label=node_labels_map.get(level, level))
                 )
 
         ax.legend(
-            handles=legend_patches, loc="lower right", fontsize=7, title="Editor Level"
+            handles=color_patches,
+            loc="lower right",
+            fontsize=7,
+            title="Editor Level",
         )
         ax.set_title(
             "Method 10: Edit Collaboration Network\nNodes=Users (grouped by edits), Edges=Co-edit | Color: Editor Level",

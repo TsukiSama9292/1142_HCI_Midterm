@@ -419,9 +419,9 @@ class SNAPlotter:
 
         elif color_by == "activity_level":
             color_map = {
-                "high": "#F44336",
-                "medium": "#FF9800",
-                "low": "#4CAF50",
+                "Active": "#2196F3",
+                "Moderate": "#4CAF50",
+                "Low": "#9E9E9E",
             }
             return [color_map.get(str(v), default_color) for v in values]
 
@@ -513,6 +513,15 @@ class SNAPlotter:
             ]
             result["^"] = [i for i, v in enumerate(post_types) if v == "3_AnswersOnly"]
 
+        elif shape_by == "editor_level":
+            editor_levels = (
+                list(graph.vs["editor_level"]) if "editor_level" in graph.vs.attribute_names() else []
+            )
+            result["s"] = [i for i, v in enumerate(editor_levels) if v == "3_Power"]
+            result["^"] = [i for i, v in enumerate(editor_levels) if v == "2_Active"]
+            result["o"] = [i for i, v in enumerate(editor_levels) if v == "1_Casual"]
+            result["X"] = [i for i, v in enumerate(editor_levels) if v == "0_None"]
+
         elif shape_by == "interaction_type":
             interaction_types = (
                 list(graph.vs["interaction_type"])
@@ -523,6 +532,16 @@ class SNAPlotter:
                 i for i, v in enumerate(interaction_types) if v == "continuous"
             ]
             result["^"] = [i for i, v in enumerate(interaction_types) if v == "single"]
+
+        elif shape_by == "activity_level":
+            activity_levels = (
+                list(graph.vs["activity_level"])
+                if "activity_level" in graph.vs.attribute_names()
+                else []
+            )
+            result["o"] = [i for i, v in enumerate(activity_levels) if v == "Active"]
+            result["^"] = [i for i, v in enumerate(activity_levels) if v == "Moderate"]
+            result["s"] = [i for i, v in enumerate(activity_levels) if v == "Low"]
 
         elif shape_by == "has_code":
             has_code = (
