@@ -6,6 +6,11 @@ DOCS_DIR="$SCRIPT_DIR/../docs"
 cd "$DOCS_DIR"
 
 SYMLINK_CREATED=false
+if [ -e "output" ] && [ ! -L "output" ]; then
+  BACKUP_DIR="output.backup.$(date +%s)"
+  echo "⚠️ docs/output 不是符號連結，已備份為 $BACKUP_DIR"
+  mv output "$BACKUP_DIR"
+fi
 if [ ! -e "output" ]; then
   ln -s ../output output
   SYMLINK_CREATED=true
