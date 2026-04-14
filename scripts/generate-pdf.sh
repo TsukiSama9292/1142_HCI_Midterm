@@ -18,7 +18,7 @@ if [ "$SYMLINK_CREATED" = true ]; then
   rm -f output
 fi
 
-OUTPUT="_book/complete_book.pdf"
+OUTPUT="_book/docs.pdf"
 if [ -f "$OUTPUT" ]; then
   echo "✅ PDF 生成完成：$(pwd)/$OUTPUT"
 else

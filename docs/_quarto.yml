@@ -10,10 +10,16 @@ crossref:
   title-delim: " "
   labels: arabic
 
+title: "Stack Overflow 社會網路分析 (SNA)"
+author:
+  - name: "B1143015 林宣佑"
+  - name: "B1143021 林成瑋"
+  - name: "B1143009 吳秉融"
+  - name: "R1343012 鄭煒霖"
+subtitle: |
+  1142_人機介面與行為分析 期中報告
+  指導教授：朱志明副教授
 book:
-  title: "Stack Overflow 社會網路分析 (SNA)"
-  author: "TsukiSama9292"
-  output-file: complete_book
   chapters:
     - index.qmd
     - 01_RESEARCH_MOTIVATION.qmd
