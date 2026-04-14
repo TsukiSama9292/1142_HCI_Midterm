@@ -429,9 +429,10 @@ class SNARunner:
             },
             "analysis_12": {
                 "colors": {
-                    "Green-Active": "#4CAF50",
-                    "Yellow-Moderate": "#FFC107",
-                    "Gray-Casual": "#9E9E9E",
+                    "Red-Power Reviewer": "#F44336",
+                    "Orange-Active Reviewer": "#FF9800",
+                    "Green-Casual Reviewer": "#4CAF50",
+                    "Gray-None": "#BDBDBD",
                 },
                 "shapes": {
                     "Circle-Reviewer": "o",
