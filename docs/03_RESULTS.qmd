@@ -15,11 +15,11 @@
 | RQ3 | ![](output/analysis_3_network_raw.png) | ![](output/analysis_3_network.png) | 標籤共現網路；呈現明顯技術領域群聚。 |
 | RQ4 | ![](output/analysis_4_network_raw.png) | ![](output/analysis_4_network.png) | 連通分量結構；大量小型孤立子網路。 |
 | RQ5 | ![](output/analysis_5_network_raw.png) | ![](output/analysis_5_network.png) | 內容特徵與分數比較；含程式碼貼文分數未優於非程式碼。 |
-| RQ6 | ![](output/analysis_6_network_raw.png) | ![](output/analysis_6_network.png) | 帳號年資與行為分布；中高年資使用者較多。 |
-| RQ7 | ![](output/analysis_7_network_raw.png) | ![](output/analysis_7_network.png) | 投票網路；upvote 佔多數。 |
-| RQ8 | ![](output/analysis_8_network_raw.png) | ![](output/analysis_8_network.png) | 評論網路密度低；互動較為分散。 |
-| RQ9 | ![](output/analysis_9_network_raw.png) | ![](output/analysis_9_network.png) | 徽章與使用者分布；多數使用者僅擁有少量徽章。 |
-| RQ10 | ![](output/analysis_10_network_raw.png) | ![](output/analysis_10_network.png) | 編輯協作網路；協作核心清晰。 |
+| RQ6 | ![](output/analysis_6_network_raw.png) | ![](output/analysis_6_network.png) | 帳號年資與行為分布；低年資使用者更傾向提問，高年資使用者更傾向回答問題而非單純提問。 |
+| RQ7 | ![](output/analysis_7_network_raw.png) | ![](output/analysis_7_network.png) | 投票網路；使用者傾向讚美他人而謹慎負面評價。 |
+| RQ8 | ![](output/analysis_8_network_raw.png) | ![](output/analysis_8_network.png) | 評論網路；評論頻率相近更容易出現在同個評論區，大多數人較少評論。 |
+| RQ9 | ![](output/analysis_9_network_raw.png) | ![](output/analysis_9_network.png) | 徽章與使用者分布；徽章獲取的條件相近則更可能同時獲得，高等級徽章更難同時獲得。 |
+| RQ10 | ![](output/analysis_10_network_raw.png) | ![](output/analysis_10_network.png) | 編輯協作網路；編輯頻率相近更可能共同編輯，大多數不活躍的編輯者不共同編輯。 |
 | RQ11 | ![](output/analysis_11_network_raw.png) | ![](output/analysis_11_network.png) | 問題引用與 duplicate 結構；重複問題接近三成。 |
 | RQ12 | ![](output/analysis_12_network_raw.png) | ![](output/analysis_12_network.png) | 審核任務；SuggestedEdit 與 Close 占比較大比例。 |
 | RQ13 | ![](output/analysis_13_network_raw.png) | ![](output/analysis_13_network.png) | 賞金網路；懸賞活動高度活躍。 |
@@ -104,13 +104,13 @@
 ![](output/analysis_6_network_raw.png)
 :::
 
-原始網路描繪使用者年資與行為類型的連結，讓讀者直接看見不同年資節點在網路中的位置。聚合圖則將年資類別分群展示：
+原始網路描繪局部使用者年資與行為類型的連結，讓讀者直接看見不同年資節點在網路中的位置。聚合圖則將年資類別分群展示：
 
 :::{#fig:rq6_agg}
 ![](output/analysis_6_network.png)
 :::
 
-此聚合圖呈現 Mature、Established、Senior 三個主要年資群，並指出本樣本中新手比例偏低，平均帳號年齡約 3202 天，顯示年資與貢獻型態的差異性。
+此聚合圖呈現 Mature、Established、Senior 三個主要年資群，新手更傾向提問，而年資較高的群體較少只問問題並較多回答問題，顯示年資與貢獻型態的差異性。
 
 ### RQ7 投票行為網路
 
@@ -118,13 +118,7 @@
 ![](output/analysis_7_network_raw.png)
 :::
 
-原始投票網路顯示投票者與被投票貼文之間的細節連接。聚合圖則按投票類型與影響力分群：
-
-:::{#fig:rq7_agg}
-![](output/analysis_7_network.png)
-:::
-
-結果顯示 20,000 次投票中 upvote 佔 16,751 次，downvote 佔 3,249 次，說明本次樣本的投票結構高度偏向正向評價。
+原始投票網路顯示左方為只受正面票的使用者，而右方為只受負面票的使用者，中間則是兩種皆有，能看出使用者不吝於讚賞他人，而謹慎地進行負面評價。
 
 ### RQ8 評論互動網路
 
@@ -132,13 +126,13 @@
 ![](output/analysis_8_network_raw.png)
 :::
 
-此原始圖描繪評論者在相同問題上的共現連結，讓人能直觀觀察哪些評論者同時出現在同一問題下。聚合圖則展示評論網路的密度與分布差異：
+此原始圖描繪評論者在相同問題上的共現連結，局部則較難看出關聯。聚合圖則展示評論網路的密度與分布差異：
 
 :::{#fig:rq8_agg}
 ![](output/analysis_8_network.png)
 :::
 
-聚合結果顯示網路密度僅 0.00034，平均每人約 6.66 則評論，說明評論互動在本樣本中較為稀疏且分散。
+聚合結果顯示絕大多數評論的使用者較少評論，並且較常評論的使用者更容易與自身評論頻率相近的其他使用者出現在同個評論區，不同評論頻率的群體間較少往來。
 
 ### RQ9 徽章成就網路
 
@@ -146,13 +140,7 @@
 ![](output/analysis_9_network_raw.png)
 :::
 
-原始徽章網路展示徽章節點與使用者節點之間的直接連結。聚合圖則依徽章類別與使用者分布進行壓縮展示：
-
-:::{#fig:rq9_agg}
-![](output/analysis_9_network.png)
-:::
-
-此圖反映 500 枚徽章分布於 491 位使用者，多數使用者僅持有少量徽章，顯示成就分布相對分散。
+原始徽章網路展示使用者獲得相似徽章的關係，可以看出較少使用者達到高等級的徽章，並且可以看出數量最多的銅徽章使用者呈現聚集成多個群集，有些群集間有往來，有些則無，這可能說明不同徽章獲取條件有所差異，有些要求條件相近而更容易同時獲取，其他則相差較遠，更難同時獲取。除此之外，看銀徽章使用者能發現較高等級的徽章較難同時獲取。
 
 ### RQ10 編輯協作網路
 
@@ -160,13 +148,13 @@
 ![](output/analysis_10_network_raw.png)
 :::
 
-原始圖呈現共同編輯者之間的全量連結，反映協作關係的真實網路樣貌。聚合圖則強調協作核心與主要維護節點：
+原始圖呈現共同編輯者之間的全量連結，反映協作關係的真實網路樣貌，局部則較難看出關聯。聚合圖則強調協作核心與主要維護節點：
 
 :::{#fig:rq10_agg}
 ![](output/analysis_10_network.png)
 :::
 
-在聚合視角下，協作網路中的核心節點更為明顯，說明編輯協作具備集中化趨勢與明確的核心參與者。
+在聚合視角下，可以看出較不活躍的編輯者更少共同編輯，而編輯頻率相近的編輯者更可能共同編輯，編輯頻率越高，共同編輯的比例越高。
 
 ### RQ11 引用與重複問題網路
 
