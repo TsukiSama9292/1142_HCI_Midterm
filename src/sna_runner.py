@@ -293,12 +293,13 @@ class SNARunner:
             },
             "analysis_3": {
                 "colors": {
-                    "LightBlue-Web": "#81D4FA",
-                    "Pink-AI/Data": "#F8BBD9",
-                    "Green-Mobile": "#A5D6A7",
-                    "Yellow-Backend": "#FFE082",
-                    "Purple-Database": "#CE93D8",
-                    "Gray-Other": "#E0E0E0",
+                    "Web": "#42A5F5",
+                    "AI_ML": "#FB8C00",
+                    "DataScience": "#5E35B1",
+                    "Backend": "#8E24AA",
+                    "Database": "#FFB300",
+                    "DevOps": "#43A047",
+                    "Other": "#9E9E9E",
                 },
                 "edge_weights": {
                     "Thick-High Co-occurrence": 3.0,

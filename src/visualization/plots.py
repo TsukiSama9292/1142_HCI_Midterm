@@ -37,14 +37,14 @@ COLOR_MAPS = {
         "0_Unresolved": "#9E9E9E",  # 灰色 - 未解決
     },
     "tech_domain": {
-        "Web": "#81D4FA",  # 淡藍色 - Web技術
-        "AI_ML": "#F8BBD9",  # 桃紅色 - 數據科學/AI
-        "Mobile": "#A5D6A7",  # 綠色 - 行動開發
-        "DataScience": "#F8BBD9",  # 桃紅色 - 數據科學
-        "Backend": "#FFE082",  # 黃色 - 後端
-        "Database": "#CE93D8",  # 紫色 - 資料庫
-        "DevOps": "#FFCC80",  # 橙色 - DevOps
-        "Other": "#E0E0E0",  # 灰色 - 其他
+        "Web": "#42A5F5",  # Web技術
+        "AI_ML": "#FB8C00",  # AI/ML
+        "Mobile": "#A5D6A7",  # 行動開發
+        "DataScience": "#5E35B1",  # 資料科學
+        "Backend": "#8E24AA",  # 後端
+        "Database": "#FFB300",  # 資料庫
+        "DevOps": "#43A047",  # DevOps
+        "Other": "#9E9E9E",  # 其他
     },
     "connectivity": {
         "main_component": "#1565C0",  # 深藍色 - 主連通分量
