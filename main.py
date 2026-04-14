@@ -91,6 +91,18 @@ def load_limit_config(config_path: str) -> dict:
     return normalized
 
 
+def parse_limit(value: str) -> int:
+    try:
+        limit_value = int(value)
+    except ValueError as err:
+        raise argparse.ArgumentTypeError("limit must be an integer") from err
+
+    if limit_value < 1 or limit_value > 10000:
+        raise argparse.ArgumentTypeError("limit must be between 1 and 10000")
+
+    return limit_value
+
+
 def get_analysis_limit(analysis_id: int, base_limit: int, limit_config: dict | None):
     if not limit_config:
         return base_limit
@@ -254,7 +266,10 @@ def main():
     )
 
     parser.add_argument(
-        "--limit", type=int, default=100, help="查詢的資料筆數 (預設: 100)"
+        "--limit",
+        type=parse_limit,
+        default=100,
+        help="查詢的資料筆數，介於 1 到 10000 之間 (預設: 100)",
     )
 
     parser.add_argument(

@@ -28,8 +28,8 @@ class DataLoader:
         - 4_Expert: 大神 (>50,000)
         """
         if user_ids:
-            user_ids_str = ",".join([str(uid) for uid in user_ids[:1000]])
-            cache_key = f"users_by_ids_{user_ids_str}"
+            user_ids_str = ",".join(str(uid) for uid in user_ids)
+            cache_key = f"users_by_ids_{hash(user_ids_str)}"
         else:
             cache_key = f"users_{limit}"
 
@@ -37,6 +37,10 @@ class DataLoader:
             return self._cache[cache_key]
 
         if user_ids:
+            chunks = [user_ids[i : i + 1000] for i in range(0, len(user_ids), 1000)]
+            in_clauses = " OR ".join(
+                f"id IN ({','.join(str(uid) for uid in chunk)})" for chunk in chunks
+            )
             sql = f"""
             SELECT
                 id,
@@ -55,7 +59,7 @@ class DataLoader:
                     ELSE '0_None'
                 END AS reputation_level
             FROM {DATASET}.users
-            WHERE id IN ({user_ids_str})
+            WHERE {in_clauses}
             """
         else:
             sql = f"""
@@ -195,8 +199,8 @@ class DataLoader:
     ) -> pd.DataFrame:
         """載入用戶連通性（識別知識孤島）"""
         if user_ids:
-            user_ids_str = ",".join([str(uid) for uid in user_ids[:1000]])
-            cache_key = f"connectivity_by_ids_{user_ids_str}"
+            user_ids_str = ",".join(str(uid) for uid in user_ids)
+            cache_key = f"connectivity_by_ids_{hash(user_ids_str)}"
         else:
             cache_key = f"connectivity_{limit}"
 
@@ -204,6 +208,10 @@ class DataLoader:
             return self._cache[cache_key]
 
         if user_ids:
+            chunks = [user_ids[i : i + 1000] for i in range(0, len(user_ids), 1000)]
+            in_clauses = " OR ".join(
+                f"u.id IN ({','.join(str(uid) for uid in chunk)})" for chunk in chunks
+            )
             sql = f"""
             SELECT
                 u.id AS user_id,
@@ -221,7 +229,7 @@ class DataLoader:
             FROM {DATASET}.users u
             LEFT JOIN {DATASET}.posts_questions p ON u.id = p.owner_user_id AND EXTRACT(YEAR FROM p.creation_date) = 2021
             LEFT JOIN {DATASET}.comments c ON u.id = c.user_id AND EXTRACT(YEAR FROM c.creation_date) = 2021
-            WHERE u.id IN ({user_ids_str})
+            WHERE {in_clauses}
             GROUP BY u.id, u.display_name, u.reputation
             ORDER BY total_interactions ASC
             LIMIT {limit}
