@@ -1,178 +1,120 @@
 {
-  "analysis_6_account_age": {
+  "analysis_9_badge_network": {
     "graph": {
-      "nodes": 468,
-      "edges": 289
+      "nodes": 491,
+      "edges": 11661
     },
-    "age_df": [
+    "badges_df": [
       {
-        "user_id": 12567365,
-        "display_name": "andrewJames",
-        "reputation": 15476,
-        "account_creation_date": "2019-12-19 20:30:15.043000+00:00",
-        "account_age_days": 2308,
-        "question_count": 2,
-        "answer_count": 327,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
+        "badge_id": 44663270,
+        "user_id": 17806714,
+        "badge_name": "Informed",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:59:58.707000+00:00",
+        "reputation": 3,
+        "display_name": "Andrew M"
       },
       {
-        "user_id": 17116838,
-        "display_name": "maca",
-        "reputation": 430,
-        "account_creation_date": "2021-10-09 23:39:40.640000+00:00",
-        "account_age_days": 1648,
-        "question_count": 26,
-        "answer_count": 14,
-        "post_type": "1_Both",
-        "account_age_level": "3_Mature"
-      },
-      {
-        "user_id": 16003875,
-        "display_name": "rumpypumpydumpy",
-        "reputation": 2940,
-        "account_creation_date": "2021-05-22 23:45:00.177000+00:00",
-        "account_age_days": 1788,
-        "question_count": 0,
-        "answer_count": 193,
-        "post_type": "3_AnswersOnly",
-        "account_age_level": "3_Mature"
-      },
-      {
-        "user_id": 10687377,
-        "display_name": "Carina",
+        "badge_id": 44663269,
+        "user_id": 17805740,
+        "badge_name": "Informed",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:58:31.807000+00:00",
         "reputation": 7,
-        "account_creation_date": "2018-11-21 18:07:11.387000+00:00",
-        "account_age_days": 2701,
-        "question_count": 3,
-        "answer_count": 1,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
+        "display_name": "Shilab66"
       },
       {
-        "user_id": 157247,
-        "display_name": "T.J. Crowder",
-        "reputation": 980540,
-        "account_creation_date": "2009-08-16 11:00:22.497000+00:00",
-        "account_age_days": 6085,
-        "question_count": 4,
-        "answer_count": 1263,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
+        "badge_id": 44663268,
+        "user_id": 207337,
+        "badge_name": "Nice Answer",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 2766,
+        "display_name": "Hugh Brackett"
       },
       {
-        "user_id": 9676887,
-        "display_name": "Jose Lora",
-        "reputation": 1514,
-        "account_creation_date": "2018-04-20 21:50:46.700000+00:00",
-        "account_age_days": 2916,
-        "question_count": 1,
-        "answer_count": 56,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
+        "badge_id": 44663261,
+        "user_id": 12060157,
+        "badge_name": "Supporter",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 45,
+        "display_name": "JJS_Vegu"
       },
       {
-        "user_id": 1491895,
-        "display_name": "Barmar",
-        "reputation": 694414,
-        "account_creation_date": "2012-06-29 18:12:29.927000+00:00",
-        "account_age_days": 5037,
-        "question_count": 0,
-        "answer_count": 2969,
-        "post_type": "3_AnswersOnly",
-        "account_age_level": "5_Senior"
+        "badge_id": 44663244,
+        "user_id": 17805150,
+        "badge_name": "Autobiographer",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 1,
+        "display_name": "Spencer Peck"
       },
       {
-        "user_id": 3560215,
-        "display_name": "hitman126",
-        "reputation": 569,
-        "account_creation_date": "2014-04-22 11:32:35.307000+00:00",
-        "account_age_days": 4375,
-        "question_count": 35,
-        "answer_count": 5,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
+        "badge_id": 44663266,
+        "user_id": 559552,
+        "badge_name": "Yearling",
+        "badge_class": 2,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 4059,
+        "display_name": "solartic"
       },
       {
-        "user_id": 6703783,
-        "display_name": "Manu Chadha",
-        "reputation": 14148,
-        "account_creation_date": "2016-08-11 07:44:53.787000+00:00",
-        "account_age_days": 3533,
-        "question_count": 33,
-        "answer_count": 3,
-        "post_type": "1_Both",
-        "account_age_level": "4_Established"
+        "badge_id": 44663265,
+        "user_id": 4570731,
+        "badge_name": "Yearling",
+        "badge_class": 2,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 1281,
+        "display_name": "guest"
       },
       {
-        "user_id": 3329922,
-        "display_name": "Tony B",
-        "reputation": 733,
-        "account_creation_date": "2014-02-19 20:33:25.170000+00:00",
-        "account_age_days": 4437,
-        "question_count": 15,
-        "answer_count": 5,
-        "post_type": "1_Both",
-        "account_age_level": "5_Senior"
+        "badge_id": 44663251,
+        "user_id": 9203876,
+        "badge_name": "Popular Question",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 197,
+        "display_name": "Federico Bellini"
+      },
+      {
+        "badge_id": 44663257,
+        "user_id": 16851479,
+        "badge_name": "Student",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 17,
+        "display_name": "Keyur Diwan"
+      },
+      {
+        "badge_id": 44663243,
+        "user_id": 17806758,
+        "badge_name": "Autobiographer",
+        "badge_class": 3,
+        "tag_based": false,
+        "date": "2021-12-31 23:56:32.867000+00:00",
+        "reputation": 1,
+        "display_name": "Carey Dalrymple"
       }
     ],
-    "patterns": "[AgeContributionPattern(age_level='3_Mature', avg_reputation=np.float64(561.0855614973262), avg_questions=np.float64(4.245989304812834), avg_answers=np.float64(20.427807486631018), both_ratio=0.4117647058823529, questions_only_ratio=0.47593582887700536, answers_only_ratio=0.11229946524064172), AgeContributionPattern(age_level='4_Established', avg_reputation=np.float64(5744.458333333333), avg_questions=np.float64(7.216666666666667), avg_answers=np.float64(79.58333333333333), both_ratio=0.5166666666666667, questions_only_ratio=0.225, answers_only_ratio=0.25833333333333336), AgeContributionPattern(age_level='5_Senior', avg_reputation=np.float64(47857.17391304348), avg_questions=np.float64(5.217391304347826), avg_answers=np.float64(241.88198757763976), both_ratio=0.6335403726708074, questions_only_ratio=0.10559006211180125, answers_only_ratio=0.2608695652173913)]",
-    "behavior_evolution": {
-      "reputation_growth": {
-        "Mature": 561.0855614973262,
-        "Established": 5744.458333333333,
-        "Senior": 47857.17391304348
-      },
-      "question_trend": {
-        "Mature": 4.245989304812834,
-        "Established": 7.216666666666667,
-        "Senior": 5.217391304347826
-      },
-      "answer_trend": {
-        "Mature": 20.427807486631018,
-        "Established": 79.58333333333333,
-        "Senior": 241.88198757763976
-      }
-    },
     "summary": {
-      "total_users": 468,
-      "age_level_distribution": {
-        "3_Mature": {
-          "count": 187,
-          "avg_reputation": 561.0855614973262
-        },
-        "4_Established": {
-          "count": 120,
-          "avg_reputation": 5744.458333333333
-        },
-        "5_Senior": {
-          "count": 161,
-          "avg_reputation": 47857.17391304348
-        }
-      },
-      "newcomer_questions_only_ratio": 0,
-      "senior_answers_only_ratio": 0.2608695652173913,
-      "veteran_both_ratio": 0,
-      "avg_account_age_days": 3058.58547008547,
-      "behavior_evolution": {
-        "reputation_growth": {
-          "Mature": 561.0855614973262,
-          "Established": 5744.458333333333,
-          "Senior": 47857.17391304348
-        },
-        "question_trend": {
-          "Mature": 4.245989304812834,
-          "Established": 7.216666666666667,
-          "Senior": 5.217391304347826
-        },
-        "answer_trend": {
-          "Mature": 20.427807486631018,
-          "Established": 79.58333333333333,
-          "Senior": 241.88198757763976
-        }
-      },
-      "hypothesis_newbie_asks_more": false,
-      "hypothesis_veteran_answers_more": false
+      "total_badges": 500,
+      "unique_users": 491,
+      "avg_badges_per_user": 1.0183299389002036,
+      "badge_distribution": {
+        "3": 385,
+        "2": 108,
+        "1": 7
+      }
     }
   }
 }

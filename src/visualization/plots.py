@@ -333,7 +333,7 @@ class SNAPlotter:
                 "1_Gold": "#FFD700",
                 "2_Silver": "#C0C0C0",
                 "3_Bronze": "#CD7F32",
-                "0_None": "#BDBDBD",
+                "0_None": "#4CAF50",
             }
             return [color_map.get(str(v), default_color) for v in values]
 
@@ -475,6 +475,17 @@ class SNAPlotter:
             )
             result["o"] = [i for i, v in enumerate(has_code) if v == 1 or v == "yes"]
             result["s"] = [i for i, v in enumerate(has_code) if v == 0 or v == "no"]
+
+        elif shape_by == "badge_level":
+            badge_levels = (
+                list(graph.vs["badge_level"])
+                if "badge_level" in graph.vs.attribute_names()
+                else []
+            )
+            result["o"] = [i for i, v in enumerate(badge_levels) if v == "1_Gold"]
+            result["s"] = [i for i, v in enumerate(badge_levels) if v == "2_Silver"]
+            result["^"] = [i for i, v in enumerate(badge_levels) if v == "3_Bronze"]
+            result["d"] = [i for i, v in enumerate(badge_levels) if v == "0_None"]
 
         return result
 

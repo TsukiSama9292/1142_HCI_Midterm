@@ -388,13 +388,16 @@ class SNARunner:
             },
             "analysis_9": {
                 "colors": {
-                    "Gold-Gold Badge": "#FFD700",
-                    "Silver-Silver Badge": "#C0C0C0",
-                    "Bronze-Bronze Badge": "#CD7F32",
+                    "Gold Badge": "#FFD700",
+                    "Silver Badge": "#C0C0C0",
+                    "Bronze Badge": "#CD7F32",
+                    "No Badge": "#4CAF50",
                 },
                 "shapes": {
-                    "Circle-Top Earner": "o",
-                    "Triangle-Regular": "^",
+                    "Circle-Gold Badge": "o",
+                    "Square-Silver Badge": "s",
+                    "Triangle-Bronze Badge": "^",
+                    "Diamond-No Badge": "d",
                 },
                 "edge_weights": {
                     "Thick-Strong Tie": 3.0,
@@ -595,6 +598,7 @@ class SNARunner:
                     result["graph"],
                     "Method 9: Badge Achievement Network\nNodes=Users, Edges=Shared Badges | Color: Badge Level",
                     color_by="badge_level",
+                    shape_by="badge_level",
                     filename="analysis_9_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_9"],
                 )
