@@ -684,34 +684,43 @@ class SNARunner:
         import matplotlib.patches as mpatches
 
         node_positions = {
+            "0_None": (0.5, 0.35),
             "1_Low": (0.5, 0.9),
             "2_Medium": (0.85, 0.6),
             "3_Senior": (0.15, 0.6),
             "4_Expert": (0.5, 0.15),
         }
         node_colors = {
+            "0_None": "#90CAF9",
             "1_Low": "#4CAF50",
             "2_Medium": "#FFD700",
             "3_Senior": "#FF9800",
             "4_Expert": "#F44336",
         }
         node_labels = {
+            "0_None": "Unknown",
             "1_Low": "Low",
             "2_Medium": "Mid",
             "3_Senior": "Senior",
             "4_Expert": "Expert",
         }
 
-        rep_counts = {"1_Low": 0, "2_Medium": 0, "3_Senior": 0, "4_Expert": 0}
+        rep_counts = {
+            "0_None": 0,
+            "1_Low": 0,
+            "2_Medium": 0,
+            "3_Senior": 0,
+            "4_Expert": 0,
+        }
         node_rep_map = {}
         for i, v in enumerate(graph.vs):
             rep_level = (
                 v["reputation_level"]
                 if "reputation_level" in v.attributes()
-                else "1_Low"
+                else "0_None"
             )
             if rep_level not in rep_counts:
-                rep_level = "1_Low"
+                rep_level = "0_None"
             rep_counts[rep_level] += 1
             node_rep_map[i] = rep_level
 
@@ -751,6 +760,11 @@ class SNARunner:
             )
 
         pair_color_map = {
+            ("0_None", "0_None"): "#90CAF9",
+            ("0_None", "1_Low"): "#81D4FA",
+            ("0_None", "2_Medium"): "#4FC3F7",
+            ("0_None", "3_Senior"): "#29B6F6",
+            ("0_None", "4_Expert"): "#0288D1",
             ("1_Low", "1_Low"): "#4CAF50",
             ("1_Low", "2_Medium"): "#8BC34A",
             ("1_Low", "3_Senior"): "#FFC107",
@@ -764,6 +778,11 @@ class SNARunner:
         }
 
         pair_label_map = {
+            ("0_None", "0_None"): "Unknown↔Unknown",
+            ("0_None", "1_Low"): "Unknown↔Low",
+            ("0_None", "2_Medium"): "Unknown↔Mid",
+            ("0_None", "3_Senior"): "Unknown↔Senior",
+            ("0_None", "4_Expert"): "Unknown↔Expert",
             ("1_Low", "1_Low"): "Low↔Low",
             ("1_Low", "2_Medium"): "Mid↔Low",
             ("1_Low", "3_Senior"): "Senior↔Low",
