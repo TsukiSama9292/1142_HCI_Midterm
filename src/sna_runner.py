@@ -645,7 +645,7 @@ class SNARunner:
             if "graph" in result and result["graph"] is not None:
                 self.plotter.plot_network_graph(
                     result["graph"],
-                    "Method 13: Bounty Network\nNodes=Users, Edges=Bounty | Color: Bounty Level",
+                    "Method 13: Bounty Network (Shared Tags)\nNodes=Users, Edges=Shared Tags | Color: Bounty Level",
                     color_by="bounty_level",
                     filename="analysis_13_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_13"],
@@ -1916,7 +1916,7 @@ class SNARunner:
         }
         colors = {
             "0_None": "#9E9E9E",
-            "1_Meager": "#42A5F5",
+            "1_Meager": "#9E9E9E",
             "2_Normal": "#4CAF50",
             "3_Generous": "#FFC107",
             "4_Extravagant": "#F44336",
@@ -1961,7 +1961,7 @@ class SNARunner:
             ax.text(
                 x,
                 y,
-                f"{lvl.replace('_', ' ')}\n({count})",
+                f"{count} users",
                 ha="center",
                 va="center",
                 fontsize=10,
@@ -1978,6 +1978,19 @@ class SNARunner:
             x2, y2 = positions[n2]
             thickness = max(2, cnt / max_count * 12)
             color = colors.get(n1, "#9E9E9E")
+            if n1 == n2:
+                ax.text(
+                    x1,
+                    y1 + 0.12,
+                    f"{cnt} self-links",
+                    ha="center",
+                    va="bottom",
+                    fontsize=9,
+                    fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                    zorder=5,
+                )
+                continue
             ax.annotate(
                 "",
                 xy=(x2, y2),
@@ -2010,7 +2023,7 @@ class SNARunner:
             title="Bounty Level",
         )
         ax.set_title(
-            "Method 13: Bounty Network\nNodes=Users (grouped by bounty activity), Edges=Shared Tags",
+            "Method 13: Bounty Network (Shared Tags)\nNodes=Users (grouped by bounty activity), Edges=Shared Tags\nNode label = bounty level + user count",
             fontsize=13,
             fontweight="bold",
             pad=15,

@@ -1,7 +1,7 @@
 """
-分析主題 13: 賞金懸賞網路分析
+分析主題 13: 賞金懸賞共用標籤網路分析
 ==============================
-分析懸賞者與回答者之間的賞金分配關係
+分析以賞金活動為基礎，建立使用者之間的共用標籤關聯網路
 """
 
 from typing import Dict, Any, Tuple
@@ -14,7 +14,7 @@ from ..models.graph_builder import GraphBuilder
 
 
 class BountyNetworkBuilder(GraphBuilder):
-    """賞金懸賞網路建構器"""
+    """賞金懸賞共用標籤網路建構器"""
 
     def build_bounty_network(self, limit: int = 100) -> Tuple[ig.Graph, pd.DataFrame]:
         sample_size = limit * 50
@@ -123,7 +123,7 @@ class BountyNetworkBuilder(GraphBuilder):
 
 
 class BountyNetworkAnalyzer:
-    """賞金懸賞網路分析器"""
+    """賞金懸賞共用標籤網路分析器"""
 
     def __init__(self, data_loader: DataLoader = None):
         self.data_loader = data_loader or DataLoader()
@@ -133,7 +133,7 @@ class BountyNetworkAnalyzer:
 
     def run(self, limit: int = 100) -> Dict[str, Any]:
         print("\n" + "=" * 60)
-        print("分析主題 13: 賞金懸賞網路分析")
+        print("分析主題 13: 賞金懸賞共用標籤網路分析")
         print("=" * 60)
 
         self.graph, self.bounties_df = self.builder.build_bounty_network(limit=limit)

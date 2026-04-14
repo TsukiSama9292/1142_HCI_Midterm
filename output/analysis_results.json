@@ -1,116 +1,150 @@
 {
-  "analysis_10_edit_collaboration": {
+  "analysis_13_bounty_network": {
     "graph": {
-      "nodes": 510,
-      "edges": 183
+      "nodes": 405,
+      "edges": 4872
     },
-    "edits_df": [
+    "bounties_df": [
       {
-        "history_id": 261063327,
-        "post_id": 70545242,
-        "editor_id": null,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-31 19:44:19.707000+00:00",
-        "edit_comment": "added 4 characters in body",
+        "vote_id": 237569320,
+        "post_id": 68867796,
+        "vote_type_id": 8,
+        "creation_date": "2021-08-26 00:00:00+00:00",
+        "post_owner_id": null,
+        "title": "Is there any way in JS to select only specific tag elements",
+        "post_score": -3,
+        "tags": "javascript|html|css",
         "reputation": null,
-        "display_name": null
+        "display_name": null,
+        "bounty_type": "BountyStart"
       },
       {
-        "history_id": 261004592,
-        "post_id": 70533895,
-        "editor_id": null,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-30 16:06:57.167000+00:00",
-        "edit_comment": "deleted 88 characters in body",
-        "reputation": null,
-        "display_name": null
+        "vote_id": 224384767,
+        "post_id": 65669683,
+        "vote_type_id": 8,
+        "creation_date": "2021-01-13 00:00:00+00:00",
+        "post_owner_id": 108999,
+        "title": "TeamsBot - How do I get the Team Id from a conversationupdate event?",
+        "post_score": 6,
+        "tags": "c#|botframework|microsoft-teams",
+        "reputation": 4433,
+        "display_name": "Corv1nus",
+        "bounty_type": "BountyStart"
       },
       {
-        "history_id": 261064867,
-        "post_id": 70537476,
-        "editor_id": 2701322,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-31 20:42:21.257000+00:00",
-        "edit_comment": "added 5 characters in body",
-        "reputation": 1327,
-        "display_name": "Jim Factor"
+        "vote_id": 224898849,
+        "post_id": 65669683,
+        "vote_type_id": 9,
+        "creation_date": "2021-01-21 00:00:00+00:00",
+        "post_owner_id": 108999,
+        "title": "TeamsBot - How do I get the Team Id from a conversationupdate event?",
+        "post_score": 6,
+        "tags": "c#|botframework|microsoft-teams",
+        "reputation": 4433,
+        "display_name": "Corv1nus",
+        "bounty_type": "BountyClose"
       },
       {
-        "history_id": 261030283,
-        "post_id": 70537476,
-        "editor_id": 2701322,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-31 03:49:48.453000+00:00",
-        "edit_comment": "added 71 characters in body",
-        "reputation": 1327,
-        "display_name": "Jim Factor"
+        "vote_id": 232922617,
+        "post_id": 67607413,
+        "vote_type_id": 8,
+        "creation_date": "2021-06-03 00:00:00+00:00",
+        "post_owner_id": 598683,
+        "title": "You tried to parse SCSS with the standard CSS parser; try again with the postcss-scss parser after Angular 12 update",
+        "post_score": 44,
+        "tags": "angular|angular-cli",
+        "reputation": 32556,
+        "display_name": "Brandon Taylor",
+        "bounty_type": "BountyStart"
       },
       {
-        "history_id": 261030306,
-        "post_id": 70537399,
-        "editor_id": 2701322,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-31 03:51:25.987000+00:00",
-        "edit_comment": "added 649 characters in body",
-        "reputation": 1327,
-        "display_name": "Jim Factor"
+        "vote_id": 239930360,
+        "post_id": 69430341,
+        "vote_type_id": 8,
+        "creation_date": "2021-10-09 00:00:00+00:00",
+        "post_owner_id": 4818123,
+        "title": "Now to make path aliases of imports visible in nuxt.config.ts?",
+        "post_score": 1,
+        "tags": "typescript|nuxt.js",
+        "reputation": 169,
+        "display_name": "Takeshi Tokugawa YD",
+        "bounty_type": "BountyStart"
       },
       {
-        "history_id": 261049306,
-        "post_id": 70534572,
-        "editor_id": 783119,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-31 13:07:20.593000+00:00",
-        "edit_comment": "Correct product name spelling/capitalisation",
-        "reputation": 151538,
-        "display_name": "LazyOne"
+        "vote_id": 240342198,
+        "post_id": 69430341,
+        "vote_type_id": 9,
+        "creation_date": "2021-10-17 00:00:00+00:00",
+        "post_owner_id": 4818123,
+        "title": "Now to make path aliases of imports visible in nuxt.config.ts?",
+        "post_score": 1,
+        "tags": "typescript|nuxt.js",
+        "reputation": 169,
+        "display_name": "Takeshi Tokugawa YD",
+        "bounty_type": "BountyClose"
       },
       {
-        "history_id": 261049307,
-        "post_id": 70534572,
-        "editor_id": 783119,
-        "post_history_type_id": 4,
-        "creation_date": "2021-12-31 13:07:20.593000+00:00",
-        "edit_comment": "Correct product name spelling/capitalisation",
-        "reputation": 151538,
-        "display_name": "LazyOne"
+        "vote_id": 241270569,
+        "post_id": 69670535,
+        "vote_type_id": 9,
+        "creation_date": "2021-11-03 00:00:00+00:00",
+        "post_owner_id": 155538,
+        "title": "How to get Application ID URI formats working",
+        "post_score": 0,
+        "tags": "azure-web-app-service|azure-identity|hosted-blazor-webassembly",
+        "reputation": 114,
+        "display_name": "Dally Horton",
+        "bounty_type": "BountyClose"
       },
       {
-        "history_id": 261039646,
-        "post_id": 70539883,
-        "editor_id": 783119,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-31 09:10:39.747000+00:00",
-        "edit_comment": "Correct product name spelling/capitalisation, improved formatting",
-        "reputation": 151538,
-        "display_name": "LazyOne"
+        "vote_id": 240829249,
+        "post_id": 69670535,
+        "vote_type_id": 8,
+        "creation_date": "2021-10-25 00:00:00+00:00",
+        "post_owner_id": 155538,
+        "title": "How to get Application ID URI formats working",
+        "post_score": 0,
+        "tags": "azure-web-app-service|azure-identity|hosted-blazor-webassembly",
+        "reputation": 114,
+        "display_name": "Dally Horton",
+        "bounty_type": "BountyStart"
       },
       {
-        "history_id": 261039647,
-        "post_id": 70539883,
-        "editor_id": 783119,
-        "post_history_type_id": 6,
-        "creation_date": "2021-12-31 09:10:39.747000+00:00",
-        "edit_comment": "Correct product name spelling/capitalisation, improved formatting",
-        "reputation": 151538,
-        "display_name": "LazyOne"
+        "vote_id": 229614220,
+        "post_id": 66935830,
+        "vote_type_id": 8,
+        "creation_date": "2021-04-08 00:00:00+00:00",
+        "post_owner_id": 1345060,
+        "title": "Serving an NX monorepo of angular apps in Docker-compose",
+        "post_score": 7,
+        "tags": "angular|docker|docker-compose|docker-volume|nrwl-nx",
+        "reputation": 586,
+        "display_name": "RoXaS",
+        "bounty_type": "BountyStart"
       },
       {
-        "history_id": 261003471,
-        "post_id": 5101485,
-        "editor_id": 1366033,
-        "post_history_type_id": 5,
-        "creation_date": "2021-12-30 15:45:58.190000+00:00",
-        "edit_comment": "clarify title",
-        "reputation": 34318,
-        "display_name": "KyleMit"
+        "vote_id": 239097849,
+        "post_id": 69097407,
+        "vote_type_id": 9,
+        "creation_date": "2021-09-23 00:00:00+00:00",
+        "post_owner_id": 2644620,
+        "title": "JS JQUERY JSPDF How can I download images and input values from a BLOB object as a PDF",
+        "post_score": 2,
+        "tags": "javascript|jquery|jspdf",
+        "reputation": 179,
+        "display_name": "user2644620",
+        "bounty_type": "BountyClose"
       }
     ],
     "summary": {
-      "total_edits": 2000,
-      "unique_editors": 510,
-      "active_editors": 229,
-      "avg_edits_per_editor": 3.8333333333333335
+      "total_bounties": 635,
+      "unique_users": 405,
+      "active_users": 203,
+      "avg_bounties_per_user": 1.5432098765432098,
+      "bounty_type_distribution": {
+        "BountyStart": 429,
+        "BountyClose": 206
+      }
     }
   }
 }
