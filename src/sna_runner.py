@@ -2084,7 +2084,21 @@ class SNARunner:
         ax.axis("off")
 
         # Draw region-to-region connections using the graph edges
-        for edge in graph.es:
+        edge_weights = [edge["weight"] if "weight" in edge.attributes() else 1 for edge in graph.es]
+        if edge_weights:
+            min_w = min(edge_weights)
+            max_w = max(edge_weights)
+            if max_w > min_w:
+                normalized_weights = [
+                    (w - min_w) / (max_w - min_w)
+                    for w in edge_weights
+                ]
+            else:
+                normalized_weights = [0.5] * len(edge_weights)
+        else:
+            normalized_weights = [0.5] * len(graph.es)
+
+        for i, edge in enumerate(graph.es):
             source = graph.vs[edge.tuple[0]]
             target = graph.vs[edge.tuple[1]]
             source_region = source["region"] if "region" in attrs else "Other"
@@ -2095,13 +2109,13 @@ class SNARunner:
                 target_region = "Other"
             x1, y1 = region_positions[source_region]
             x2, y2 = region_positions[target_region]
-            weight = edge["weight"] if "weight" in edge.attributes() else 1
-            linewidth = max(1.0, min(6.0, weight / 1000.0))
+            linewidth = 1.5 + normalized_weights[i] * 4.5
+            alpha = 0.35 + normalized_weights[i] * 0.35
             ax.plot(
                 [x1, x2],
                 [y1, y2],
                 color="#444444",
-                alpha=0.35,
+                alpha=alpha,
                 linewidth=linewidth,
                 zorder=1,
             )

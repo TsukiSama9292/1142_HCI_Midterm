@@ -1,150 +1,115 @@
 {
-  "analysis_13_bounty_network": {
+  "analysis_14_user_location": {
     "graph": {
-      "nodes": 405,
-      "edges": 4872
+      "nodes": 8,
+      "edges": 28
     },
-    "bounties_df": [
+    "users_df": [
       {
-        "vote_id": 237569320,
-        "post_id": 68867796,
-        "vote_type_id": 8,
-        "creation_date": "2021-08-26 00:00:00+00:00",
-        "post_owner_id": null,
-        "title": "Is there any way in JS to select only specific tag elements",
-        "post_score": -3,
-        "tags": "javascript|html|css",
-        "reputation": null,
-        "display_name": null,
-        "bounty_type": "BountyStart"
+        "id": 788,
+        "display_name": "Matt Nelson",
+        "reputation": 991,
+        "location": "Illinois, United States",
+        "up_votes": 214,
+        "down_votes": 5,
+        "region": "North America"
       },
       {
-        "vote_id": 224384767,
-        "post_id": 65669683,
-        "vote_type_id": 8,
-        "creation_date": "2021-01-13 00:00:00+00:00",
-        "post_owner_id": 108999,
-        "title": "TeamsBot - How do I get the Team Id from a conversationupdate event?",
-        "post_score": 6,
-        "tags": "c#|botframework|microsoft-teams",
-        "reputation": 4433,
-        "display_name": "Corv1nus",
-        "bounty_type": "BountyStart"
+        "id": 3354,
+        "display_name": "seanb",
+        "reputation": 6919,
+        "location": "Australia",
+        "up_votes": 592,
+        "down_votes": 15,
+        "region": "Oceania"
       },
       {
-        "vote_id": 224898849,
-        "post_id": 65669683,
-        "vote_type_id": 9,
-        "creation_date": "2021-01-21 00:00:00+00:00",
-        "post_owner_id": 108999,
-        "title": "TeamsBot - How do I get the Team Id from a conversationupdate event?",
-        "post_score": 6,
-        "tags": "c#|botframework|microsoft-teams",
-        "reputation": 4433,
-        "display_name": "Corv1nus",
-        "bounty_type": "BountyClose"
+        "id": 9876,
+        "display_name": "Caleb Huitt - cjhuitt",
+        "reputation": 14580,
+        "location": "Iowa",
+        "up_votes": 4202,
+        "down_votes": 20,
+        "region": "Other"
       },
       {
-        "vote_id": 232922617,
-        "post_id": 67607413,
-        "vote_type_id": 8,
-        "creation_date": "2021-06-03 00:00:00+00:00",
-        "post_owner_id": 598683,
-        "title": "You tried to parse SCSS with the standard CSS parser; try again with the postcss-scss parser after Angular 12 update",
-        "post_score": 44,
-        "tags": "angular|angular-cli",
-        "reputation": 32556,
-        "display_name": "Brandon Taylor",
-        "bounty_type": "BountyStart"
+        "id": 11534,
+        "display_name": "flytzen",
+        "reputation": 7138,
+        "location": "United Kingdom",
+        "up_votes": 450,
+        "down_votes": 7,
+        "region": "Europe"
       },
       {
-        "vote_id": 239930360,
-        "post_id": 69430341,
-        "vote_type_id": 8,
-        "creation_date": "2021-10-09 00:00:00+00:00",
-        "post_owner_id": 4818123,
-        "title": "Now to make path aliases of imports visible in nuxt.config.ts?",
-        "post_score": 1,
-        "tags": "typescript|nuxt.js",
-        "reputation": 169,
-        "display_name": "Takeshi Tokugawa YD",
-        "bounty_type": "BountyStart"
+        "id": 11562,
+        "display_name": "Lars Corneliussen",
+        "reputation": 2503,
+        "location": "Waltrop, Germany",
+        "up_votes": 136,
+        "down_votes": 15,
+        "region": "Europe"
       },
       {
-        "vote_id": 240342198,
-        "post_id": 69430341,
-        "vote_type_id": 9,
-        "creation_date": "2021-10-17 00:00:00+00:00",
-        "post_owner_id": 4818123,
-        "title": "Now to make path aliases of imports visible in nuxt.config.ts?",
-        "post_score": 1,
-        "tags": "typescript|nuxt.js",
-        "reputation": 169,
-        "display_name": "Takeshi Tokugawa YD",
-        "bounty_type": "BountyClose"
+        "id": 12425,
+        "display_name": "Ray Jenkins",
+        "reputation": 123,
+        "location": "Salt Lake City, UT",
+        "up_votes": 59,
+        "down_votes": 0,
+        "region": "Other"
       },
       {
-        "vote_id": 241270569,
-        "post_id": 69670535,
-        "vote_type_id": 9,
-        "creation_date": "2021-11-03 00:00:00+00:00",
-        "post_owner_id": 155538,
-        "title": "How to get Application ID URI formats working",
-        "post_score": 0,
-        "tags": "azure-web-app-service|azure-identity|hosted-blazor-webassembly",
-        "reputation": 114,
-        "display_name": "Dally Horton",
-        "bounty_type": "BountyClose"
+        "id": 15410,
+        "display_name": "Rippo",
+        "reputation": 21616,
+        "location": "United Kingdom",
+        "up_votes": 1126,
+        "down_votes": 44,
+        "region": "Europe"
       },
       {
-        "vote_id": 240829249,
-        "post_id": 69670535,
-        "vote_type_id": 8,
-        "creation_date": "2021-10-25 00:00:00+00:00",
-        "post_owner_id": 155538,
-        "title": "How to get Application ID URI formats working",
-        "post_score": 0,
-        "tags": "azure-web-app-service|azure-identity|hosted-blazor-webassembly",
-        "reputation": 114,
-        "display_name": "Dally Horton",
-        "bounty_type": "BountyStart"
+        "id": 16183,
+        "display_name": "JamesWampler",
+        "reputation": 952,
+        "location": "Bainbridge Island, WA, USA",
+        "up_votes": 185,
+        "down_votes": 1,
+        "region": "North America"
       },
       {
-        "vote_id": 229614220,
-        "post_id": 66935830,
-        "vote_type_id": 8,
-        "creation_date": "2021-04-08 00:00:00+00:00",
-        "post_owner_id": 1345060,
-        "title": "Serving an NX monorepo of angular apps in Docker-compose",
-        "post_score": 7,
-        "tags": "angular|docker|docker-compose|docker-volume|nrwl-nx",
-        "reputation": 586,
-        "display_name": "RoXaS",
-        "bounty_type": "BountyStart"
+        "id": 16974,
+        "display_name": "Alex",
+        "reputation": 26076,
+        "location": "Toulouse, France",
+        "up_votes": 55,
+        "down_votes": 3,
+        "region": "Europe"
       },
       {
-        "vote_id": 239097849,
-        "post_id": 69097407,
-        "vote_type_id": 9,
-        "creation_date": "2021-09-23 00:00:00+00:00",
-        "post_owner_id": 2644620,
-        "title": "JS JQUERY JSPDF How can I download images and input values from a BLOB object as a PDF",
-        "post_score": 2,
-        "tags": "javascript|jquery|jspdf",
-        "reputation": 179,
-        "display_name": "user2644620",
-        "bounty_type": "BountyClose"
+        "id": 20628,
+        "display_name": "Brian Hodge",
+        "reputation": 2105,
+        "location": "California",
+        "up_votes": 55,
+        "down_votes": 9,
+        "region": "North America"
       }
     ],
     "summary": {
-      "total_bounties": 635,
-      "unique_users": 405,
-      "active_users": 203,
-      "avg_bounties_per_user": 1.5432098765432098,
-      "bounty_type_distribution": {
-        "BountyStart": 429,
-        "BountyClose": 206
-      }
+      "total_users": 10000,
+      "unique_regions": 8,
+      "region_distribution": {
+        "Europe": 2772,
+        "Asia": 2233,
+        "Other": 2104,
+        "North America": 1864,
+        "Middle East": 314,
+        "South America": 274,
+        "Oceania": 262,
+        "Africa": 177
+      },
+      "top_region": "Europe"
     }
   }
 }
