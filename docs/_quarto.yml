@@ -1,0 +1,57 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: zh-TW
+
+crossref:
+  fig-title: 圖
+  tbl-title: 表
+  title-delim: " "
+  labels: arabic
+
+book:
+  title: "Stack Overflow 社會網路分析 (SNA)"
+  author: "TsukiSama9292"
+  output-file: complete_book
+  chapters:
+    - index.qmd
+    - 01_RESEARCH_MOTIVATION.qmd
+    - 02_RESEARCH_METHODS.qmd
+    - 03_RESULTS.qmd
+    - 04_UNEXPECTED_OBSERVATIONS.qmd
+    - 05_CONCLUSIONS_AND_RECOMMENDATIONS.qmd
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    papersize: a4
+    margin:
+      x: 2.5cm
+      y: 2.5cm
+    linkcolor: "blue"
+    urlcolor: "blue"
+    colorlinks: true
+    toc: true
+    lot: false
+    lof: false
+    toc-title: "目錄"
+    lof-title: "圖目錄"
+    lot-title: "表目錄"
+    toc-depth: 3
+    number-sections: true
+    number-depth: 3
+    fig-align: center
+    table-align: center
+    tbl-cap-location: bottom
+    fig-cap-location: bottom
+    mainfont: "Noto Sans"
+    sansfont: "Noto Sans"
+    monofont: "Noto Sans Mono"
+    CJKmainfont: "Noto Serif CJK TC"
+    header-includes: |
+      \usepackage{float}
+      \floatplacement{table}{htbp}
+      \usepackage{caption}
+      \captionsetup[table]{labelsep=quad}
+      \captionsetup[figure]{labelsep=quad}

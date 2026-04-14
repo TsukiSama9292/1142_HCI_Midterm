@@ -8,6 +8,8 @@
 
 ## 圖像總覽表
 
+Table: 圖像總覽表
+
 | 分析編號 | 原始圖 (raw) | 聚合圖 | 簡要說明 |
 |---|---|---|---|
 | RQ1 | ![RQ1 raw](../output/analysis_1_network_raw.png) | ![RQ1 agg](../output/analysis_1_network.png) | 使用者回答網路；聲望與中心性分群未明顯對應。 |

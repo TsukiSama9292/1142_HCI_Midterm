@@ -8,3 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+
+/.quarto/
+**/*.quarto_ipynb
+/_book/
+docs/_book/
+docs/output/
+index.log
+index.tex
