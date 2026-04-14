@@ -259,6 +259,7 @@ class SNARunner:
         LEGEND_INFO = {
             "analysis_1": {
                 "colors": {
+                    "Blue-Unknown Reputation": "#90CAF9",
                     "Green-Newcomer (<1K)": "#4CAF50",
                     "Yellow-Mid (1K~10K)": "#FFD700",
                     "Orange-Senior (10K~50K)": "#FF9800",

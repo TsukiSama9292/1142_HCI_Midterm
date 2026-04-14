@@ -98,6 +98,7 @@ class CentralityAnalyzer:
         print(f"  - 聲望與介性中心度相關係數: {correlation:.4f}")
         print(f"  - 高聲望用戶平均介性中心度: {result['high_rep_avg_betweenness']:.4f}")
         print(f"  - 低聲望用戶平均介性中心度: {result['low_rep_avg_betweenness']:.4f}")
+        print(f"  - 未知聲望用戶數: {result['unknown_rep_users']}")
 
         return {
             "graph": self.graph,
@@ -173,10 +174,12 @@ class CentralityAnalyzer:
         high_rep = df[df["reputation_level"] == "4_High"]
         low_rep = df[df["reputation_level"] == "1_Low"]
 
+        unknown_rep = df[df["reputation_level"] == "0_None"]
         summary = {
             "total_users": len(df),
             "high_rep_users": len(high_rep),
             "low_rep_users": len(low_rep),
+            "unknown_rep_users": len(unknown_rep),
             "high_rep_avg_betweenness": high_rep["betweenness"].mean()
             if len(high_rep) > 0
             else 0,
