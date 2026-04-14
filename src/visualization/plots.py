@@ -25,9 +25,9 @@ COLOR_MAPS = {
     "reputation": {
         "0_None": "#90CAF9",
         "1_Low": "#4CAF50",  # 綠色 - 新手 (<1,000)
-        "2_Medium-Low": "#FFD700",  # 黃色 - 中階 (1,000~10,000)
-        "3_Medium-High": "#FF9800",  # 橘色 - 資深 (10,000~50,000)
-        "4_High": "#F44336",  # 紅色 - 大神 (>50,000)
+        "2_Medium": "#FFD700",  # 黃色 - 中階 (1,000~10,000)
+        "3_Senior": "#FF9800",  # 橘色 - 資深 (10,000~50,000)
+        "4_Expert": "#F44336",  # 紅色 - 大神 (>50,000)
     },
     "answer_time": {
         "1_VeryFast": "#4CAF50",  # 綠色 - <1小時
@@ -210,24 +210,27 @@ class SNAPlotter:
                 min_w = weights.min()
                 if max_w > min_w:
                     norm_weights = (weights - min_w) / (max_w - min_w)
-                    line_widths = 1.0 + norm_weights * 5
+                    line_widths = 1.5 + norm_weights * 4.5
                 else:
-                    line_widths = [2.0] * len(weights)
+                    norm_weights = np.zeros_like(weights, dtype=float)
+                    line_widths = [2.5] * len(weights)
 
                 for i, edge in enumerate(graph.es):
                     source, target = edge.tuple
                     x_coords = [layout[source][0], layout[target][0]]
                     y_coords = [layout[source][1], layout[target][1]]
-                    alpha = 0.5 + norm_weights[i] * 0.3 if max_w > min_w else 0.7
+                    alpha = 0.55 + norm_weights[i] * 0.35
                     ax.plot(
                         x_coords,
                         y_coords,
-                        color=edge_colors[i] if edge_colors else "#666666",
+                        color=edge_colors[i] if edge_colors else "#333333",
                         alpha=alpha,
                         linewidth=line_widths[i],
+                        solid_capstyle="round",
                         zorder=1,
                     )
         else:
+            default_width = 2.2 if len(graph.es) <= 200 else 1.4
             for i, edge in enumerate(graph.es):
                 source, target = edge.tuple
                 x_coords = [layout[source][0], layout[target][0]]
@@ -235,9 +238,10 @@ class SNAPlotter:
                 ax.plot(
                     x_coords,
                     y_coords,
-                    color=edge_colors[i] if edge_colors else "#444444",
-                    alpha=0.78,
-                    linewidth=1.8,
+                    color=edge_colors[i] if edge_colors else "#333333",
+                    alpha=0.65,
+                    linewidth=default_width,
+                    solid_capstyle="round",
                     zorder=1,
                 )
 
@@ -434,9 +438,19 @@ class SNAPlotter:
     def _get_sizes(self, graph: ig.Graph, color_by: Optional[str]) -> List[int]:
         """根據屬性獲取節點大小"""
         n = len(graph.vs)
-        base_size = 100
+        if n > 400:
+            base_size = 30
+        elif n > 250:
+            base_size = 40
+        elif n > 150:
+            base_size = 55
+        elif n > 80:
+            base_size = 70
+        else:
+            base_size = 90
+
         max_size = 500
-        min_size = 50
+        min_size = 30
 
         if color_by in ["reputation", "popularity", "degree", "score"]:
             values = (

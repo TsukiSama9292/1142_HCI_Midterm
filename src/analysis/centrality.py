@@ -171,7 +171,7 @@ class CentralityAnalyzer:
         """生成分析摘要"""
         print("\n中間過程: 生成分析摘要...")
 
-        high_rep = df[df["reputation_level"] == "4_High"]
+        high_rep = df[df["reputation_level"] == "4_Expert"]
         low_rep = df[df["reputation_level"] == "1_Low"]
 
         unknown_rep = df[df["reputation_level"] == "0_None"]

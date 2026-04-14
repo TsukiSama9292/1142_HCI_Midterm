@@ -259,7 +259,6 @@ class SNARunner:
         LEGEND_INFO = {
             "analysis_1": {
                 "colors": {
-                    "Blue-Unknown Reputation": "#90CAF9",
                     "Green-Newcomer (<1K)": "#4CAF50",
                     "Yellow-Mid (1K~10K)": "#FFD700",
                     "Orange-Senior (10K~50K)": "#FF9800",
@@ -711,7 +710,6 @@ class SNARunner:
         }
 
         rep_counts = {
-            "0_None": 0,
             "1_Low": 0,
             "2_Medium": 0,
             "3_Senior": 0,
@@ -725,14 +723,16 @@ class SNARunner:
                 else "0_None"
             )
             if rep_level not in rep_counts:
-                rep_level = "0_None"
+                continue
             rep_counts[rep_level] += 1
             node_rep_map[i] = rep_level
 
         edge_pair_counts = {}
         for e in graph.es:
-            src_rep = node_rep_map[e.source]
-            tgt_rep = node_rep_map[e.target]
+            src_rep = node_rep_map.get(e.source)
+            tgt_rep = node_rep_map.get(e.target)
+            if src_rep is None or tgt_rep is None:
+                continue
             pair = tuple(sorted([src_rep, tgt_rep]))
             edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
 
@@ -743,12 +743,19 @@ class SNARunner:
 
         for rep_level, count in rep_counts.items():
             x, y = node_positions[rep_level]
-            size = max(500, count * 3)
+            if count > 0:
+                size = max(500, count * 3)
+                alpha = 1.0
+            else:
+                size = 180
+                alpha = 0.25
+
             ax.scatter(
                 x,
                 y,
                 s=size,
                 c=node_colors[rep_level],
+                alpha=alpha,
                 zorder=3,
                 edgecolors="black",
                 linewidths=1.5,
@@ -833,10 +840,14 @@ class SNARunner:
 
         legend_patches = []
         for pair, color in pair_color_map.items():
+            if "0_None" in pair:
+                continue
+            label = pair_label_map.get(pair, f"{pair[0]}-{pair[1]}")
             if pair in edge_pair_counts:
-                label = pair_label_map.get(pair, f"{pair[0]}-{pair[1]}")
-                patch = mpatches.Patch(color=color, label=label)
-                legend_patches.append(patch)
+                patch = mpatches.Patch(color=color, label=f"{label} ({edge_pair_counts[pair]})")
+            else:
+                patch = mpatches.Patch(color=color, label=f"{label} (0)", alpha=0.25)
+            legend_patches.append(patch)
 
         ax.legend(
             handles=legend_patches,
