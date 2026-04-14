@@ -33,8 +33,8 @@ format:
     urlcolor: "blue"
     colorlinks: true
     toc: true
-    lot: false
-    lof: false
+    lot: true
+    lof: true
     toc-title: "目錄"
     lof-title: "圖目錄"
     lot-title: "表目錄"
