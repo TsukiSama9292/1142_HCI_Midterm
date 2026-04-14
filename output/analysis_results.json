@@ -1,120 +1,115 @@
 {
-  "analysis_9_badge_network": {
+  "analysis_14_user_location": {
     "graph": {
-      "nodes": 491,
-      "edges": 11661
+      "nodes": 8,
+      "edges": 28
     },
-    "badges_df": [
+    "users_df": [
       {
-        "badge_id": 44663270,
-        "user_id": 17806714,
-        "badge_name": "Informed",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:59:58.707000+00:00",
-        "reputation": 3,
-        "display_name": "Andrew M"
+        "id": 1556,
+        "display_name": "popopome",
+        "reputation": 11960,
+        "location": "Seattle, WA",
+        "up_votes": 26,
+        "down_votes": 0,
+        "region": "North America"
       },
       {
-        "badge_id": 44663269,
-        "user_id": 17805740,
-        "badge_name": "Informed",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:58:31.807000+00:00",
-        "reputation": 7,
-        "display_name": "Shilab66"
+        "id": 2605,
+        "display_name": "Diones",
+        "reputation": 1395,
+        "location": "Fargo, ND",
+        "up_votes": 95,
+        "down_votes": 3,
+        "region": "Other"
       },
       {
-        "badge_id": 44663268,
-        "user_id": 207337,
-        "badge_name": "Nice Answer",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 2766,
-        "display_name": "Hugh Brackett"
+        "id": 3610,
+        "display_name": "ADB",
+        "reputation": 2319,
+        "location": "Vancouver, Canada",
+        "up_votes": 321,
+        "down_votes": 4,
+        "region": "North America"
       },
       {
-        "badge_id": 44663261,
-        "user_id": 12060157,
-        "badge_name": "Supporter",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 45,
-        "display_name": "JJS_Vegu"
+        "id": 6084,
+        "display_name": "mjallday",
+        "reputation": 9572,
+        "location": "San Francisco",
+        "up_votes": 677,
+        "down_votes": 4,
+        "region": "North America"
       },
       {
-        "badge_id": 44663244,
-        "user_id": 17805150,
-        "badge_name": "Autobiographer",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 1,
-        "display_name": "Spencer Peck"
+        "id": 6766,
+        "display_name": "paurullan",
+        "reputation": 33,
+        "location": "Palma, Spain",
+        "up_votes": 0,
+        "down_votes": 0,
+        "region": "Europe"
       },
       {
-        "badge_id": 44663266,
-        "user_id": 559552,
-        "badge_name": "Yearling",
-        "badge_class": 2,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 4059,
-        "display_name": "solartic"
+        "id": 6992,
+        "display_name": "Nano Taboada",
+        "reputation": 4108,
+        "location": "Buenos Aires, Argentina",
+        "up_votes": 294,
+        "down_votes": 20,
+        "region": "South America"
       },
       {
-        "badge_id": 44663265,
-        "user_id": 4570731,
-        "badge_name": "Yearling",
-        "badge_class": 2,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 1281,
-        "display_name": "guest"
+        "id": 8952,
+        "display_name": "xenox",
+        "reputation": 745,
+        "location": "Netherlands",
+        "up_votes": 45,
+        "down_votes": 1,
+        "region": "Europe"
       },
       {
-        "badge_id": 44663251,
-        "user_id": 9203876,
-        "badge_name": "Popular Question",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 197,
-        "display_name": "Federico Bellini"
+        "id": 9267,
+        "display_name": "Tom E",
+        "reputation": 2509,
+        "location": "Philadelphia, PA",
+        "up_votes": 1495,
+        "down_votes": 36,
+        "region": "Other"
       },
       {
-        "badge_id": 44663257,
-        "user_id": 16851479,
-        "badge_name": "Student",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 17,
-        "display_name": "Keyur Diwan"
+        "id": 11596,
+        "display_name": "unmounted",
+        "reputation": 32492,
+        "location": "San Francisco, CA",
+        "up_votes": 1296,
+        "down_votes": 17,
+        "region": "North America"
       },
       {
-        "badge_id": 44663243,
-        "user_id": 17806758,
-        "badge_name": "Autobiographer",
-        "badge_class": 3,
-        "tag_based": false,
-        "date": "2021-12-31 23:56:32.867000+00:00",
-        "reputation": 1,
-        "display_name": "Carey Dalrymple"
+        "id": 12549,
+        "display_name": "inxilpro",
+        "reputation": 19299,
+        "location": "United States",
+        "up_votes": 40,
+        "down_votes": 4,
+        "region": "North America"
       }
     ],
     "summary": {
-      "total_badges": 500,
-      "unique_users": 491,
-      "avg_badges_per_user": 1.0183299389002036,
-      "badge_distribution": {
-        "3": 385,
-        "2": 108,
-        "1": 7
-      }
+      "total_users": 500,
+      "unique_regions": 8,
+      "region_distribution": {
+        "Europe": 167,
+        "Other": 119,
+        "Asia": 90,
+        "North America": 79,
+        "Oceania": 17,
+        "South America": 12,
+        "Middle East": 12,
+        "Africa": 4
+      },
+      "top_region": "Europe"
     }
   }
 }

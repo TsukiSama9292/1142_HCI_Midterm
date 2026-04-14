@@ -2044,12 +2044,41 @@ class SNARunner:
             region = v["region"] if "region" in attrs else "Other"
             if region not in region_counts:
                 region = "Other"
-            region_counts[region] += 1
+            if "user_count" in attrs:
+                try:
+                    region_counts[region] = v["user_count"]
+                except KeyError:
+                    region_counts[region] = region_counts[region]
+            else:
+                region_counts[region] += 1
 
         fig, ax = plt.subplots(figsize=(10, 8))
         ax.set_xlim(0, 1)
         ax.set_ylim(0, 1)
         ax.axis("off")
+
+        # Draw region-to-region connections using the graph edges
+        for edge in graph.es:
+            source = graph.vs[edge.tuple[0]]
+            target = graph.vs[edge.tuple[1]]
+            source_region = source["region"] if "region" in attrs else "Other"
+            target_region = target["region"] if "region" in attrs else "Other"
+            if source_region not in region_positions:
+                source_region = "Other"
+            if target_region not in region_positions:
+                target_region = "Other"
+            x1, y1 = region_positions[source_region]
+            x2, y2 = region_positions[target_region]
+            weight = edge["weight"] if "weight" in edge.attributes() else 1
+            linewidth = max(1.0, min(6.0, weight / 1000.0))
+            ax.plot(
+                [x1, x2],
+                [y1, y2],
+                color="#444444",
+                alpha=0.35,
+                linewidth=linewidth,
+                zorder=1,
+            )
 
         for region, count in region_counts.items():
             if count == 0:
