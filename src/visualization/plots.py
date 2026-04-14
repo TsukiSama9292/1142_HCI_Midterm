@@ -305,6 +305,23 @@ class SNAPlotter:
             color_map = self.color_maps["connectivity"]
             return [color_map.get(v, default_color) for v in values]
 
+        elif color_by == "connectivity_level":
+            color_map = {
+                "1_Isolated": "#9E9E9E",
+                "2_Low": "#BDBDBD",
+                "3_Medium": "#FFD700",
+                "4_Active": "#4CAF50",
+            }
+            return [color_map.get(v, default_color) for v in values]
+
+        elif color_by == "component_category":
+            color_map = {
+                "Main Component": "#1565C0",
+                "Small Islands": "#FF9800",
+                "Tiny Islands": "#9E9E9E",
+            }
+            return [color_map.get(v, default_color) for v in values]
+
         elif color_by == "has_code":
             color_map = {"yes": "#42A5F5", "no": "#FFA726"}
             return [color_map.get(str(v), default_color) for v in values]

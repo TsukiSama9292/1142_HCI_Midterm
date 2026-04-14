@@ -204,8 +204,23 @@ class UserNetworkBuilder(GraphBuilder):
             for uid in unique_users
         ]
 
+        component_label_map = {}
+        for component in components:
+            if len(component) == 1:
+                label = "Tiny Islands"
+            elif len(component) == len(largest_component):
+                label = "Main Component"
+            else:
+                label = "Small Islands"
+            for idx in component:
+                component_label_map[idx] = label
+
         self.graph.vs["connectivity_type"] = [
             "main_component" if idx in main_component_indices else "isolated"
+            for idx in range(len(unique_users))
+        ]
+        self.graph.vs["component_category"] = [
+            component_label_map.get(idx, "Small Islands")
             for idx in range(len(unique_users))
         ]
         self.graph.vs["interaction_type"] = [

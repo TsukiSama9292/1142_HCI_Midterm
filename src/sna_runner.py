@@ -308,7 +308,8 @@ class SNARunner:
             "analysis_4": {
                 "colors": {
                     "DarkBlue-Main Component": "#1565C0",
-                    "Gray-Isolated": "#9E9E9E",
+                    "Orange-Small Islands": "#FF9800",
+                    "Gray-Tiny Islands": "#9E9E9E",
                 },
                 "shapes": {
                     "Circle-Continuous": "o",
@@ -526,7 +527,8 @@ class SNARunner:
                 self.plotter.plot_network_graph(
                     result["graph"],
                     "Method 4: Knowledge Islands & Connected Components (Raw User Graph)",
-                    color_by="connectivity_level",
+                    color_by="component_category",
+                    shape_by="interaction_type",
                     filename="analysis_4_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_4"],
                 )
