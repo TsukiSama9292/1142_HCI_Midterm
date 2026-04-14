@@ -558,6 +558,7 @@ class SNARunner:
                     result["graph"],
                     "Method 6: Account Age vs Community Contribution (Raw User Graph)",
                     color_by="account_age_level",
+                    shape_by="post_type",
                     filename="analysis_6_network_raw.png",
                     legend_info=LEGEND_INFO["analysis_6"],
                 )
@@ -1282,135 +1283,139 @@ class SNARunner:
         import matplotlib.pyplot as plt
         import matplotlib.patches as mpatches
 
-        node_positions = {
-            "1_New": (0.5, 0.88),
-            "2_Young": (0.82, 0.65),
-            "3_Mature": (0.18, 0.65),
-            "4_Established": (0.82, 0.35),
-            "5_Senior": (0.18, 0.35),
-        }
-        node_colors = {
-            "1_New": "#4CAF50",
-            "2_Young": "#FFD700",
+        age_levels = ["3_Mature", "4_Established", "5_Senior"]
+        age_colors = {
             "3_Mature": "#FF9800",
             "4_Established": "#F44336",
             "5_Senior": "#9C27B0",
         }
-        node_labels_map = {
-            "1_New": "New\n(<1yr)",
-            "2_Young": "Young\n(1~3yr)",
+        age_labels = {
             "3_Mature": "Mature\n(3~6yr)",
             "4_Established": "Estab.\n(6~10yr)",
             "5_Senior": "Senior\n(>10yr)",
         }
+        behavior_types = ["2_QuestionsOnly", "3_AnswersOnly", "1_Both"]
+        behavior_shapes = {
+            "2_QuestionsOnly": "o",
+            "3_AnswersOnly": "^",
+            "1_Both": "s",
+        }
+        behavior_labels = {
+            "2_QuestionsOnly": "Questions Only",
+            "3_AnswersOnly": "Answers Only",
+            "1_Both": "Both",
+        }
 
-        age_levels = list(node_positions.keys())
-        level_counts = {lv: 0 for lv in age_levels}
-        node_level_map = {}
-        for i, v in enumerate(graph.vs):
-            level = (
-                v["account_age_level"]
-                if "account_age_level" in v.attributes()
-                else "1_New"
-            )
-            if level not in level_counts:
-                level = "1_New"
-            level_counts[level] += 1
-            node_level_map[i] = level
+        base_x = {"3_Mature": 0.2, "4_Established": 0.5, "5_Senior": 0.8}
+        base_y = {"2_QuestionsOnly": 0.2, "3_AnswersOnly": 0.5, "1_Both": 0.8}
+        positions = {
+            (age, behavior): (base_x[age], base_y[behavior])
+            for age in age_levels
+            for behavior in behavior_types
+        }
 
-        post_type_counts = {"1_Both": 0, "2_QuestionsOnly": 0, "3_AnswersOnly": 0}
-        if "post_type" in graph.vs.attribute_names():
-            for v in graph.vs:
-                pt = v["post_type"]
-                if pt in post_type_counts:
-                    post_type_counts[pt] += 1
+        group_counts = {
+            (age, behavior): 0
+            for age in age_levels
+            for behavior in behavior_types
+        }
+        node_category = {}
 
-        edge_pair_counts = {}
+        for idx, v in enumerate(graph.vs):
+            age = v["account_age_level"] if "account_age_level" in v.attributes() else None
+            behavior = v["post_type"] if "post_type" in v.attributes() else None
+            if age in age_levels and behavior in behavior_types:
+                group_counts[(age, behavior)] += 1
+                node_category[idx] = (age, behavior)
+
+        edge_counts = {}
         for e in graph.es:
-            src_lv = node_level_map[e.source]
-            tgt_lv = node_level_map[e.target]
-            pair = tuple(sorted([src_lv, tgt_lv]))
-            edge_pair_counts[pair] = edge_pair_counts.get(pair, 0) + 1
+            src = node_category.get(e.source)
+            tgt = node_category.get(e.target)
+            if src is None or tgt is None:
+                continue
+            weight = e["weight"] if "weight" in graph.es.attribute_names() else 1
+            pair = tuple(sorted([src, tgt]))
+            edge_counts[pair] = edge_counts.get(pair, 0) + weight
 
-        fig, ax = plt.subplots(figsize=(10, 8))
+        fig, ax = plt.subplots(figsize=(12, 9))
         ax.set_xlim(0, 1)
         ax.set_ylim(0, 1)
         ax.axis("off")
 
-        for level, count in level_counts.items():
+        max_edge = max(edge_counts.values()) if edge_counts else 1
+        for pair, cnt in edge_counts.items():
+            (age1, beh1), (age2, beh2) = pair
+            x1, y1 = positions[(age1, beh1)]
+            x2, y2 = positions[(age2, beh2)]
+            line_width = max(1.0, min(8.0, cnt / max_edge * 8))
+            color = age_colors[age1] if age1 == age2 else "#757575"
+            ax.plot([x1, x2], [y1, y2], color=color, linewidth=line_width, alpha=0.65, zorder=1)
+            if (age1, beh1) != (age2, beh2):
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+                ax.text(
+                    mx,
+                    my,
+                    str(int(cnt)),
+                    ha="center",
+                    va="center",
+                    fontsize=8,
+                    bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
+                    zorder=2,
+                )
+
+        for (age, behavior), count in group_counts.items():
             if count == 0:
                 continue
-            x, y = node_positions[level]
-            size = max(500, count * 3)
+            x, y = positions[(age, behavior)]
             ax.scatter(
                 x,
                 y,
-                s=size,
-                c=node_colors[level],
-                zorder=3,
+                s=max(200, count * 8),
+                c=age_colors[age],
+                marker=behavior_shapes[behavior],
                 edgecolors="black",
-                linewidths=1.5,
+                linewidths=1.2,
+                alpha=0.95,
+                zorder=3,
             )
             ax.text(
                 x,
-                y,
-                f"{node_labels_map[level]}\n({count})",
+                y - 0.06,
+                f"{behavior_labels[behavior]}\n{count}",
                 ha="center",
-                va="center",
-                fontsize=10,
-                fontweight="bold",
+                va="top",
+                fontsize=8,
                 zorder=4,
             )
 
-        max_count = max(edge_pair_counts.values()) if edge_pair_counts else 1
-
-        for pair, cnt in edge_pair_counts.items():
-            n1, n2 = pair
-            if n1 not in node_positions or n2 not in node_positions:
-                continue
-            x1, y1 = node_positions[n1]
-            x2, y2 = node_positions[n2]
-            thickness = max(2, cnt / max_count * 12)
-            color = node_colors.get(n1, "#9E9E9E")
-            ax.annotate(
-                "",
-                xy=(x2, y2),
-                xytext=(x1, y1),
-                arrowprops=dict(arrowstyle="-", color=color, lw=thickness, alpha=0.7),
-                zorder=2,
+        age_patches = [
+            mpatches.Patch(color=age_colors[age], label=age_labels[age])
+            for age in age_levels
+            if any(group_counts[(age, behavior)] > 0 for behavior in behavior_types)
+        ]
+        shape_patches = [
+            plt.Line2D(
+                [0],
+                [0],
+                marker=behavior_shapes[behavior],
+                color="w",
+                markerfacecolor="#666666",
+                markersize=9,
+                label=behavior_labels[behavior],
             )
-            if n1 == n2:
-                mx, my = x1, y1 + 0.08
-            else:
-                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-            ax.text(
-                mx,
-                my,
-                str(cnt),
-                ha="center",
-                va="center",
-                fontsize=9,
-                fontweight="bold",
-                bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8),
-                zorder=5,
-            )
-
-        legend_patches = []
-        for level, color in node_colors.items():
-            if level_counts.get(level, 0) > 0:
-                legend_patches.append(
-                    mpatches.Patch(color=color, label=node_labels_map.get(level, level))
-                )
+            for behavior in behavior_types
+        ]
 
         ax.legend(
-            handles=legend_patches,
+            handles=age_patches + shape_patches,
             loc="lower right",
-            fontsize=7,
-            title="Account Age Levels",
+            fontsize=8,
+            title="Age & Behavior",
         )
         ax.set_title(
-            "Method 6: Account Age vs Community Contribution\nNodes=Users (grouped by age), Edges=Interaction | Color: Age Level",
-            fontsize=13,
+            "Method 6: Account Age vs Community Contribution\nSplit by Age and Behavior Group",
+            fontsize=14,
             fontweight="bold",
             pad=15,
         )
