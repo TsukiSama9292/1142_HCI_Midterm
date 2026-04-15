@@ -20,11 +20,11 @@
 | RQ8 | ![](output/analysis_8_network_raw.png) | ![](output/analysis_8_network.png) | 評論網路；評論頻率相近更容易出現在同個評論區，大多數人較少評論。 |
 | RQ9 | ![](output/analysis_9_network_raw.png) | ![](output/analysis_9_network.png) | 徽章與使用者分布；徽章獲取的條件相近則更可能同時獲得，高等級徽章更難同時獲得。 |
 | RQ10 | ![](output/analysis_10_network_raw.png) | ![](output/analysis_10_network.png) | 編輯協作網路；編輯頻率相近更可能共同編輯，大多數不活躍的編輯者不共同編輯。 |
-| RQ11 | ![](output/analysis_11_network_raw.png) | ![](output/analysis_11_network.png) | 問題引用與 duplicate 結構；重複問題接近三成。 |
+| RQ11 | ![](output/analysis_11_network_raw.png) |  | 問題引用與 duplicate 結構；重複問題接近三成。 |
 | RQ12 | ![](output/analysis_12_network_raw.png) | ![](output/analysis_12_network.png) | 審核任務；SuggestedEdit 與 Close 占比較大比例。 |
 | RQ13 | ![](output/analysis_13_network_raw.png) | ![](output/analysis_13_network.png) | 賞金網路；懸賞活動高度活躍。 |
-| RQ14 | ![](output/analysis_14_network_raw.png) | ![](output/analysis_14_network.png) | 地理分布；歐洲為最大區域。 |
-| RQ15 | ![](output/analysis_15_network_raw.png) | ![](output/analysis_15_network.png) | 時間序列；14–15 點為活動高峰。 |
+| RQ14 |  | ![](output/analysis_14_network.png) | 地理分布；歐、亞、北美洲是主要核心地區。 |
+| RQ15 | ![](output/analysis_15_network_raw.png) |  | 時間序列；14、3、10、11 月貼文量明顯較高。 |
 
 ## 每個分析的圖像解讀
 
@@ -162,13 +162,9 @@
 ![](output/analysis_11_network_raw.png)
 :::
 
-原始 post link 網路展示問題之間的所有引用與重複連結。聚合圖則根據連結類型進行分類，突顯 Linked 與 Duplicate 的結構差異：
+原始 post link 網路展示問題之間的所有引用與重複連結。結果指出 Duplicate 比例約 29.4%，意味近三成連結屬於重複問題，顯示平台中存在顯著的重複提問現象。
 
-:::{#fig:rq11_agg}
-![](output/analysis_11_network.png)
-:::
-
-結果指出 Duplicate 比例約 29.4%，意味近三成連結屬於重複問題，顯示平台中存在顯著的重複提問現象。
+少數核心貼文連結很多，多數貼文只在小群組中流動。從 Linked 與 Duplicate 的分佈看，並未明顯偏向某一類型，但 Duplicate 的出現機率仍不小，且多數連結較多的貼文中皆可觀察到 Duplicate，少數貼文則完全沒有 Duplicate。這顯示重複問題主要集中於連結密度較高的核心節點。
 
 ### RQ12 審核任務網路
 
@@ -176,11 +172,13 @@
 ![](output/analysis_12_network_raw.png)
 :::
 
-原始圖顯示審核任務節點間的詳細連結與參與者互動。聚合圖則依任務類型進行精簡展示：
+原始圖顯示審核任務節點間的詳細連結與參與者互動。整體網路分散，僅少數節點形成小規模連結，反映多數審核活動分散在不同節點而非集中核心。
 
 :::{#fig:rq12_agg}
 ![](output/analysis_12_network.png)
 :::
+
+聚合圖則依任務類型進行精簡展示：Causal 和 Power 之間存在連結，而 Active 相對獨立。這顯示部分審核類型具備較強的交互關係，而 Active 任務較不與其他類型共同聚集。
 
 本次樣本中 SuggestedEdit 與 Close 為主要審核行為，210 次 SuggestedEdit 與 176 次 Close 顯示治理流程以這兩種任務為核心。
 
@@ -190,27 +188,23 @@
 ![](output/analysis_13_network_raw.png)
 :::
 
-原始賞金網路呈現賞金事件的起始與結束連結，讓人能直接看見懸賞行為的流向。聚合圖則突顯活動集中與主要傾向：
+原始賞金網路呈現賞金事件的起始與結束連結，多數 Normal 懸賞等級的使用者具有共同標籤，且在網路中段出現一個較核心的 Generous 等級使用者。少數使用者則呈現零散孤立狀態，反映懸賞行為集中於特定標籤群與核心節點。
 
 :::{#fig:rq13_agg}
 ![](output/analysis_13_network.png)
 :::
 
+聚合圖顯示 Meager 和 Normal 等級使用者數量相同，且明顯多於 Generous。這兩個等級的共同持有標籤數量大於自身連結數量，符合預期；在唯一的 Generous 使用者上，與 Meager 和 Normal 的共同持有標籤數量也差不多。
+
 此圖表明本次樣本中共有 26,346 次賞金活動，說明懸賞機制高度活躍，但仍需進一步觀察其與回答品質之間的關聯性。
 
 ### RQ14 使用者地理分布
-
-:::{#fig:rq14_raw}
-![](output/analysis_14_network_raw.png)
-:::
-
-原始地理網路展示使用者與地理區域之間的直接連結。聚合圖則依區域與地理分布進行分群：
 
 :::{#fig:rq14_agg}
 ![](output/analysis_14_network.png)
 :::
 
-聚合結果顯示歐洲為最大區域，167 人，說明使用者地理分布具有明顯的區域集中性。
+聚合結果顯示歐洲、亞洲與北美洲為主要核心地區，且歐洲仍為最大區域，說明使用者地理分布具有明顯的區域集中性。
 
 ### RQ15 時間序列活躍度
 
@@ -218,13 +212,7 @@
 ![](output/analysis_15_network_raw.png)
 :::
 
-原始時間序列網路呈現每個時間節點與活動連結，讓人能直接觀察時間節點之間的互動。聚合圖則將月度與時段趨勢進行壓縮展示：
-
-:::{#fig:rq15_agg}
-![](output/analysis_15_network.png)
-:::
-
-聚合圖顯示 12 個月資料與 14–15 點高峰時段，支持時間分布的日間活動高峰觀察。
+原始時間序列網路呈現每個時間節點與活動連結，讓人能直接觀察時間節點之間的互動。此圖顯示 1、3、10、11 月的貼文量明顯高於其他月份，且 14–15 點為活動高峰時段。
 
 ## 結果與方法的對應
 
