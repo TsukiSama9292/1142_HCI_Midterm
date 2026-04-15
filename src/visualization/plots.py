@@ -419,9 +419,11 @@ class SNAPlotter:
 
         elif color_by == "activity_level":
             color_map = {
-                "Active": "#2196F3",
-                "Moderate": "#4CAF50",
-                "Low": "#9E9E9E",
+                "High": "#F44336",
+                "Medium": "#FF9800",
+                "Low": "#4CAF50",
+                "Active": "#F44336",
+                "Moderate": "#FF9800",
             }
             return [color_map.get(str(v), default_color) for v in values]
 
@@ -539,8 +541,8 @@ class SNAPlotter:
                 if "activity_level" in graph.vs.attribute_names()
                 else []
             )
-            result["o"] = [i for i, v in enumerate(activity_levels) if v == "Active"]
-            result["^"] = [i for i, v in enumerate(activity_levels) if v == "Moderate"]
+            result["o"] = [i for i, v in enumerate(activity_levels) if v in ("High", "Active")]
+            result["^"] = [i for i, v in enumerate(activity_levels) if v in ("Medium", "Moderate")]
             result["s"] = [i for i, v in enumerate(activity_levels) if v == "Low"]
 
         elif shape_by == "has_code":

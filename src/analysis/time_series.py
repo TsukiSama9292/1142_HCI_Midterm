@@ -89,9 +89,11 @@ class TimeSeriesNetworkBuilder(GraphBuilder):
         median_count = pd.Series(post_counts).median()
         
         def activity_level(count):
-            if count >= median_count * 1.5: return 'high'
-            if count >= median_count * 0.5: return 'medium'
-            return 'low'
+            if count >= median_count * 1.25:
+                return 'High'
+            if count >= median_count * 0.75:
+                return 'Medium'
+            return 'Low'
         
         self.graph.vs['year_month'] = unique_months
         self.graph.vs['name'] = unique_months
