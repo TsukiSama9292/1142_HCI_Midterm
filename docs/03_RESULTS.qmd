@@ -11,7 +11,7 @@
 | 分析編號 | 原始圖 (raw) | 聚合圖 | 簡要說明 |
 |---|---|---|---|
 | RQ1 | ![](output/analysis_1_network_raw.png) | ![](output/analysis_1_network.png) | 使用者回答網路；聲望與中心性分群未明顯對應。 |
-| RQ2 | ![](output/analysis_2_network_raw.png) | ![](output/analysis_2_network.png) | 核心/邊緣結構；樣本皆判定為核心。 |
+| RQ2 | ![](output/analysis_2_network_raw.png) | ![](output/analysis_2_network.png) | 核心/邊緣結構；越慢得到回覆的人更傾向與相同群體交流。 |
 | RQ3 | ![](output/analysis_3_network_raw.png) | ![](output/analysis_3_network.png) | 標籤共現網路；呈現明顯技術領域群聚。 |
 | RQ4 | ![](output/analysis_4_network_raw.png) | ![](output/analysis_4_network.png) | 連通分量結構；大量小型孤立子網路。 |
 | RQ5 | ![](output/analysis_5_network_raw.png) | ![](output/analysis_5_network.png) | 內容特徵與分數比較；含程式碼貼文分數未優於非程式碼。 |
@@ -54,7 +54,7 @@
 ![](output/analysis_2_network.png)
 :::
 
-聚合圖強調核心與邊緣的劃分，然而本次樣本中所有樣本節點皆被判定為核心。這反映了取樣策略對「核心效率」觀察的影響，無法直接支持核心使用者回應速度更快的假設。 透過觀察得出，越慢得到回覆的人， 更傾向與相同群體的使用者交流。
+聚合圖強調核心與邊緣的劃分，然而本次樣本中所有樣本節點皆被判定為核心。這反映了取樣策略對「核心效率」觀察的影響，無法直接支持核心使用者回應速度更快的假設。觀察顯示，越慢得到回覆的人更傾向與相同群體的使用者交流。
 
 ### RQ3 技術標籤共現與領域地圖
 
@@ -212,7 +212,7 @@
 ![](output/analysis_15_network_raw.png)
 :::
 
-原始時間序列網路呈現每個時間節點與活動連結，讓人能直接觀察時間節點之間的互動。此圖顯示 1、3、10、11 月的貼文量明顯高於其他月份，且 14–15 點為活動高峰時段。
+原始時間序列網路呈現每個時間節點與活動連結，讓人能直接觀察時間節點之間的互動。此圖顯示 1、3、10、11 月的貼文量明顯高於其他月份。
 
 ## 結果與方法的對應
 
